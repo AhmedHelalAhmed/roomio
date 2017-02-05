@@ -1,1 +1,1 @@
-## Repo for open source topic based messaging project.
+## Open source topic based messaging project.
