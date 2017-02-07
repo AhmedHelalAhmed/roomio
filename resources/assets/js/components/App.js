@@ -23,7 +23,9 @@ const App = (props) => {
                     }
                 </ul>
             </nav>
-            {props.children}
+            <section>
+                {props.children}
+            </section>
         </div>
     );
 };

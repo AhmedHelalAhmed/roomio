@@ -3,13 +3,13 @@ import styles from './style.css';
 import axios from 'axios';
 
 const authHeaders = {
-    Authorization: `Bearer ${window.user ? window.user.api_token : ''}`
+    Authorization: `Bearer ${window.user ? window.user.token : ''}`
 };
 
 class Home extends Component {
-    state = { loading: true, user: {}, error: null }; // initial state.
+    state = { loading: true, user: null, error: null }; // initial state.
 
-    componentWillMount = () => {
+    componentWillMount() {
         axios.get('/api/user', { headers: {...authHeaders} }) // make request with header token.
             .then((res) => this.setState(
                 this.endRequest({ user: res.data }))
@@ -38,7 +38,7 @@ class Home extends Component {
                     </p> : null
                 }
                 {
-                    Object.keys(this.state.user).length ?
+                    this.state.user ?
                     <div>
                         <p>
                             Name: {this.state.user.name}
