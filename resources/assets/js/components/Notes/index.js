@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import styles from './style.css';
 import axios from 'axios';
-
-const authHeaders = {
-    Authorization: `Bearer ${window.user ? window.user.token : ''}`
-};
+import { headers } from '../../utils/headers';
 
 class Notes extends Component {
     state = {
@@ -15,17 +12,14 @@ class Notes extends Component {
     };
 
     componentWillMount() {
-        const args = { headers: {...authHeaders} };
-        axios.get('/api/notes', args)
+        axios.get('/api/notes', { headers })
             .then((res) => this.setState({ notes: res.data.notes || [] }) )
             .catch((error) => this.setState({ error: error.toString() }) );
     }
 
     makeNote = (e) => {
         e.preventDefault();
-        const args = { headers: {...authHeaders} };
-        const data = { ...this.state.fields };
-        axios.post('/api/notes', data, args)
+        axios.post('/api/notes', { ...this.state.fields }, { headers })
             .then((res) => {
                 const notes = this.state.notes.slice(); //  slice returns a copy of the array so we don't modify the state object directly.
                 notes.push(res.data);
@@ -43,7 +37,7 @@ class Notes extends Component {
         return (
             <div className={styles.add_note_form}>
                 <div>
-                    { this.state.error ? 'there was an error' : null }
+                    { this.state.error ? `there was an error ${this.state.error}` : null }
                 </div>
                 <div>
                     <form onSubmit={this.makeNote} >
