@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import Home from './Home/';
 import Test from './Test';
+import Notes from './Notes';
 import App from './App';
 
 // router would go here.
@@ -11,6 +12,7 @@ const Routes = () => {
          <Route path="/" component={App}>
             <IndexRoute component={Home} />
             <Route path="test" component={Test} />
+            <Route path="notes" component={Notes} />
          </Route>
       </Router>
    );

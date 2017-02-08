@@ -12,9 +12,12 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $authUserNotes = $request->user()->notes->all();
+        return response()->json([
+            'notes' => $authUserNotes
+        ]);
     }
 
     /**
@@ -22,9 +25,9 @@ class NoteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -35,10 +38,10 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        $note = $request->input('note');
+        $noteText = $request->input('note');
         return Note::create([
-            'text' => $note,
-            'user_id' => Auth::guard('api')->id()
+            'text' => $noteText,
+            'user_id' => $request->user()->id
         ]);
     }
 

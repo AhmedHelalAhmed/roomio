@@ -16,10 +16,25 @@ Route::get('ping', function() { //  test connection to API.
  * in the headers of the request under "Authorization" : "Bearer" + api_token.
  */
 Route::group([ 'middleware' => 'auth:api' ], function () {
+    Route::get('token', function() {
+        if (Auth::check()) {
+            return response()->json([
+                'token' => Auth::user()->api_token
+            ]);
+        } else {
+            return response()->json([
+                'message' => 'No user in session.',
+                'status' => 403
+            ]);
+        }
+    });
+
     Route::get('user', function () {
         return response()->json(
             Auth::user()
         );
     });
-    //  Route::post('note', 'NoteController@store');
+
+    Route::get('notes', 'NoteController@index');
+    Route::post('notes', 'NoteController@store');
 });

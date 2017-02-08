@@ -6,7 +6,9 @@
         <script type="text/javascript">
             @if(Auth::check())
                 window.user = {
-                    token: "{{ Auth::user()->api_token }}"
+                    token: "{{ Auth::user()->api_token }}",
+                    name: "{{ Auth::user()->name }}",
+                    email: "{{ Auth::user()->email }}"
                 };
              @else
                 window.user = null;
