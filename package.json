@@ -3,8 +3,9 @@
   "description": "Messenger App",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "start-socket": "node --harmony socket_server/server.js"
+    "start-webpack": "webpack-dev-server",
+    "start-socket": "node --harmony socket_server/server.js",
+    "start-php": "php artisan serve --port 8888"
   },
   "author": "Tyler Bainbridge, Alex Cushing, James Erardi",
   "license": "ISC",
