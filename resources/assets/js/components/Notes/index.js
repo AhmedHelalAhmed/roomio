@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './style.css';
 import axios from 'axios';
-import { headers } from '../../utils/headers';
+import { headersWithAuth } from '../../utils/headers';
 
 class Notes extends Component {
     state = {
@@ -12,14 +12,14 @@ class Notes extends Component {
     };
 
     componentWillMount() {
-        axios.get('/api/notes', { headers })
+        axios.get('/api/notes', { headersWithAuth })
             .then((res) => this.setState({ notes: res.data.notes || [] }) )
             .catch((error) => this.setState({ error: error.toString() }) );
     }
 
     makeNote = (e) => {
         e.preventDefault();
-        axios.post('/api/notes', { ...this.state.fields }, { headers })
+        axios.post('/api/notes', { ...this.state.fields }, { headersWithAuth })
             .then((res) => {
                 const notes = this.state.notes.slice(); //  slice returns a copy of the array so we don't modify the state object directly.
                 notes.push(res.data);

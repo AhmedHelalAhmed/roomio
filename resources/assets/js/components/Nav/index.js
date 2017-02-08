@@ -9,9 +9,12 @@ const Nav = () => {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
-                <li>
-                    <Link to='/notes'>Notes</Link>
-                </li>
+                {
+                    window.user ?
+                    <li>
+                        <Link to='/notes'>Notes</Link>
+                    </li> : null
+                }
                 {
                     window.user ?
                     <li>

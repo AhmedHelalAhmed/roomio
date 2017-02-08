@@ -1,5 +1,5 @@
-export const authHeaders = {
+export const auth = {
     Authorization: `Bearer ${window.user ? window.user.token : ''}`
 };
-export const headers = { ...authHeaders };
+export const headersWithAuth = { ...auth };
 export const args = { headers };
