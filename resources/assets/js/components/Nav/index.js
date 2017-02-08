@@ -18,6 +18,12 @@ const Nav = () => {
                 {
                     window.user ?
                     <li>
+                        <Link to='/socket'>Socket</Link>
+                    </li> : null
+                }
+                {
+                    window.user ?
+                    <li>
                         <a href='/logout'>Logout</a>
                     </li> :
                     <li>

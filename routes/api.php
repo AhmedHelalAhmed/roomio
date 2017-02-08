@@ -24,7 +24,7 @@ Route::group([ 'middleware' => 'auth:api' ], function () {
         } else {
             return response()->json([
                 'message' => 'No user in session.',
-                'status' => 403
+                'status' => 401
             ]);
         }
     });
