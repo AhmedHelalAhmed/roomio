@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import styles from './style.css';
+import { nav } from './style.css';
 
 const Nav = () => {
     return (
-        <nav className={styles.nav}>
+        <nav className={nav}>
             <ul>
                 <li>
                     <Link to="/">Home</Link>

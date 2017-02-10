@@ -11,6 +11,9 @@ Route::get('ping', function() { //  test connection to API.
     return 'pong';
 });
 
+Route::get('users', 'UserController@index');
+Route::get('users/{user}', 'UserController@show');
+
 /**
  * Routes in this group can only be accessed if a valid auth token is located
  * in the headers of the request under "Authorization" : "Bearer" + api_token.
@@ -29,11 +32,16 @@ Route::group([ 'middleware' => 'auth:api' ], function () {
         }
     });
 
-    Route::get('user', function () {
+    Route::get('auth/user', function () {
         return response()->json(
             Auth::user()
         );
     });
+
+    Route::get('user/{id}/conversations', 'UserController@getConversations');
+
+    Route::get('conversations', 'ConversationController@index');
+    Route::post('conversations', 'ConversationController@store');
 
     Route::get('notes', 'NoteController@index');
     Route::post('notes', 'NoteController@store');

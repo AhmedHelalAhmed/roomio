@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Conversation;
 
 class User extends Authenticatable
 {
@@ -29,5 +30,9 @@ class User extends Authenticatable
 
     public function notes() {
         return $this->hasMany(Note::class);
+    }
+
+    public function conversations() {
+        return $this->belongsToMany(Conversation::class)->withTimestamps();
     }
 }

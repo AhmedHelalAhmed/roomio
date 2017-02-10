@@ -11,15 +11,12 @@ class SocketTest extends Component {
     }
 
     componentWillMount() {
-        this.socket.emit('user_connected', {
-            user: window.user
-        });
         this.socket.on('new_message', this.newMessage);
     }
 
     newMessage = ({ message, name }) => {
         const messages = this.state.messages.slice();
-        messages.push(`${name}: ${message}`);
+        messages.push(`${name === window.user.name ? 'you' : name}: ${message}`);
         this.setState({ messages });
     }
 
@@ -31,9 +28,12 @@ class SocketTest extends Component {
         e.preventDefault();
         if (this.state.message) {
             this.socket.emit('send_message', {
-                message: this.state.message
+                message: this.state.message,
+                user: window.user
             });
             this.setState({ message: '' });
+        } else {
+            console.log('error sending');
         }
     }
 
