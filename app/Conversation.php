@@ -13,7 +13,9 @@ class Conversation extends Model
 
     public function users()
     {
-        // return User::find([$this->user1_id, $this->user2_id]);
-        return User::find([$this->user1_id, $this->user2_id]);
+        return $this->belongsToMany(User::class, 'conversation_user');
+        // return $this->belongsToMany(User::class)->withTimestamps();
     }
 }
+
+// return User::find([ $this->user1_id, $this->user2_id] );

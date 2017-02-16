@@ -16,8 +16,10 @@ console.log(events);
 io.on(events.io.CONNECTION, (socket) => {
     connectionController.connect();
     const messageController = new MessageController(socket, io);
+
     //  io events
     socket.on(events.socket.DISCONNECT, connectionController.disconnect);
+
     //  message events
     socket.on(events.socket.SEND_MESSAGE, messageController.sendMessage);
     // socket.on(events.socket.SEND_MESSAGE_TO_ALL, messageController.sendMessageToAll);

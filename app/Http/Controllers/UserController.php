@@ -30,10 +30,12 @@ class UserController extends Controller
     public function getConversations($id)
     {
         $user = User::find($id);
-        $conversations = $user->conversations->map(function ($item) {
-            $item->users = $item->users();
-            return $item;
-        })->toArray();
+        $conversations = $user->conversations()->with('users')->get();
+        // $conversations = $user->conversations->map(function ($item) {
+        //     $item->users = $item->users();
+        //     return $item;
+        // })->toArray();
+
         return response()->json(
             compact('conversations')
         );

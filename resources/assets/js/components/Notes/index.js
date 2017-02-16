@@ -20,11 +20,11 @@ class Notes extends Component {
 
     makeNote = (e) => {
         e.preventDefault();
-        axios.post('/api/notes', { ...this.state.fields }, { ...headersWithAuth })
+        axios.post('/api/notes', { note: this.state.note }, { ...headersWithAuth })
             .then((res) => {
                 const notes = this.state.notes.slice(); //  slice returns a copy of the array so we don't modify the state object directly.
                 notes.push(res.data);
-                this.setState({ notes: notes, fields: { note: '' } });
+                this.setState({ notes: notes, note: '' });
             })
             .catch((error) => this.setState({ error: error.toString() }));
     }
