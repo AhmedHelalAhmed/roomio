@@ -9,10 +9,11 @@ class Notes extends Component {
         notes: [],
         error: null,
         loading: false
-    };
+    }
 
     componentWillMount() {
         console.log(headersWithAuth);
+        const { conversations } = res.data;
         axios.get('/api/notes', { ...headersWithAuth })
             .then((res) => this.setState({ notes: res.data.notes || [] }) )
             .catch((error) => this.setState({ error: error.toString() }) );

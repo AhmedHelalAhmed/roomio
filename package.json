@@ -3,7 +3,7 @@
   "description": "Messenger App",
   "main": "index.js",
   "scripts": {
-    "start-webpack": "webpack-dev-server",
+    "start-webpack": "webpack-dev-server -w",
     "start-socket": "node --harmony socket_server/server.js",
     "start-php": "php artisan serve --port 8888"
   },

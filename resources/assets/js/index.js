@@ -17,6 +17,6 @@ render(Routes);
 // for hot module replacement, needs to point to the root file. (for recursive bundling)
 if (module.hot) {
     module.hot.accept('./components/Routes', () => {
-    render(Routes)
+      render(Routes)
   });
 }

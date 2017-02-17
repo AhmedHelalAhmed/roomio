@@ -19,12 +19,11 @@ class CreateConversationsTable extends Migration
         });
 
         Schema::create('conversation_user', function (Blueprint $table) {
-
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->integer('conversation_id')->unsigned()->index();
-            $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
+            $table->foreign('conversation_id')->references('id')->on('conversations');
 
             $table->timestamps();
         });

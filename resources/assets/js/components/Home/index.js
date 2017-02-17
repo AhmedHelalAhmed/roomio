@@ -31,6 +31,7 @@ class Home extends Component {
         console.log(this.state.user);
         return (
             <div className={styles.home}>
+                hehehehehehehehe
                 {
                     this.state.error ?
                     <p>

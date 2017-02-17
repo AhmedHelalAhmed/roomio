@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     public function index()
     {
@@ -27,15 +23,10 @@ class UserController extends Controller
         );
     }
 
-    public function getConversations($id)
+    public function getConversations()
     {
-        $user = User::find($id);
+        $user = request()->user();
         $conversations = $user->conversations()->with('users')->get();
-        // $conversations = $user->conversations->map(function ($item) {
-        //     $item->users = $item->users();
-        //     return $item;
-        // })->toArray();
-
         return response()->json(
             compact('conversations')
         );
