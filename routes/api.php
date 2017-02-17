@@ -42,6 +42,10 @@ Route::group([ 'middleware' => 'auth:api' ], function () {
 
     Route::get('conversations', 'ConversationController@index');
     Route::post('conversations', 'ConversationController@store');
+    Route::get('conversations/{convo}/messages', 'ConversationController@getMessages');
+
+    Route::get('messages', 'MessageController@index');
+    Route::post('messages', 'MessageController@store');
 
     Route::get('notes', 'NoteController@index');
     Route::post('notes', 'NoteController@store');

@@ -7,14 +7,14 @@ use App\User;
 
 class Conversation extends Model
 {
-    protected $fillable = [
-        'user1_id', 'user2_id',
-    ];
-
     public function users()
     {
         return $this->belongsToMany(User::class, 'conversation_user');
-        // return $this->belongsToMany(User::class)->withTimestamps();
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }
 
