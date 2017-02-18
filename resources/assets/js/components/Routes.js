@@ -4,7 +4,7 @@ import Home from './Home/';
 import Test from './Test';
 import Notes from './Notes';
 import Conversations from './Conversations';
-import SocketTest from './Socket_Test';
+import Conversation from './Conversation';
 import App from './App';
 
 // router would go here.
@@ -15,9 +15,8 @@ const Routes = () => {
             <IndexRoute component={Home} />
             <Route path="test" component={Test} />
             <Route path="conversations" component={Conversations} />
-            <Route path="conversation/:id" component={SocketTest} />
+            <Route path="conversation/:id" component={Conversation} />
             <Route path="notes" component={Notes} />
-            <Route path="socket" component={SocketTest} />
          </Route>
       </Router>
    );

@@ -28,8 +28,14 @@ class ConversationController extends Controller
         return $conversation;
     }
 
-    public function getMessages(Conversation $convo)
+    public function getMessages($convo)
     {
-        return $convo->messages()->with('user')->get();
+        $conversation = Conversation::with(['users', 'messages.user'])
+          ->where('id', $convo)
+          ->first();
+
+        return response()->json([
+          "conversation" => $conversation,
+        ]);
     }
 }

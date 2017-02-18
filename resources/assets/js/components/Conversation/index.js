@@ -5,23 +5,27 @@ import { SOCKET_SERVER } from '../../utils/sockets';
 import { headersWithAuth } from '../../utils/headers';
 import styles from './styles.css';
 
-class SocketTest extends Component {
+class Conversation extends Component {
     constructor() {
         super();
-        this.state = { messages: [], message: '' };
+        this.state = { messages: [], message: '', otherUser: '' };
         this.socket = io(SOCKET_SERVER);
     }
 
     componentWillMount() {
         if (this.props.params.id) {
           axios.get(`/api/conversations/${this.props.params.id}/messages`, { ...headersWithAuth })
-            .then(res => 
+            .then(res => {
+              const { conversation } = res.data;
+              console.log(conversation);
+              const otherUser = conversation.users.filter(user => user.name !== window.user.name).pop();
               this.setState({ 
-                messages: res.data.map(message => {
+                messages: conversation.messages.map(message => {
                   return `${message.user.name === window.user.name ? 'you' : message.user.name}: ${message.content}`;
-                })
+                }),
+                otherUser: otherUser.name
               })
-            )
+            })
             .catch(error => console.log(error))
         }
         this.socket.on('new_message', this.newMessage);
@@ -54,7 +58,7 @@ class SocketTest extends Component {
     render() {
         return (
             <div className={styles.socket_test}>
-                <h1>chat{ this.props.params.id ? `: ${this.props.params.id}` : ' '}</h1>
+                <h1>chat{ this.state.otherUser ? ` with ${this.state.otherUser}` : ' '}</h1>
                 <ul>
                     {this.state.messages.map((message, key) => {
                         return <li key={key}>{message}</li>
@@ -76,4 +80,4 @@ class SocketTest extends Component {
     }
 };
 
-export default SocketTest;
+export default Conversation;
