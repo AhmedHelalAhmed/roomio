@@ -8,13 +8,13 @@ const CONNECTION = 'connection';
 const SEND_MESSAGE = 'send_message';
 
 module.exports = {
-    socket: {
-        DISCONNECT,
-        USER_CONNECTED,
-        SEND_MESSAGE
-    },
-    io: {
-        CONNECTION,
-        NEW_MESSAGE
-    }
+  socket: {
+    DISCONNECT,
+    USER_CONNECTED,
+    SEND_MESSAGE,
+  },
+  io: {
+    CONNECTION,
+    NEW_MESSAGE,
+  },
 };

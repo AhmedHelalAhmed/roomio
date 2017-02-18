@@ -15,6 +15,7 @@ const Routes = () => {
             <IndexRoute component={Home} />
             <Route path="test" component={Test} />
             <Route path="conversations" component={Conversations} />
+            <Route path="conversation/:id" component={SocketTest} />
             <Route path="notes" component={Notes} />
             <Route path="socket" component={SocketTest} />
          </Route>

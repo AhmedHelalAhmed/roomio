@@ -3,8 +3,8 @@
   "description": "Messenger App",
   "main": "index.js",
   "scripts": {
-    "start-webpack": "webpack-dev-server -w",
-    "start-socket": "node --harmony socket_server/server.js",
+    "start-webpack": "webpack-dev-server",
+    "start-socket": "node --harmony socket_server/server.js --laravelApi http://localhost:8888/api",
     "start-php": "php artisan serve --port 8888"
   },
   "author": "Tyler Bainbridge, Alex Cushing, James Erardi",
@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "dotenv": "^4.0.0",
     "express": "^4.14.1",
+    "minimist": "^1.2.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-router": "^3.0.2",
