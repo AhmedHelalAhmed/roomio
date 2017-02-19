@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { headersWithAuth } from '../../utils/headers';
+import { authGET } from '../../../shared/utils/authAxios';
 
 class Conversations extends Component {
     state = {
@@ -9,7 +8,7 @@ class Conversations extends Component {
     }
 
     componentWillMount() {
-        axios.get('/user/conversations', { ...headersWithAuth })
+        authGET('/user/conversations')
             .then((res) => {
                 const { conversations } = res.data;
                 console.log(conversations);

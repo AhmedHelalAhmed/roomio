@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import styles from './style.css';
-import axios from 'axios';
-
-const authHeaders = {
-    Authorization: `Bearer ${window.user ? window.user.token : ''}`
-};
+import { authGET } from '../../../shared/utils/authAxios';
 
 class Home extends Component {
-    state = { loading: true, user: null, error: null }; // initial state.
+    state = { loading: true, user: null, error: null };
 
     componentWillMount() {
-        axios.get('/api/auth/user', { headers: {...authHeaders} }) // make request with header token.
+        // make request with header token.
+        authGET('/api/auth/user')
             .then((res) => {this.setState(
                 this.endRequest({ user: res.data }))
             })
@@ -28,10 +25,9 @@ class Home extends Component {
 
     render = () => {
         if (this.state.loading) return null; // or spinner
-        console.log(this.state.user);
         return (
             <div className={styles.home}>
-                hehehehehehehehe
+                profile
                 {
                     this.state.error ?
                     <p>
