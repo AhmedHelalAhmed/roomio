@@ -8,8 +8,8 @@ const argv = require('minimist')(process.argv.slice(2));
 const ConnectionController = require('./controllers/ConnectionController');
 const conversationController = require('./controllers/ConversationController');
 
-process.env.laravelApi = argv.laravelApi;
-process.env.socketPort = argv.socketPort;
+process.env.laravelURI = argv.laravelURI || 'http://localhost:8888';
+process.env.socketPort = argv.socketPort || 3000;
 
 // connection instance
 const connectionController = new ConnectionController();
@@ -20,9 +20,12 @@ io.on(events.io.CONNECTION, (socket) => {
     //  io events
   socket.on(events.socket.DISCONNECT, connectionController.disconnect);
 
-  // room related
-  socket.on(events.JOIN_ROOM, (payload) => {
-    connectionController.joinRoom(payload);
+  // room join/leave
+  socket.on(events.socket.JOIN_ROOM, (payload) => {
+    conversationController.joinRoom(io, socket, payload);
+  });
+  socket.on(events.socket.LEAVE_ROOM, (payload) => {
+    conversationController.leaveRoom(io, socket, payload);
   });
 
   //  message events
@@ -33,5 +36,5 @@ io.on(events.io.CONNECTION, (socket) => {
 
 http.listen(process.env.socketPort, () => {
   console.log(`socket server running on port ${process.env.socketPort}`);
-  console.log(`connected to api running on at ${process.env.socketPort}`);
+  console.log(`connected to api running on at ${process.env.laravelURI}`);
 });

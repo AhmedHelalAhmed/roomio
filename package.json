@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
-    "start-socket": "node --harmony socket_server/server.js --laravelApi http://localhost:8888/api",
+    "start-socket": "node --harmony socket_server/server.js --laravelURI http://localhost:8888 --socketPort 3000",
     "start-php": "php artisan serve --port 8888"
   },
   "author": "Tyler Bainbridge, Alex Cushing, James Erardi",

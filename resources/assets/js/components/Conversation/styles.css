@@ -12,3 +12,8 @@
 .socket_test li {
     padding: 10px;
 }
+
+.chat {
+  height: 500px;
+  overflow-y: auto;
+}
