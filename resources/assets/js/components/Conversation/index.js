@@ -14,6 +14,7 @@ class Conversation extends Component {
 
     componentWillMount() {
         if (this.props.params.id) {
+          this.socket.emit('join_room', { conversationId: this.props.params.id });
           axios.get(`/api/conversations/${this.props.params.id}/messages`, { ...headersWithAuth })
             .then(res => {
               const { conversation } = res.data;
@@ -28,6 +29,11 @@ class Conversation extends Component {
             .catch(error => console.log(error))
         }
         this.socket.on('new_message', this.newMessage);
+    }
+
+    componentWillUnmount() {
+      this.socket.emit('leave_room', { conversationId: this.props.params.id });
+      this.socket = null;
     }
 
     newMessage = ({ message, name }) => {
