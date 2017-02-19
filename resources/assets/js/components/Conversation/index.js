@@ -17,7 +17,6 @@ class Conversation extends Component {
           axios.get(`/api/conversations/${this.props.params.id}/messages`, { ...headersWithAuth })
             .then(res => {
               const { conversation } = res.data;
-              console.log(conversation);
               const otherUser = conversation.users.filter(user => user.name !== window.user.name).pop();
               this.setState({ 
                 messages: conversation.messages.map(message => {
