@@ -18,7 +18,7 @@ const Nav = () => {
                 {
                     window.user ?
                     <li>
-                        <Link to='/socket'>Socket</Link>
+                        <Link to='/conversations'>Conversations</Link>
                     </li> : null
                 }
                 {

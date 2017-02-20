@@ -12,8 +12,6 @@ class Notes extends Component {
     }
 
     componentWillMount() {
-        console.log(headersWithAuth);
-        const { conversations } = res.data;
         authGET('/api/notes')
             .then((res) => this.setState({ notes: res.data.notes || [] }) )
             .catch((error) => this.setState({ error: error.toString() }) );
