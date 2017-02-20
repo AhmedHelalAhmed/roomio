@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { authGET } from '../../../shared/utils/authAxios';
 
 class Conversations extends Component {
@@ -8,10 +9,11 @@ class Conversations extends Component {
     }
 
     componentWillMount() {
-        authGET('/user/conversations')
+        authGET('/api/user/conversations')
             .then((res) => {
                 const { conversations } = res.data;
-                console.log(conversations);
+                console.log("conversations: ", conversations);
+                this.setState({conversations : conversations});
             })
             .catch((error) => {
                 console.log(error);
@@ -22,6 +24,15 @@ class Conversations extends Component {
         return (
             <div>
                 <h1>Conversations</h1>
+                <ul>
+                {this.state.conversations.map((chat, index) => {
+                    return (
+                        <li key={ index }>
+                            <Link to={"/conversation/"+ chat.id }>{ chat.users[0].name } & { chat.users[1].name }</Link>
+                        </li>
+                    );
+                })}
+                </ul>
             </div>
         );
     }
