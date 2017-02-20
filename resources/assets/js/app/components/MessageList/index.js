@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Message from './Message';
+import Message from '../Message';
 
 const MessageList = (props) => {
   return (
