@@ -10,7 +10,9 @@
 
 #### Starting the app.
 Make sure you have MySQL running with a database named "roomio".
+
 Contact one of us for a working .env file.
+
 All of these commands need to be executed in seperate terminals.
 
 - Start the Laravel server (PHP)
