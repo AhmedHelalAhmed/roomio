@@ -12,8 +12,7 @@ class Conversations extends Component {
         authGET('/api/user/conversations')
             .then((res) => {
                 const { conversations } = res.data;
-                console.log("conversations: ", conversations);
-                this.setState({conversations : conversations});
+                this.setState({ conversations });
             })
             .catch((error) => {
                 console.log(error);
@@ -27,8 +26,10 @@ class Conversations extends Component {
                 <ul>
                 {this.state.conversations.map((chat, index) => {
                     return (
-                        <li key={ index }>
-                            <Link to={"/conversation/"+ chat.id }>{ chat.users[0].name } & { chat.users[1].name }</Link>
+                        <li key={index}>
+                            <Link to={`conversation/${chat.id}`}>
+                              {chat.users[0].name} & {chat.users[1].name}
+                            </Link>
                         </li>
                     );
                 })}
