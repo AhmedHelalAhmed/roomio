@@ -4,7 +4,7 @@ import Home from './components/Home/';
 import Test from './Test';
 import Notes from './components/Notes';
 import Conversations from './components/Conversations';
-import Conversation from './components/Conversation/container';
+import Conversation from './components/Conversation';
 import AppContainer from './AppContainer';
 
 // router would go here.
