@@ -1,10 +1,10 @@
 import React from 'react';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import Home from './features/Home/';
+import Home from './components/Home/';
 import Test from './Test';
-import Notes from './features/Notes';
-import Conversations from './features/Conversations';
-import Conversation from './features/Conversation';
+import Notes from './components/Notes';
+import Conversations from './components/Conversations';
+import Conversation from './components/Conversation';
 import AppContainer from './AppContainer';
 
 // router would go here.
