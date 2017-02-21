@@ -1,17 +1,33 @@
 ## Open source topic based messaging project.
 
 ### To Run:
-#### Installation Preregs:
+#### Installation Prereqs:
 - PHP
 - Node
 - NPM
 - MySQL
 - global webpack and webpack-dev-server.
 
-#### Starting the app.
-Make sure you have MySQL running with a database named "roomio".
-Contact one of us for a working .env file.
-All of these commands need to be executed in seperate terminals.
+#### Getting started:
+- Make sure you have MySQL running with a database named "roomio".
+
+- Contact one of us for a working .env file.
+
+- All of these commands need to be executed in seperate terminals.
+
+#### Install packages:
+
+- Install Composer packages
+```bash
+  composer install
+```
+
+- Install npm packages
+```bash
+  npm install
+```
+
+#### Run:
 
 - Start the Laravel server (PHP)
 ```bash
@@ -25,5 +41,5 @@ All of these commands need to be executed in seperate terminals.
 
 - Start the webpack dev server (Node)
 ```bash
-  npm run start-php
+  npm run start-webpack
 ```
