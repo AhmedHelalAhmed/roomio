@@ -1,4 +1,4 @@
-'''javascript
+```javascript
 // sending to sender-client only
 socket.emit('message', "this is a test");
 
@@ -22,4 +22,4 @@ io.of('myNamespace').emit('message', 'gg');
 
 // sending to individual socketid
 socket.broadcast.to(socketid).emit('message', 'for your eyes only');
-'''
+```
