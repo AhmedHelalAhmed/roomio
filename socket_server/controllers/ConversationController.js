@@ -33,7 +33,8 @@ const ConversationController = {
     axios.post(`${laravelURI}/api/messages`, newMessage, { headers: makeHeaders(token) })
       .then((res) => {
         const room = `/conversation/${conversationId}`;
-        socket.to(room).broadcast.emit(events.io.NEW_MESSAGE, res.data);
+        io.in(room).emit(events.io.NEW_MESSAGE, res.data);
+        // socket.to(room).emit(events.io.NEW_MESSAGE, res.data);
       })
       .catch((error) => {
         console.log(error);

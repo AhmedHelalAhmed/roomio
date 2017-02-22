@@ -12,7 +12,10 @@ Route::get('ping', function() { //  test connection to API.
 });
 
 Route::get('users', 'UserController@index');
+
 Route::get('users/{user}', 'UserController@show');
+
+Route::get('todos', 'TodoController@index');
 
 /**
  * Routes in this group can only be accessed if a valid auth token is located
@@ -49,4 +52,5 @@ Route::group([ 'middleware' => 'auth:api' ], function () {
 
     Route::get('notes', 'NoteController@index');
     Route::post('notes', 'NoteController@store');
+
 });

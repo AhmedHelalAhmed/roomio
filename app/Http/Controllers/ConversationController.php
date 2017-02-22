@@ -25,7 +25,9 @@ class ConversationController extends Controller
         $conversation->users()->attach(
             $request->user2_id
         );
-        return $conversation;
+        return response()->json([
+          "conversation" => $conversation,
+        ]);
     }
 
     public function getMessages($convo)
