@@ -10,6 +10,7 @@ class Conversations extends Component {
     }
 
     componentWillMount() {
+<<<<<<< Updated upstream
         authGET('/api/user/conversations')
             .then((res) => {
                 let conversations = [];
@@ -27,6 +28,16 @@ class Conversations extends Component {
             .catch((error) => {
                 console.log(error);
             });
+=======
+      authGET('/api/user/conversations')
+        .then((res) => {
+            const { conversations } = res.data;
+            this.setState({ conversations });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+>>>>>>> Stashed changes
     }
 
     render() {

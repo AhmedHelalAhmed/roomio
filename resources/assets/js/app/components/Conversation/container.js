@@ -25,7 +25,7 @@ class ConversationContainer extends Component {
   componentWillUnmount() {
     this.socket.emit(LEAVE_ROOM, { conversationId: this.props.params.id });
     this.socket = null;
-  }
+  } 
 
   sendMessage = (e) => {
     e.preventDefault();
@@ -58,9 +58,7 @@ const mapStateToProps = state => ({
   conversation: state.conversation,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(actions, dispatch);
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
 
 const ConnectedConversation = connect(
   mapStateToProps,

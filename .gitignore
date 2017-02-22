@@ -8,5 +8,4 @@
 Homestead.json
 Homestead.yaml
 .env
-/public/js/bundle
-/public/js/app
+/public/js
