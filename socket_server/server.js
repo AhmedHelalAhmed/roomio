@@ -24,6 +24,7 @@ io.on(events.io.CONNECTION, (socket) => {
   socket.on(events.socket.JOIN_ROOM, (payload) => {
     conversationController.joinRoom(io, socket, payload);
   });
+
   socket.on(events.socket.LEAVE_ROOM, (payload) => {
     conversationController.leaveRoom(io, socket, payload);
   });
@@ -36,5 +37,5 @@ io.on(events.io.CONNECTION, (socket) => {
 
 http.listen(process.env.socketPort, () => {
   console.log(`socket server running on port ${process.env.socketPort}`);
-  console.log(`connected to api running on at ${process.env.laravelURI}`);
+  console.log(`connected to api running at ${process.env.laravelURI}`);
 });

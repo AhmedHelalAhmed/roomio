@@ -9,16 +9,16 @@ class Message extends Model
     protected $fillable = [
         'content',
         'user_id',
-        'conversation_id'
+        'topic_id'
     ];
     
     public function user()
     {
-        return $this->belongsTo(User::Class);
+        return $this->belongsTo(User::Class)->select(array('id', 'username'));
     }
 
-    public function conversation()
+    public function topic()
     {
-        return $this->belongsTo(Conversation::class);
+        return $this->belongsTo(Topic::class);
     }
 }

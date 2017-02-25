@@ -11,46 +11,51 @@ Route::get('ping', function() { //  test connection to API.
     return 'pong';
 });
 
-Route::get('users', 'UserController@index');
+/** PUBLIC ROUTES (NO AUTH NEEDED) **/
+Route::group(['prefix' => 'user'], function () {
+    Route::get('/', 'UserController@index');
+    Route::get('/{user}', 'UserController@show');
+    Route::get('/{username}/profile', 'UserController@getUserProfileFromUsername');
+});
 
-Route::get('users/{user}', 'UserController@show');
+Route::group(['prefix' => 'room'], function () {
+    Route::get('/', 'RoomController@index');
+    Route::get('/{name}', 'RoomController@showByName');
+    Route::get('/{name}/topics', 'RoomController@getWithTopics'); // TODO: Paginate
 
-Route::get('todos', 'TodoController@index');
+    Route::group([ 'middleware' => 'auth:api' ], function () {
+      Route::post('/', 'RoomController@store');
+      Route::patch('/{room}', 'RoomController@update');
+    });
+});
+
+Route::group(['prefix' => 'topic'], function () {
+    Route::get('/', 'TopicController@index');
+    Route::get('/{topic}', 'TopicController@show');
+    Route::get('/{topic}/messages', 'TopicController@getWithMessages'); // TODO: Paginate
+    
+    Route::group([ 'middleware' => 'auth:api' ], function () {
+      Route::post('/', 'TopicController@store');
+      Route::patch('/{topic}', 'TopicController@update');
+    });
+});
+
+Route::group(['prefix' => 'message'], function () {
+    Route::group([ 'middleware' => 'auth:api' ], function () {
+        Route::get('/', 'MessageController@index');
+        Route::post('/', 'MessageController@store');
+    });
+});
+
 
 /**
  * Routes in this group can only be accessed if a valid auth token is located
  * in the headers of the request under "Authorization" : "Bearer" + api_token.
  */
 Route::group([ 'middleware' => 'auth:api' ], function () {
-    Route::get('token', function() {
-        if (Auth::check()) {
-            return response()->json([
-                'token' => Auth::user()->api_token
-            ]);
-        } else {
-            return response()->json([
-                'message' => 'No user in session.',
-                'status' => 401
-            ]);
-        }
-    });
-
-    Route::get('auth/user', function () {
+    Route::get('/auth/user', function () {
         return response()->json(
             Auth::user()
         );
     });
-
-    Route::get('user/conversations', 'UserController@getConversations');
-
-    Route::get('conversations', 'ConversationController@index');
-    Route::post('conversations', 'ConversationController@store');
-    Route::get('conversations/{convo}/messages', 'ConversationController@getMessages');
-
-    Route::get('messages', 'MessageController@index');
-    Route::post('messages', 'MessageController@store');
-
-    Route::get('notes', 'NoteController@index');
-    Route::post('notes', 'NoteController@store');
-
 });

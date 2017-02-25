@@ -23,12 +23,20 @@ class UserController extends Controller
         );
     }
 
-    public function getConversations()
+    public function getUserProfileFromUsername($username)
     {
-        $user = request()->user();
-        $conversations = $user->conversations()->with('users')->get();
+        $user = User::with('rooms', 'topics')
+                  ->where('username', $username)
+                  ->first();
+
+        if ($user == null) {
+          return Response::json([
+            'error' => 'Could not find a user with that id'
+          ], 200);
+        }
+
         return response()->json(
-            compact('conversations')
+            compact('user')
         );
     }
 }
