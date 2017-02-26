@@ -6,15 +6,14 @@ use Validator;
 use Response;
 use Illuminate\Http\Request;
 
-class MessageController extends Controller
-{
+class MessageController extends Controller {
+
     public function index() {
         $messages = Message::with(['user'])->get();
         return response()->json(compact('messages'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $rules = array(
             'content' => 'required|string',
             'topic_id' => 'required|numeric',
@@ -27,8 +26,7 @@ class MessageController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             $messages = $validator->messages();
             return Response::json(compact('messages'), 400);
             return response(400)->json(compact('messages'));

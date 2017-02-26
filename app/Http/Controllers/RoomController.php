@@ -7,18 +7,16 @@ use Illuminate\Http\Request;
 use Response;
 use Validator;
 
-class RoomController extends Controller
-{
-    public function index()
-    {
+class RoomController extends Controller {
+  
+    public function index() {
         $rooms = Room::with(['user'])->get();
         return response()->json(
             compact('rooms')
         );
     }
 
-    public function showById($room)
-    {
+    public function showById($room) {
         $room = Room::with(['user'])
                   ->where('id', $room)
                   ->first();
@@ -32,8 +30,7 @@ class RoomController extends Controller
         return Response::json(compact('room'), 200);
     }
 
-    public function showByName($name)
-    {
+    public function showByName($name) {
         $room = Room::with(['user'])
                   ->where('name', $name)
                   ->first();
@@ -47,8 +44,7 @@ class RoomController extends Controller
         return Response::json(compact('room'), 200);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $rules = array(
             'name' => 'required|alpha_num|max:40|unique:rooms',
             'title' => 'required|string',
@@ -57,8 +53,7 @@ class RoomController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             $messages = $validator->messages();
             return Response::json(compact('messages'), 400);
             return response(400)->json(compact('messages'));
@@ -77,8 +72,7 @@ class RoomController extends Controller
         // );
     }
 
-    public function update(Request $request, Room $room)
-    {
+    public function update(Request $request, Room $room) {
         $rules = array(
             'title' => 'string',
             'description' => 'string'
@@ -86,23 +80,17 @@ class RoomController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             $messages = $validator->messages();
             return Response::json(compact('messages'), 400);
-            return response(400)->json(compact('messages'));
         }
 
         $newFields = [];
+        
+        $newFields['description'] = $request->input('description');
 
-        if ($request->input('title') != null)
-        {
+        if ($request->input('title') != null) {
             $newFields['title'] = $request->input('title');
-        }
-
-        if ($request->input('description') != null)
-        {
-            $newFields['description'] = $request->input('description');
         }
 
         $room->fill($newFields)->save();

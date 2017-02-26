@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
-{
+class Room extends Model {
     protected $fillable = [
         'name',
         'title',
@@ -13,13 +12,11 @@ class Room extends Model
         'user_id'
     ];
 
-    public function topics()
-    {
+    public function topics() {
         return $this->hasMany(Topic::class);
     }
 
-    public function user()
-    {
+    public function user() {
         return $this->belongsTo(User::class)->select(array('id', 'username'));
     }
 }

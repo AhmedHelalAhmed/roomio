@@ -5,26 +5,23 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
-{
+class UserController extends Controller {
 
-    public function index()
-    {
+    public function index() {
         $users = User::all();
-        return response()->json(
-            compact('users')
-        );
+        return Response::json(compact('users'), 200);
     }
 
-    public function show(User $user)
-    {
-        return response()->json(
-            compact('user')
-        );
+    public function show(User $user) {
+        if ($user === null) {
+          return Response::json([
+            'error' => 'Could not find a user with that id'
+          ], 404);
+        }
+        return Response::json(compact('user'), 200);
     }
 
-    public function getUserProfileFromUsername($username)
-    {
+    public function getUserProfileFromUsername($username) {
         $user = User::with('rooms', 'topics')
                   ->where('username', $username)
                   ->first();
@@ -35,8 +32,6 @@ class UserController extends Controller
           ], 200);
         }
 
-        return response()->json(
-            compact('user')
-        );
+       return Response::json(compact('user'), 200);
     }
 }
