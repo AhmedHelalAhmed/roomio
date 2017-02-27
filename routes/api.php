@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
+use Hashids\Hashids;
 /**
  * To test connection to the api send a request to /api/ping and "pong" should
  * be the response.

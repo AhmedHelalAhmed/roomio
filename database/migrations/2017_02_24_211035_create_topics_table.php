@@ -15,6 +15,7 @@ class CreateTopicsTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('ref', 60)->unique();
             
             $table->text('title');
             $table->text('description')->nullable();

@@ -15,7 +15,7 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ref', 60)->unique()->default(uniqid());
+            $table->string('ref', 60)->unique();
 
             // no spaces (in the url) - e.g. "phplaravel"
             $table->string('name', 40)->unique()->index();
