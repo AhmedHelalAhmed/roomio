@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Topic;
 use App\Room;
+use App\Message;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,9 @@ class DatabaseSeeder extends Seeder
 
         Topic::truncate();
         $this->call(TopicTableSeeder::class);
+
+        Message::truncate();
+        $this->call(MessageTableSeeder::class);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
