@@ -44,6 +44,20 @@ class RoomController extends Controller {
         return Response::json(compact('room'), 200);
     }
 
+    public function getWithTopics($name) {
+        $room = Room::with(['user', 'topics.user'])
+                  ->where('name', $name)
+                  ->first();
+
+        if ($room == null) {
+            return Response::json([
+              'error' => 'No room with this name.'
+            ], 404);
+        }
+
+        return Response::json(compact('room'), 200);
+    }
+
     public function store(Request $request) {
         $rules = array(
             'name' => 'required|alpha_num|max:40|unique:rooms',

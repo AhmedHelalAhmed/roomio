@@ -15,7 +15,15 @@ class UsersTableSeeder extends Seeder
     {
         $faker = Faker::create();
         
-        foreach (range(1, 20) as $index) {        
+          User::create([
+              'username' => 'admin',
+              'email' => 'admin@admin.com',
+              'password' => bcrypt('password'),
+              'api_token' => 'oFhRFh08fdX1GYfU1SBvni0o764hOSG2aod4otZXZwUv4SMuzeyFBVcNtas3',
+              'ref' => uniqid((string)($index)),
+          ]);
+
+        foreach (range(1, 19) as $index) {        
             User::create([
                 'username' => $faker->username(),
                 'email' => $faker->email(),

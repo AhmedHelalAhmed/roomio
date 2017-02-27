@@ -14,10 +14,25 @@ class TopicController extends Controller {
         return Response::json(compact('topics'), 400);
     }
 
-    public function show($topic) {
+    public function show($topicRef) {
         $topic = Topic::with(['room'])
-                    ->where('id', $topic)
+                    ->where('ref', '=', $topicRef)
                     ->first();
+
+        if ($topic == null) {
+            return Response::json([
+              'message' => 'No topic with this id.'
+            ], 404);
+        }
+
+        return Response::json(compact('topic'), 200);
+    }
+
+    public function getWithMessages($topicRef) {
+        $topic = Topic::with(['room', 'messages'])
+                    ->where('ref', '=',  $topicRef)
+                    ->first();
+
         if ($topic == null) {
             return Response::json([
               'message' => 'No topic with this id.'
@@ -62,6 +77,8 @@ class TopicController extends Controller {
     }
 
     public function update(Request $request, Topic $topic) {
+        $topic = Topic::where('ref', '=', $topicRef)->first();
+
         $rules = array(
             'title' => 'sometimes|string|max:160',
             'description' => 'sometimes|string|max:1000'

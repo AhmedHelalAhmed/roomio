@@ -9,8 +9,16 @@ use Illuminate\Http\Request;
 class MessageController extends Controller {
 
     public function index() {
-        $messages = Message::with(['user'])->get();
+        $messages = Message::with(['user'])->paginate(15);
         return response()->json(compact('messages'));
+    }
+
+    public function getMessagesForTopic($topicId) {
+        $messages = Message::with(['user'])
+                      ->where('topic_id', '=', $topicId)
+                      ->paginate(20);
+
+        return Response::json(compact('messages'), 200);                
     }
 
     public function store(Request $request) {

@@ -31,18 +31,19 @@ Route::group(['prefix' => 'room'], function () {
 
 Route::group(['prefix' => 'topic'], function () {
     Route::get('/', 'TopicController@index');
-    Route::get('/{topic}', 'TopicController@show');
-    Route::get('/{topic}/messages', 'TopicController@getWithMessages'); // TODO: Paginate
+    Route::get('/{topicRef}', 'TopicController@show');
+    Route::get('/{topicId}/messages', 'TopicController@getMessages'); // TODO: Paginate
     
     Route::group([ 'middleware' => 'auth:api' ], function () {
       Route::post('/', 'TopicController@store');
-      Route::patch('/{topic}', 'TopicController@update');
+      Route::patch('/{topicRef}', 'TopicController@update');
     });
 });
 
 Route::group(['prefix' => 'message'], function () {
     Route::group([ 'middleware' => 'auth:api' ], function () {
         Route::get('/', 'MessageController@index');
+        Route::get('/topic/{topicId}', 'MessageController@getMessagesForTopic');
         Route::post('/', 'MessageController@store');
     });
 });
