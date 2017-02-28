@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
               'email' => 'admin@admin.com',
               'password' => bcrypt('password'),
               'api_token' => 'oFhRFh08fdX1GYfU1SBvni0o764hOSG2aod4otZXZwUv4SMuzeyFBVcNtas3',
-              'ref' => uniqid((string)($index)),
+              'ref' => uniqid((string)(1)),
           ]);
 
         foreach (range(1, 19) as $index) {        

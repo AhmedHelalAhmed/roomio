@@ -70,7 +70,6 @@ class RoomController extends Controller {
         if ($validator->fails()) {
             $messages = $validator->messages();
             return Response::json(compact('messages'), 400);
-            return response(400)->json(compact('messages'));
         }
 
         $room = new Room($request->all());

@@ -29,6 +29,7 @@ Route::group(['prefix' => 'room'], function () {
     });
 });
 
+
 Route::group(['prefix' => 'topic'], function () {
     Route::get('/', 'TopicController@index');
     Route::get('/{topicRef}', 'TopicController@show');
@@ -41,9 +42,10 @@ Route::group(['prefix' => 'topic'], function () {
 });
 
 Route::group(['prefix' => 'message'], function () {
+    Route::get('/', 'MessageController@index');
+    Route::get('/topic/{topicId}', 'MessageController@getMessagesForTopic');
+
     Route::group([ 'middleware' => 'auth:api' ], function () {
-        Route::get('/', 'MessageController@index');
-        Route::get('/topic/{topicId}', 'MessageController@getMessagesForTopic');
         Route::post('/', 'MessageController@store');
     });
 });
