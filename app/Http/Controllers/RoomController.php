@@ -84,7 +84,10 @@ class RoomController extends Controller {
             return Response::json(compact('messages'), 400);
         }
 
-        $room = new Room($request->all());
+        $roomFields = $request-all();
+        $roomFields['ref'] = uniqid();
+        
+        $room = new Room(roomFields);
         $room->user_id = $request->user()->id;
         $room->save();
 
