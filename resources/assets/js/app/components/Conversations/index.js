@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { authGET } from '../../../shared/utils/authAxios';
+import { authGET } from '../../../src/shared/utils/authAxios';
 import styles from './styles.css';
 
 class Conversations extends Component {
@@ -10,34 +10,23 @@ class Conversations extends Component {
     }
 
     componentWillMount() {
-<<<<<<< Updated upstream
-        authGET('/api/user/conversations')
-            .then((res) => {
-                let conversations = [];
-                if (res.data.conversations.length) {
-                  conversations = res.data.conversations.map((convo) => {
-                    const [user1, user2] = convo.users;
-                    return {
-                      name: user1.name != window.user.name ? `w/ ${user1.name}` : `w/ ${user2.name}`,
-                      id: convo.id,
-                    };
-                  });
-                }
-                this.setState({ conversations });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-=======
       authGET('/api/user/conversations')
-        .then((res) => {
-            const { conversations } = res.data;
-            this.setState({ conversations });
-        })
-        .catch((error) => {
-            console.log(error);
-        });
->>>>>>> Stashed changes
+          .then((res) => {
+              let conversations = [];
+              if (res.data.conversations.length) {
+                conversations = res.data.conversations.map((convo) => {
+                  const [user1, user2] = convo.users;
+                  return {
+                    name: user1.name != window.user.name ? `w/ ${user1.name}` : `w/ ${user2.name}`,
+                    id: convo.id,
+                  };
+                });
+              }
+              this.setState({ conversations });
+          })
+          .catch((error) => {
+              console.log(error);
+          });
     }
 
     render() {

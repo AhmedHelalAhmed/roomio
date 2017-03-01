@@ -10,20 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token',
+        'username', 'email', 'password', 'api_token',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token', 'api_token',
     ];
@@ -32,8 +22,12 @@ class User extends Authenticatable
         return $this->hasMany(Note::class);
     }
 
-    public function conversations() {
-        return $this->belongsToMany(Conversation::class, 'conversation_user')->withTimestamps();
+    public function topics() {
+      return $this->hasMany(Topic::class);
+    }
+
+    public function rooms() {
+        return $this->hasMany(Room::class);
     }
 
     public function messages() {

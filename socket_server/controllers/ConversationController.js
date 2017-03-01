@@ -30,7 +30,7 @@ const ConversationController = {
       socket.emit('error', { message: 'no token supplied' });
     }
 
-    axios.post(`${laravelURI}/api/messages`, newMessage, { headers: makeHeaders(token) })
+    axios.post(`${laravelURI}/api/message`, newMessage, { headers: makeHeaders(token) })
       .then((res) => {
         const room = `/conversation/${conversationId}`;
         io.in(room).emit(events.io.NEW_MESSAGE, res.data);

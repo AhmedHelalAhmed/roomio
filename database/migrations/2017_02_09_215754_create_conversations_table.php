@@ -13,20 +13,20 @@ class CreateConversationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('conversations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+        // Schema::create('conversations', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->timestamps();
+        // });
 
-        Schema::create('conversation_user', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users');
+        // Schema::create('conversation_user', function (Blueprint $table) {
+        //     $table->integer('user_id')->unsigned()->index();
+        //     $table->foreign('user_id')->references('id')->on('users');
 
-            $table->integer('conversation_id')->unsigned()->index();
-            $table->foreign('conversation_id')->references('id')->on('conversations');
+        //     $table->integer('conversation_id')->unsigned()->index();
+        //     $table->foreign('conversation_id')->references('id')->on('conversations');
 
-            $table->timestamps();
-        });
+        //     $table->timestamps();
+        // });
     }
 
     /**
@@ -36,7 +36,7 @@ class CreateConversationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conversations');
-        Schema::dropIfExists('conversation_user');
+        // Schema::dropIfExists('conversations');
+        // Schema::dropIfExists('conversation_user');
     }
 }

@@ -4,13 +4,14 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import thunk from 'redux-thunk';
-import rootReducer from './app/reducers';
+import reducers from './redux/reducers';
 
 //  root file
-import Routes from './app/Routes';
+// import Routes from '../app/Routes';
+import Routes from './Routes';
 
 const store = createStore(
-  rootReducer,
+  reducers,
   applyMiddleware(thunk),
 );
 
@@ -31,7 +32,7 @@ render(Routes);
 
 // for hot module replacement, needs to point to the root file. (for recursive bundling)
 if (module.hot) {
-  module.hot.accept('./app/Routes', () => {
+  module.hot.accept('./Routes', () => {
     render(Routes);
   });
 }

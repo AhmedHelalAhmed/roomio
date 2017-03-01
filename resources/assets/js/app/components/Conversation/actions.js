@@ -1,4 +1,4 @@
-import { authGET } from '../../../shared/utils/authAxios';
+import { authGET } from '../../../src/shared/utils/authAxios';
 
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const ADD_MESSAGES = 'ADD_MESSAGES';
