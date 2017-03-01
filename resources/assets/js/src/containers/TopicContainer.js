@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { find } from 'lodash';
+import find from 'lodash/find';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
-import { addTopic } from '../redux/ducks/entitiesDucks';
+import { addTopic, addMessages } from '../redux/ducks/entitiesDucks';
 import { startLoading, stopLoading } from '../redux/ducks/loadingDucks';
 import { authGET } from '../shared/utils/authAxios';
 
@@ -35,7 +35,7 @@ class TopicContainer extends Component {
   }
 
   render() {
-    const { topics, loading } = this.props;
+    const { topics, loading, messages } = this.props;
     const { roomName, topicRef } = this.props.params;
     const topic = find(topics[roomName], { ref: topicRef });
 
@@ -48,6 +48,7 @@ class TopicContainer extends Component {
     return (
       <Topic
         topic={topic}
+        messages={messages[topicRef]}
       />
     );
   }
@@ -55,8 +56,9 @@ class TopicContainer extends Component {
 
 const mapStateToProps = state => ({
   topics: state.entities.topics,
+  messages: state.entities.messages,
   active: state.active,
-  loading: state.loading.topic
+  loading: state.loading.topic,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -65,7 +67,9 @@ const mapDispatchToProps = dispatch => ({
     authGET(`/api/topic/${topicRef}/messages`)
       .then((res) => {
         const { messages, topic } = res.data;
+        console.log(messages);
         dispatch(addTopic(topic));
+        dispatch(addMessages(topic.ref, messages.data));
         dispatch(updateActiveTopic(topic.ref));
         document.title = `${topic.room.title} - ${topic.title}`;
         dispatch(stopLoading('topic'));

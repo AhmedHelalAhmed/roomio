@@ -3,6 +3,7 @@ import { uniqBy, orderBy } from 'lodash';
 const ADD_ROOM   = 'entities/ADD';
 const ADD_TOPIC   = 'entities/ADD_TOPIC';
 const ADD_MULTIPLE_TOPICS = 'entities/ADD_MULTIPLE_TOPICS';
+const ADD_MULTIPLE_MESSAGES = 'entities/ADD_MULTIPLE_MESSAGES';
 const ADD_MESSAGE   = 'entities/ADD_TOPIC';
 
 //  Initial State
@@ -55,6 +56,20 @@ export default function reducer(state = initialState, action = {}) {
           ],
         }
       });
+    case ADD_MULTIPLE_MESSAGES:
+      return Object.assign({}, state, {
+        messages: {
+          ...state.messages,
+            [payload.topicRef]: [
+            ...orderBy(
+              uniqBy([
+                ...(state.topics[payload.topicRef] || []),
+                ...payload.messages
+              ], 'id'),
+              ['created_at'], ['desc']),
+          ],
+        }
+      });
     default:
       return state;
   }
@@ -71,4 +86,8 @@ export const addTopic = (topic) => {
 
 export const addTopics = (roomName, topics = []) => {
   return { type: ADD_MULTIPLE_TOPICS, payload: { roomName, topics } };
+};
+
+export const addMessages = (topicRef, messages = []) => {
+  return { type: ADD_MULTIPLE_MESSAGES, payload: { topicRef, messages } };
 };
