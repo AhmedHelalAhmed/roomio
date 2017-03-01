@@ -11,11 +11,11 @@ module.exports = {
 
   output: {
     filename: 'bundle.js', //output public/js/
-    path: resolve(__dirname, 'public/js/'),
+    path: resolve(__dirname, 'public/js/src'),
     publicPath: 'http://localhost:8080/public/' //output path for dev (include in index.blade.php).
   },
 
-  context: resolve(__dirname, 'resources/assets/js/'), // where the js code lives.
+  context: resolve(__dirname, 'resources/assets/js/src'), // where the js code lives.
 
   devtool: 'inline-source-map',
 

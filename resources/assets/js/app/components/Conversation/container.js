@@ -8,7 +8,7 @@ import {
   JOIN_ROOM,
   LEAVE_ROOM,
   SEND_MESSAGE,
-} from '../../../shared/constants/socket';
+} from '../../../src/shared/constants/socket';
 import * as actions from './actions';
 import Conversation from './component';
 

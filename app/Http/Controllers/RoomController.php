@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Room;
+use App\Topic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Response;
 use Validator;
 
@@ -31,9 +33,19 @@ class RoomController extends Controller {
     }
 
     public function showByName($name) {
+        $res = [];
+
         $room = Room::with(['user'])
-                  ->where('name', $name)
-                  ->first();
+                        ->where('name', $name)
+                        ->first();
+
+        $res['room'] = $room;          
+
+        if (Input::get("with") == 'topics') {
+          $res['topics'] = Topic::with(['user'])
+                            ->where('room_name', $room->name)
+                            ->paginate(20);
+        }
 
         if ($room == null) {
             return Response::json([
@@ -41,7 +53,7 @@ class RoomController extends Controller {
             ], 404);
         }
 
-        return Response::json(compact('room'), 200);
+        return Response::json($res, 200);
     }
 
     public function getWithTopics($name) {

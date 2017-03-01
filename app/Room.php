@@ -14,7 +14,8 @@ class Room extends Model {
     ];
 
     public function topics() {
-        return $this->hasMany(Topic::class);
+        return $this->hasMany(Topic::class, 'name', 'room_name');
+        // return $this->hasMany(Topic::class);
     }
 
     public function user() {

@@ -6,6 +6,18 @@ use App\Topic;
 
 class TopicTableSeeder extends Seeder
 {
+    protected $rooms = [
+        ['javascript', 'Javascript'],
+        ['politics', 'Politics'],
+        ['hiphop', 'Hip Hop Heads'],
+        ['news', 'News'],
+        ['music', 'Music'],
+        ['programming', 'Programming'],
+        ['gifs', 'Gifs'],
+        ['movies', 'Movies'],
+        ['photography', 'Photography'],
+        ['gaming', 'Gaming']
+    ]; // 10 rooms
     /**
      * Run the database seeds.
      *
@@ -19,7 +31,7 @@ class TopicTableSeeder extends Seeder
             Topic::create([
                 'title' => $faker->paragraph(2, true),
                 'description' => $faker->paragraph(3, true),
-                'room_id' => $faker->numberBetween(1, 10),
+                'room_name' => $this->rooms[rand(0, 9)][0],
                 'user_id' => $faker->numberBetween(1, 20),
                 'ref' => uniqid((string)($index)),
             ]);

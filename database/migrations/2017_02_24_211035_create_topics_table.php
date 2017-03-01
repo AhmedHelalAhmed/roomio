@@ -20,9 +20,9 @@ class CreateTopicsTable extends Migration
             $table->text('title');
             $table->text('description')->nullable();
             
-            $table->integer('room_id')->unsigned();
-            $table->foreign('room_id')->references('id')->on('rooms');
-            
+            $table->string('room_name');
+            $table->foreign('room_name')->references('name')->on('rooms');
+
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

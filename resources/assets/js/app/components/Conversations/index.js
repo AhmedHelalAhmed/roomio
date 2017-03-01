@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { authGET } from '../../../shared/utils/authAxios';
+import { authGET } from '../../../src/shared/utils/authAxios';
 import styles from './styles.css';
 
 class Conversations extends Component {

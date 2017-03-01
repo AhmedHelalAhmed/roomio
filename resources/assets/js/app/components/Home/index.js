@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './style.css';
-import { authGET } from '../../../shared/utils/authAxios';
+import { authGET } from '../../../src/shared/utils/authAxios';
 
 class Home extends Component {
     state = { loading: true, user: null, error: null };

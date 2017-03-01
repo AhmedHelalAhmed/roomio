@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './style.css';
 import axios from 'axios';
-import { authGET, authPOST } from '../../../shared/utils/authAxios';
+import { authGET, authPOST } from '../../../src/shared/utils/authAxios';
 
 class Notes extends Component {
     state = {

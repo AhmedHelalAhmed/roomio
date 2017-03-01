@@ -10,11 +10,13 @@ class Topic extends Model {
         'title',
         'description',
         'user_id',
-        'room_id'
+        'room_name',
+        'ref'
     ];
 
     public function room() {
-        return $this->belongsTo(Room::class)->select(array('title', 'name'));
+        return $this->belongsTo(Room::class, 'room_name', 'name')->select(array('title', 'name'));
+        // return $this->belongsTo(Room::class)->select(array('title', 'name'));
     }
 
     public function messages() {
