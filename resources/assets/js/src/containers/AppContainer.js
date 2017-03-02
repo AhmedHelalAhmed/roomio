@@ -4,25 +4,38 @@ import {
   addRoom,
   addTopic,
 } from '../redux/ducks/entitiesDucks';
+import io from 'socket.io-client';
+import {
+  SOCKET_SERVER,
+  NEW_MESSAGE,
+  JOIN_ROOM,
+  LEAVE_ROOM,
+  SEND_MESSAGE,
+} from '../shared/constants/socket';
+
+const socket = io(SOCKET_SERVER);
+// socket.emit(JOIN_ROOM, { conversationId: this.props.params.id });
+// socket.on(NEW_MESSAGE, ({ message, name }) => {
+//   this.props.addMessage({ ...message, user: { name } });
+// });
 
 class AppContainer extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {};
-  }
-
-  componentWillMount() {
-    console.log(this.props);
-  }
-
   render() {
-      return (
-          <div>
-            {this.props.children}
-          </div>
-      );
+    return (
+      <div>
+        {
+          React.Children.map(this.props.children, child =>
+            React.cloneElement(child, { socket }),
+          )
+        }
+      </div>
+    );
   }
 }
+
+AppContainer.propTypes = {
+  children: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
   entities: state.entities,

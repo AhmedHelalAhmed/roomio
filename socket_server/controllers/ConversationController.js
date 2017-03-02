@@ -5,24 +5,24 @@ const { makeHeaders } = require('../utils/headers');
 const ConversationController = {
 
   joinRoom: (io, socket, payload) => {
-    const { conversationId } = payload;
-    const room = `/conversation/${conversationId}`;
-    console.log(`User joined ${room}`);
+    const { roomName } = payload;
+    const room = `/room/${roomName}`;
+    console.log(`User joined ${roomName}`);
     socket.join(room);
   },
 
   leaveRoom: (io, socket, payload) => {
-    const { conversationId } = payload;
-    const room = `/conversation/${conversationId}`;
-    console.log(`User left ${room}`);
+    const { roomName } = payload;
+    const room = `/room/${roomName}`;
+    console.log(`User left ${roomName}`);
     socket.leave(room);
   },
 
 
   sendMessage: (io, socket, payload) => {
     const { laravelURI } = process.env;
-    const { content, token, conversationId } = payload;
-    const newMessage = { content, conversation_id: conversationId };
+    const { content, token, topicRef } = payload;
+    const newMessage = { content, topic_ref: topicRef };
 
     if (!conversationId) {
       socket.emit('error', { message: 'no conversationId supplied' });

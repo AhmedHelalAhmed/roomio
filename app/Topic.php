@@ -20,7 +20,7 @@ class Topic extends Model {
     }
 
     public function messages() {
-        return $this->hasMany(Message::class)->paginate(15);
+        return $this->hasMany(Message::class, 'ref', 'topic_ref')->paginate(15);
     }
 
     public function user() {

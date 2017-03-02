@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Message;
+use App\Topic;
 
 class MessageTableSeeder extends Seeder
 {
@@ -18,7 +19,7 @@ class MessageTableSeeder extends Seeder
             Message::create([
                 'content' => $faker->paragraph(rand(1, 3), true),
                 'user_id' => $faker->numberBetween(1, 20),
-                'topic_id' => $faker->numberBetween(1, 50)
+                'topic_ref' => Topic::where('id', rand(1, 50))->first()->ref
             ]);
         }
     }

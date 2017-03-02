@@ -44,7 +44,7 @@ class TopicController extends Controller {
                     ->first();
 
         $messages = Message::with(['user'])
-                    ->where('topic_id', $topic->id)
+                    ->where('topic_ref', $topicRef)
                     ->paginate(20);
 
         if ($topic == null) {

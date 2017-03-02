@@ -13,9 +13,9 @@ class MessageController extends Controller {
         return response()->json(compact('messages'));
     }
 
-    public function getMessagesForTopic($topicId) {
+    public function getMessagesForTopic($topicRef) {
         $messages = Message::with(['user'])
-                      ->where('topic_id', '=', $topicId)
+                      ->where('topic_ref', '=', $topicRef)
                       ->paginate(20);
 
         return Response::json(compact('messages'), 200);                
@@ -24,7 +24,7 @@ class MessageController extends Controller {
     public function store(Request $request) {
         $rules = array(
             'content' => 'required|string',
-            'topic_id' => 'required|numeric',
+            'topic_ref' => 'required|alpha_num',
             'description' => 'string'
         );
 
