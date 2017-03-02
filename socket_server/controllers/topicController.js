@@ -28,13 +28,14 @@ const topicController = {
   sendMessage: (io, socket, payload) => {
     const { laravelURI } = process.env;
     const { token, content, topicRef } = payload;
-    console.log(payload);
     authPOST(`${laravelURI}/api/message`, token, {
       content,
       topic_ref: topicRef, 
-    }).then((message) => {
+    }).then((res) => {
+      const { message } = res.data;
       const topic = `topic:${message.topic_ref}`;
-      io.to(topic).emit('topic:new_message', { message });
+      
+      io.sockets.to(topic).emit('topic:new_message', { message });
     }).catch((err) => console.log(err));
   },
 

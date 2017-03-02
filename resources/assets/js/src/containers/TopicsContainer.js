@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
-import { addTopic, addMessages } from '../redux/ducks/entitiesDucks';
+import { addTopic, addMessages, addMessage } from '../redux/ducks/entitiesDucks';
 import { startLoading, stopLoading } from '../redux/ducks/loadingDucks';
 import { authGET } from '../shared/utils/authAxios';
 import find from 'lodash/find';
@@ -12,7 +12,7 @@ import find from 'lodash/find';
 import Topic from '../components/Topic';
 
 class TopicContainer extends Component {
-  state = { messageContent: ''};
+  state = { content: ''};
 
   componentWillMount() {
     const { topics, socket, params: { topicRef, roomName } } = this.props;
@@ -35,6 +35,18 @@ class TopicContainer extends Component {
     this.props.emit.leaveTopic();
   }
 
+  onInputChange(event) {
+    const { value } = event.target;
+    this.setState({ content: value });
+  }
+
+  sendMessage(event) {
+    event.preventDefault();
+    const { content } = this.state;
+    this.props.emit.sendMessage(content);
+    this.setState({ content: '' });
+  }
+
   render() {
     const { topics, loading, messages } = this.props;
     const { roomName, topicRef } = this.props.params;
@@ -50,6 +62,9 @@ class TopicContainer extends Component {
       <Topic
         topic={topic}
         messages={messages[topicRef]}
+        onChange={this.onInputChange.bind(this)}
+        sendMessage={this.sendMessage.bind(this)}
+        content={this.state.content}
       />
     );
   }
@@ -68,21 +83,22 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     initSocketListeners: () => {
       socket.on('topic:new_message', ({ message }) => {
-        this.props.addMessage(message.topic_ref, message);
+        console.log(message);
+        dispatch(addMessage(message.topic_ref, message));
       });
     },
     emit: {
       joinTopic: () => {
         const { topicRef, roomName } = params;
-        props.socket.emit('topic:join', { topicRef, roomName });
+        socket.emit('topic:join', { topicRef, roomName });
       },
       leaveTopic: () => {
         const { topicRef, roomName } = params;
-        props.socket.emit('topic:leave', { topicRef, roomName });
+        socket.emit('topic:leave', { topicRef, roomName });
       },
       sendMessage: (content) => {
         const { topicRef, roomName } = params;
-        props.socket.emit('topic:send_message', {
+        socket.emit('topic:send_message', {
           content, 
           topicRef, 
           ...window.user,

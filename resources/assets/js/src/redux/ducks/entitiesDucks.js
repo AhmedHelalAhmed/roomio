@@ -4,7 +4,7 @@ const ADD_ROOM   = 'entities/ADD';
 const ADD_TOPIC   = 'entities/ADD_TOPIC';
 const ADD_MULTIPLE_TOPICS = 'entities/ADD_MULTIPLE_TOPICS';
 const ADD_MULTIPLE_MESSAGES = 'entities/ADD_MULTIPLE_MESSAGES';
-const ADD_MESSAGE   = 'entities/ADD_TOPIC';
+const ADD_MESSAGE   = 'entities/ADD_MESSAGE';
 
 //  Initial State
 const initialState = {
@@ -38,6 +38,20 @@ export default function reducer(state = initialState, action = {}) {
                 ...(state.topics[payload.topic.room_name] || []),
                 payload.topic
               ], 'ref'),
+              ['created_at'], ['desc']),
+          ],
+        }
+      });
+    case ADD_MESSAGE:
+      return Object.assign({}, state, {
+        messages: {
+          ...state.messages,
+            [payload.topicRef]: [
+            ...orderBy(
+              uniqBy([
+                ...(state.messages[payload.topicRef] || []),
+                payload.message
+              ], 'id'),
               ['created_at'], ['desc']),
           ],
         }
@@ -90,4 +104,8 @@ export const addTopics = (roomName, topics = []) => {
 
 export const addMessages = (topicRef, messages = []) => {
   return { type: ADD_MULTIPLE_MESSAGES, payload: { topicRef, messages } };
+};
+
+export const addMessage = (topicRef, message = {}) => {
+  return { type: ADD_MESSAGE, payload: { topicRef, message } };
 };

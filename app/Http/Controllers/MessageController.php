@@ -24,8 +24,7 @@ class MessageController extends Controller {
     public function store(Request $request) {
         $rules = array(
             'content' => 'required|string',
-            'topic_ref' => 'required|alpha_num',
-            'description' => 'string'
+            'topic_ref' => 'required|alpha_num'
         );
 
         $messageFields = $request->all();
@@ -41,7 +40,11 @@ class MessageController extends Controller {
         }
 
         $message = Message::create($messageFields);
-        $message['user'] = $request->user();
+
+        $message['user'] = [
+          'id' => $request->user()->id,
+          'username' => $request->user()->username
+        ];
 
         return Response::json(compact('message'), 200);
     }

@@ -9,7 +9,7 @@ class Message extends Model {
     protected $fillable = [
         'content',
         'user_id',
-        'topic_id'
+        'topic_ref'
     ];
     
     public function user() {
