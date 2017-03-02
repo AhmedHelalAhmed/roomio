@@ -100,7 +100,7 @@ const mapDispatchToProps = (dispatch, props) => {
         const { topicRef, roomName } = params;
         socket.emit('topic:send_message', {
           content, 
-          topicRef, 
+          topic_ref: topicRef, 
           ...window.user,
         });
       },
