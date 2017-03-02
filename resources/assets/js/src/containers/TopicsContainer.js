@@ -1,37 +1,38 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import find from 'lodash/find';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
 import { addTopic, addMessages } from '../redux/ducks/entitiesDucks';
 import { startLoading, stopLoading } from '../redux/ducks/loadingDucks';
 import { authGET } from '../shared/utils/authAxios';
+import find from 'lodash/find';
 
+/**
+ * Components
+ */
 import Topic from '../components/Topic';
 
 class TopicContainer extends Component {
-
-  componentWillReceiveProps(nextProps) {
-    // const { roomName, topicRef } = this.props.params;
-    // const { active } = this.props;
-    // if (roomName && roomName !== active.room) {
-    //   this.props.fetchRoom(roomName);
-    // }
-  }
+  state = { messageContent: ''};
 
   componentWillMount() {
-    const { roomName, topicRef } = this.props.params;
-    const { topics } = this.props;
-
+    const { topics, socket, params: { topicRef, roomName } } = this.props;
     // check cache
     const topic = find(topics[roomName], { ref: topicRef });
 
-    if (topic) {
-      // still get the new one in case things have changed but don't show the spinner
-      this.props.fetchTopic(topicRef);
-    } else {
+    if (!topic) {
+      // if not in the cache show spinner
       this.props.startLoading();
-      this.props.fetchTopic(topicRef);
     }
+
+    this.props.fetchTopic(topicRef)
+      .then(() => {
+          this.props.initSocketListeners();
+          this.props.emit.joinTopic();
+      }).catch((err) => console.log(err));
+  }
+
+  componentWillUnmount() {
+    this.props.emit.leaveTopic();
   }
 
   render() {
@@ -61,25 +62,55 @@ const mapStateToProps = state => ({
   loading: state.loading.topic,
 });
 
-const mapDispatchToProps = dispatch => ({
-  startLoading: () => dispatch(startLoading('topic')),
-  fetchTopic: (topicRef) => {
-    authGET(`/api/topic/${topicRef}/messages`)
-      .then((res) => {
-        const { messages, topic } = res.data;
-        console.log(messages);
-        dispatch(addTopic(topic));
-        dispatch(addMessages(topic.ref, messages.data));
-        dispatch(updateActiveTopic(topic.ref));
-        document.title = `${topic.room.title} - ${topic.title}`;
-        dispatch(stopLoading('topic'));
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(stopLoading('topic'));
+const mapDispatchToProps = (dispatch, props) => {
+  const { socket, params } = props;
+
+  return {
+    initSocketListeners: () => {
+      socket.on('topic:new_message', ({ message }) => {
+        this.props.addMessage(message.topic_ref, message);
       });
-  },
-});
+    },
+    emit: {
+      joinTopic: () => {
+        const { topicRef, roomName } = params;
+        props.socket.emit('topic:join', { topicRef, roomName });
+      },
+      leaveTopic: () => {
+        const { topicRef, roomName } = params;
+        props.socket.emit('topic:leave', { topicRef, roomName });
+      },
+      sendMessage: (content) => {
+        const { topicRef, roomName } = params;
+        props.socket.emit('topic:send_message', {
+          content, 
+          topicRef, 
+          ...window.user,
+        });
+      },
+    },
+    startLoading: () => dispatch(startLoading('topic')),
+    fetchTopic: (topicRef) => {
+      return new Promise((resolve, reject) => {
+        authGET(`/api/topic/${topicRef}/messages`)
+          .then((res) => {
+            const { messages, topic } = res.data;
+            console.log(messages);
+            dispatch(addTopic(topic));
+            dispatch(addMessages(topic.ref, messages.data));
+            dispatch(updateActiveTopic(topic.ref));
+            document.title = `${topic.room.title} - ${topic.title}`;
+            dispatch(stopLoading('topic'));
+            resolve();
+          })
+          .catch((err) => {
+            dispatch(stopLoading('topic'));
+            reject(err);
+          });
+      })
+    }
+  }
+};
 
 const ConnectedTopicContainer = connect(
   mapStateToProps,
