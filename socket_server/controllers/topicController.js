@@ -34,7 +34,6 @@ const topicController = {
     }).then((res) => {
       const { message } = res.data;
       const topic = `topic:${message.topic_ref}`;
-      
       io.sockets.to(topic).emit('topic:new_message', { message });
     }).catch((err) => console.log(err));
   },
