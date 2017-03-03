@@ -2,23 +2,35 @@
 const START_LOADING = 'loading/START';
 const STOP_LOADING = 'loading/STOP';
 
-//  Initial State
+// //  Initial State
+// const initialState = {
+//   room: true,
+//   topic: true,
+// };
+
 const initialState = {
-  room: true,
-  topic: true,
+  rooms: {},
+  topics: {},
 };
 
 //  Reducer
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
+
   switch (type) {
     case START_LOADING:
       return Object.assign({}, state, {
-        [payload.key]: true,
+        [payload.type]: {
+          ...state[payload.type],
+          [payload.identifier]: false,
+        },
       });
     case STOP_LOADING:
       return Object.assign({}, state, {
-        [payload.key]: false,
+        [payload.type]: {
+          ...state[payload.type],
+          [payload.identifier]: true,
+        },
       });
     default:
       return state;
@@ -26,10 +38,43 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 //  Action Creators
-export const startLoading = (key) => {
-  return { type: START_LOADING, payload: { key } };
+export const startLoadingRoom = (roomName) => {
+  return {
+    type: START_LOADING,
+    payload: {
+      type: 'rooms',
+      identifier: roomName
+    }
+  };
 };
 
-export const stopLoading = (key) => {
-  return { type: STOP_LOADING, payload: { key } };
+export const stopLoadingRoom = (roomName) => {
+  return {
+    type: STOP_LOADING,
+    payload: {
+      type: 'rooms',
+      identifier: roomName
+    }
+  };
 };
+
+export const startLoadingTopic = (topicRef) => {
+  return {
+    type: START_LOADING,
+    payload: {
+      type: 'topics',
+      identifier: topicRef
+    }
+  };
+};
+
+export const stopLoadingTopic = (topicRef) => {
+  return {
+    type: STOP_LOADING,
+    payload: {
+      type: 'topics',
+      identifier: topicRef
+    }
+  };
+};
+

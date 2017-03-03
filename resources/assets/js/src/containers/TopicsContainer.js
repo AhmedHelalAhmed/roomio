@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
 import { addTopic, addMessages, addMessage } from '../redux/ducks/entitiesDucks';
-import { startLoading, stopLoading } from '../redux/ducks/loadingDucks';
+import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/loadingDucks';
 import { authGET } from '../shared/utils/authAxios';
 import find from 'lodash/find';
 
@@ -18,7 +18,7 @@ class TopicContainer extends Component {
     const { topics, socket, params: { topicRef, roomName } } = this.props;
     // check cache
     const topic = find(topics[roomName], { ref: topicRef });
-
+    console.log(this.props.loading);
     if (!topic) {
       // if not in the cache show spinner
       this.props.startLoading();
@@ -48,33 +48,34 @@ class TopicContainer extends Component {
   }
 
   render() {
-    const { topics, loading, messages } = this.props;
+    const { topics, isLoaded, messages } = this.props;
     const { roomName, topicRef } = this.props.params;
+
     const topic = find(topics[roomName], { ref: topicRef });
 
-    if (loading && !topic) {
+    if (isLoaded || topic) {
       return (
-        <p>spinner</p>
-      )
+        <Topic
+          topic={topic}
+          messages={messages[topicRef]}
+          onChange={this.onInputChange.bind(this)}
+          sendMessage={this.sendMessage.bind(this)}
+          content={this.state.content}
+        />
+      );
     }
 
     return (
-      <Topic
-        topic={topic}
-        messages={messages[topicRef]}
-        onChange={this.onInputChange.bind(this)}
-        sendMessage={this.sendMessage.bind(this)}
-        content={this.state.content}
-      />
+      <p>spinner</p>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   topics: state.entities.topics,
   messages: state.entities.messages,
   active: state.active,
-  loading: state.loading.topic,
+  isLoaded: state.isLoaded.topics[props.params.topicRef],
 });
 
 const mapDispatchToProps = (dispatch, props) => {
@@ -105,7 +106,7 @@ const mapDispatchToProps = (dispatch, props) => {
         });
       },
     },
-    startLoading: () => dispatch(startLoading('topic')),
+    startLoading: () => dispatch(startLoadingTopic(params.topicRef)),
     fetchTopic: (topicRef) => {
       return new Promise((resolve, reject) => {
         authGET(`/api/topic/${topicRef}/messages`)
@@ -115,12 +116,12 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(addTopic(topic));
             dispatch(addMessages(topic.ref, messages.data));
             dispatch(updateActiveTopic(topic.ref));
+            dispatch(stopLoadingTopic(params.topicRef));
             document.title = `${topic.room.title} - ${topic.title}`;
-            dispatch(stopLoading('topic'));
             resolve();
           })
           .catch((err) => {
-            dispatch(stopLoading('topic'));
+            dispatch(stopLoadingTopic(params.topicRef));
             reject(err);
           });
       })

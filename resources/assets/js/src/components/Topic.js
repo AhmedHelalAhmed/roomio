@@ -8,10 +8,13 @@ const Topic = (props) => {
           <h4>{topic.title}</h4>
           <h3>Description</h3>
           <p>{topic.description}</p>
-          <form onSubmit={props.sendMessage}>
-            <input type="text" onChange={props.onChange} value={props.content} />
-            <button type="submit">Send</button>
-          </form>
+          {
+            window.user ?
+              <form onSubmit={props.sendMessage}>
+                <input type="text" onChange={props.onChange} value={props.content} />
+                <button type="submit">Send</button>
+              </form> : null
+          }
           {messages ?
             messages.map((message, key) => {
               return (

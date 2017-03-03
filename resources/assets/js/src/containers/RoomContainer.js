@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
 import { updateActiveRoom } from '../redux/ducks/activeDucks';
-import { startLoading, stopLoading } from '../redux/ducks/loadingDucks';
+import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/loadingDucks';
 import { authGET } from '../shared/utils/authAxios';
 
 import Room from '../components/Room';
@@ -10,17 +10,23 @@ import Room from '../components/Room';
 class RoomContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
-    const { roomName } = nextProps;
-    const { active } = this.props;
-    if (roomName && roomName !== active.room) {
-      this.props.fetchRoom(roomName);
+    const newRoomName = nextProps.params.roomName;
+    const currentRoomName = this.props.params.roomName;
+
+    if (newRoomName && newRoomName !== currentRoomName) {
+      const { socket } = nextProps;
+      socket.emit('leave_room', { currentRoomName });
+      this.checkCacheAndFetch(newRoomName);
     }
   }
 
   componentWillMount() {
     const { roomName } = this.props.params;
+    this.checkCacheAndFetch(roomName);
+  }
+
+  checkCacheAndFetch(roomName) {
     const { rooms, socket } = this.props;
-    
     // check cache
     if (!rooms[roomName]) {
       //  show spinner if nothing is in cache
@@ -34,54 +40,52 @@ class RoomContainer extends Component {
   }
 
   componentWillUnmount() {
-    const { roomName } = this.props.params;
-    const { socket } = this.props;
+    const { socket, params: { roomName } } = this.props;
     socket.emit('leave_room', { roomName });
   }
 
   render() {
-    const { rooms, topics, active, loading } = this.props;
+    const { rooms, topics, isLoaded } = this.props;
     const { roomName } = this.props.params;
 
-    if (loading && !rooms[roomName]) {
+    if (isLoaded || rooms[roomName]) {
       return (
-        <p>spinner</p>
-      );
-    }
-
-    return (
         <Room
           room={rooms[roomName]}
           topics={topics[roomName]}
         />
+      );
+    }
+
+    return (
+      <p>spinner</p>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   rooms: state.entities.rooms,
   topics: state.entities.topics,
   active: state.active,
-  loading: state.loading.room,
+  isLoaded: state.isLoaded.rooms[props.params.roomName],
 });
 
 const mapDispatchToProps = dispatch => ({
-  startLoading: (roomName) => dispatch(startLoading('room')),
+  startLoading: (roomName) => dispatch(startLoadingRoom(roomName)),
   fetchRoom: (roomName, onSuccess) => {
     return new Promise((resolve, reject) => {
-      dispatch(startLoading('room'));
       authGET(`/api/room/${roomName}?with=topics`)
         .then((res) => {
           const { room, topics } = res.data;
           dispatch(addRoom(room));
           dispatch(addTopics(room.name, topics.data));
           dispatch(updateActiveRoom(room.name));
+          dispatch(stopLoadingRoom(roomName));
           document.title = room.title;
-          dispatch(stopLoading('room'));
           resolve();
         })
         .catch((err) => {
-          dispatch(stopLoading('room'));
+          dispatch(stopLoadingRoom(roomName));
           reject(err);
         });
     })

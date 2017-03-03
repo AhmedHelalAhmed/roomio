@@ -34,7 +34,38 @@ const topicController = {
         const { message } = res.data;
         const topic = `topic:${message.topic_ref}`;
         io.sockets.to(topic).emit('topic:new_message', { message });
-      }).catch((err) => console.log(err));
+      }).catch((error) => {
+        const { status, data, message } = error.response;
+        switch (status) {
+          case 400:
+            console.log('Validation Error');
+            console.log(data.message);
+            return socket.emit('error:topic', {
+              error: data.messages,
+              type: 'validation',
+            });
+          case 500:
+            console.log('Server Error');
+            console.log(message);
+            return socket.emit('error:topic', {
+              error: 'Server Error',
+              type: 'server',
+            });
+          case 403:
+            console.log('Unauthenticated Request');
+            console.log(message);
+            return socket.emit('error:topic', {
+              error: 'Unauthenticated Request',
+              type: 'auth',
+            });
+          default:
+            console.log('General Server Error');
+            return socket.emit('error:topic', {
+              error: 'Server Error',
+              type: 'general',
+            });
+        };
+      });
   },
 
 };

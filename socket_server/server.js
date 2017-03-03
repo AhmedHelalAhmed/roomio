@@ -15,7 +15,7 @@ process.env.laravelURI = argv.laravelURI || 'http://localhost:8888';
 process.env.socketPort = argv.socketPort || 3000;
 
 io.on(events.io.CONNECTION, (socket) => {
-  connectionController.connect();
+  connectionController.connect(io, socket);
 
     //  io events
   socket.on('disconnect', () => {

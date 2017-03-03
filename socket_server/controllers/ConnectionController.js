@@ -5,8 +5,9 @@ const logUsers = () => {
 };
 
 const connectionController = {
-  connect() {
+  connect(io, socket) {
     users += 1;
+    socket.emit('check_connection');
     logUsers();
   },
 
