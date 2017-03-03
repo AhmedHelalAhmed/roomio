@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
 import { updateActiveRoom } from '../redux/ducks/activeDucks';
-import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/loadingDucks';
+import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 
 import Room from '../components/Room';

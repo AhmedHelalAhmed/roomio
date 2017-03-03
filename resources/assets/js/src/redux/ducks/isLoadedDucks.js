@@ -1,6 +1,6 @@
 //  Actions
-const START_LOADING = 'loading/START';
-const STOP_LOADING = 'loading/STOP';
+const START_LOADING = 'isLoaded/START';
+const STOP_LOADING = 'isLoaded/STOP';
 
 // //  Initial State
 // const initialState = {
