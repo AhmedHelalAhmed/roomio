@@ -29,13 +29,17 @@ class Login extends Component {
     render() {
         return (
             <div>
-            <div>
-                <h1>Login</h1>
-                <form onSubmit={this.handleLogIn} className="flexForm" >
-                    <input name="email" type="text" onChange={this.onChange} value={this.state.email} />
-                    <input name="password" type="password" onChange={this.onChange} value={this.state.password} />
-                    <button>Sign In!</button>
-                </form> </div>
+                <form onSubmit={this.handleLogIn} className="form" >
+                    <h1>Login</h1>
+                    Username: <input name="email" type="text" onChange={this.onChange} value={this.state.email} className="formInput" />
+                    Password: <input name="password" type="password" onChange={this.onChange} value={this.state.password} className="formInput" />
+                    <div className="buttonContainer">
+                        <button className="formButton" >Sign In!</button>
+                    </div>
+                </form> 
+                <div className="linkContainer">
+                        <a href="/signup" className="link">sign up here.</a>
+                </div>
             </div>
         ); 
     }

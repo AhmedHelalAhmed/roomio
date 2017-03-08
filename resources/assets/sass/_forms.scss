@@ -1,0 +1,88 @@
+
+
+.formContainer {
+    margin-top: 50px;
+    height: 650px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background: $body-bg;
+    h1 {
+        margin-bottom: 60px;
+        text-align: center;
+    }
+    h4 {
+        margin-bottom: 5px;
+    }
+    .form {
+        background: white;
+        align-self: flex-end;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        width: 300px;
+        padding: 30px;
+        line-height: 1.5em;
+        margin: auto;
+    }
+    .formInput {
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        font-size: 1em;
+        line-height: 1.2em;
+        border: none;
+        border-bottom: solid 1px $brand-dark;
+        background: none;
+    }
+    
+    .buttonContainer{
+        margin-top: 15px;
+        display: flex;
+        justify-content: flex-end;
+        .formButton{
+            padding: 3px 7px 3px 7px;
+            line-height: 1.5em;
+            font-size: 1.025em;
+            margin-bottom: 10px;
+            background-color: $brand-success;
+            color: $btn-opp-color;
+            border: solid 1px $brand-success;
+            cursor: pointer;
+            width: 100%;
+        }
+    }
+
+}
+
+.linkContainer{
+    margin: 30px;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    .link{
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: 1px solid $brand-link;
+            text-decoration: none;
+            &:hover {
+                color: $brand-link;
+            }
+            &:visited {
+                color: $brand-dark;
+            }
+        }
+}
+
+
+input:-webkit-autofill {
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inset 0 0 0px 9999px white;
+}
+
+input:focus,
+input:-webkit-autofill:focus {
+    border-color: #66afe9;
+    -webkit-box-shadow: inset 0 0 0px 9999px white,
+                        0 0 8px rgba(102, 175, 233, 0.6);
+}

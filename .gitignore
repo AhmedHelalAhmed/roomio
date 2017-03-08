@@ -9,3 +9,5 @@ Homestead.json
 Homestead.yaml
 .env
 /public/js
+webpack.config.js
+/resources/views/index.blade.php
