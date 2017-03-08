@@ -4,6 +4,7 @@ import AppContainer from './containers/AppContainer';
 import RoomContainer from './containers/RoomContainer';
 import TopicContainer from './containers/TopicContainer';
 import Login from './components/Login';
+import Register from './components/Register';
 
 // router would go here.
 const Routes = () => {
@@ -11,6 +12,7 @@ const Routes = () => {
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
         <Route path="/signin" component={Login} />
+        <Route path="/signup" component={Register} />
         <Route path="/room/:roomName" component={RoomContainer} />
         <Route path="/room/:roomName/topic/:topicRef" component={TopicContainer} />
       </Route>
