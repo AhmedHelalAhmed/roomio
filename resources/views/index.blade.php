@@ -7,7 +7,7 @@
             @if(Auth::check())
                 window.user = {
                     token: "{{ Auth::user()->api_token }}",
-                    name: "{{ Auth::user()->name }}",
+                    username: "{{ Auth::user()->username }}",
                     email: "{{ Auth::user()->email }}"
                 };
              @else

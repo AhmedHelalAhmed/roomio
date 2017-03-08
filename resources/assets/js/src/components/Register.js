@@ -9,7 +9,7 @@ class Register extends Component {
             email: "",
             username: "",
             password: "",
-            confirm: ""
+            password_confirmation: ""
          };
     }
 
@@ -19,7 +19,7 @@ class Register extends Component {
 
     handleRegister = (e) => {
         e.preventDefault();
-        axios.post(`/register`, { username: this.state.username, email: this.state.email, password: this.state.password, password_confirmation: this.state.confirm })
+        axios.post(`/register`, { ...this.state })
             .then((res) => {
                 console.log(res);
             })
@@ -37,7 +37,7 @@ class Register extends Component {
                     Username: <input name="username" type="text" onChange={this.onChange} value={this.state.username} required/>
                     Email: <input name="email" type="text" onChange={this.onChange} value={this.state.email} required/>
                     Password: <input name="password" type="password" onChange={this.onChange} value={this.state.password} required />
-                    Confirm Password: <input name="confirm" type="password" onChange={this.onChange} value={this.state.confirm} required />
+                    Confirm Password: <input name="password_confirmation" type="password" onChange={this.onChange} value={this.state.password_confirmation} required />
                     <button>Register!</button>
                 </form> </div>
             </div>

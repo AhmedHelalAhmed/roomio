@@ -31,7 +31,7 @@ class Login extends Component {
             <div>
             <div>
                 <h1>Login</h1>
-                <form onSubmit={this.handleLogIn}>
+                <form onSubmit={this.handleLogIn} className="flexForm" >
                     <input name="email" type="text" onChange={this.onChange} value={this.state.email} />
                     <input name="password" type="password" onChange={this.onChange} value={this.state.password} />
                     <button>Sign In!</button>
