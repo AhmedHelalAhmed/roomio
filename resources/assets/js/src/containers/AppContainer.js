@@ -4,42 +4,50 @@ import {
   addRoom,
   addTopic,
 } from '../redux/ducks/entitiesDucks';
+import io from 'socket.io-client';
+import { SOCKET_SERVER } from '../shared/constants/socket';
+
+/**
+ * Components
+ */
+import Nav from '../components/Nav';
+import Active from '../components/Active';
+
+const socket = io(SOCKET_SERVER);
 
 class AppContainer extends Component {
-  constructor(props) {
-      super(props);
-      this.state = {};
-  }
 
   componentWillMount() {
-    console.log(this.props);
+    socket.on('check_connection', () => {
+      if (this.props.params) {
+        const { params: { roomName, topicRef } } = this.props;
+        if (roomName) {
+          socket.emit('join:room', { roomName })
+        }
+        if (topicRef) {
+          socket.emit('join:topic', { topicRef, roomName })
+        }
+      }
+    });
   }
 
   render() {
-      return (
-          <div>
-            {this.props.children}
-          </div>
-      );
+    return (
+      <div className="app-container">
+        <Nav
+          location={this.props.location}
+        />
+        <Active
+          children={this.props.children}
+          socket={socket} 
+        />
+      </div>
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  entities: state.entities,
-});
+AppContainer.propTypes = {
+  children: PropTypes.object.isRequired,
+};
 
-// const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch);
-
-function mapDispatchToProps(dispatch) {
-  return {
-    addRoom: (value) => dispatch(addRoom(value)),
-    addTopic: () => dispatch(addTopic())
-  };
-}
-
-const ConnectedAppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AppContainer);
-
-export default ConnectedAppContainer;
+export default AppContainer;

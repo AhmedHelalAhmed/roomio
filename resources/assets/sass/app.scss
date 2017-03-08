@@ -4,3 +4,34 @@
 
 // Variables
 @import "variables";
+
+body {
+  background-color: $body-bg;
+  font-family: $font-family-sans-serif;
+  color: black;
+  padding: 0;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+}
+
+.side-nav {
+  height: 100vh;
+  width: 15vw;
+  text-align: center;
+  margin-right: 10px;
+  background-color: indianred;
+  color: white;
+  .bookmark {
+    margin: 10px;
+    a {
+      color: white;
+    }
+  }
+}
+
+.main-view {
+   width: 70vw;
+}

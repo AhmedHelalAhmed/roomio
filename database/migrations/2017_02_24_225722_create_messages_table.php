@@ -21,8 +21,8 @@ class CreateMessagesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             // this message belongs to a room.
-            $table->integer('topic_id')->unsigned();
-            $table->foreign('topic_id')->references('id')->on('topics');
+            $table->string('topic_ref');
+            $table->foreign('topic_ref')->references('ref')->on('topics');
 
             $table->text('content');
 

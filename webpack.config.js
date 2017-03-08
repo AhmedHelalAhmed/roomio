@@ -11,11 +11,11 @@ module.exports = {
 
   output: {
     filename: 'bundle.js', //output public/js/
-    path: resolve(__dirname, 'public/js/src'),
+    path: resolve(__dirname, 'public/js'),
     publicPath: 'http://localhost:8080/public/' //output path for dev (include in index.blade.php).
   },
 
-  context: resolve(__dirname, 'resources/assets/js/src'), // where the js code lives.
+  context: resolve(__dirname, 'resources/assets/js'), // where the js code lives.
 
   devtool: 'inline-source-map',
 
@@ -38,13 +38,21 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader?modules',
-          'postcss-loader',
-        ],
-      },
+          test: /\.scss$/,
+          loaders: [
+              'style-loader',
+              'css-loader',
+              'sass-loader'
+          ]
+      }
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader',
+      //     'css-loader?modules',
+      //     'postcss-loader',
+      //   ],
+      // },
     ],
   },
 

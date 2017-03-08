@@ -1,23 +1,20 @@
-class ConnectionController {
-  constructor() {
-    this.users = 0;
-    this.connect = this.connect.bind(this);
-    this.disconnect = this.disconnect.bind(this);
-  }
+let users = 0;
 
-  logUsers() {
-    console.log(`total users: ${this.users}`);
-  }
+const logUsers = () => {
+  console.log(`total users: ${users}`);
+};
 
-  connect() {
-    this.users += 1;
-    this.logUsers();
-  }
+const connectionController = {
+  connect(io, socket) {
+    users += 1;
+    socket.emit('check_connection');
+    logUsers();
+  },
 
   disconnect() {
-    this.users -= 1;
-    this.logUsers();
+    users -= 1;
+    logUsers();
   }
 }
 
-module.exports = ConnectionController;
+module.exports = connectionController;

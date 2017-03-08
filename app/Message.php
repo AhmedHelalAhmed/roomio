@@ -9,7 +9,7 @@ class Message extends Model {
     protected $fillable = [
         'content',
         'user_id',
-        'topic_id'
+        'topic_ref'
     ];
     
     public function user() {
@@ -17,6 +17,6 @@ class Message extends Model {
     }
 
     public function topic() {
-        return $this->belongsTo(Topic::class);
+        return $this->belongsTo(Topic::class, 'topic_ref', 'ref');
     }
 }
