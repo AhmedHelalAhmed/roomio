@@ -16,7 +16,7 @@ class Login extends Component {
     });
   }
 
-  handleLogIn = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
     axios.post(`/login`, { ...this.state })
       .then((res) => {
@@ -30,10 +30,24 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleLogIn} className="form" >
+        <form onSubmit={this.onSubmit} className="form">
           <h1>Login</h1>
-          Email: <input name="email" type="text" onChange={this.onChange} value={this.state.email} className="formInput" />
-          Password: <input name="password" type="password" onChange={this.onChange} value={this.state.password} className="formInput" />
+          <label htmlFor="email">Email: </label>
+          <input
+            name="email"
+            type="email"
+            onChange={this.onChange}
+            value={this.state.email}
+            className="formInput"
+          />
+          <label htmlFor="password">Password: </label>
+          <input
+            name="password"
+            type="password"
+            onChange={this.onChange}
+            value={this.state.password}
+            className="formInput"
+          />
           <div className="buttonContainer">
               <button className="formButton" >Sign In!</button>
           </div>
