@@ -1,0 +1,85 @@
+.formContainer {
+    margin-top: 50px;
+    height: 650px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    // background: $body-bg;
+    h1 {
+        margin-bottom: 60px;
+        text-align: center;
+    }
+    h4 {
+        margin-bottom: 5px;
+    }
+    .form {
+        background: white;
+        align-self: flex-end;
+        box-shadow: $shadow;
+        width: 300px;
+        padding: 30px;
+        line-height: 1.5em;
+        margin: auto;
+    }
+    .formInput {
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        font-size: 1em;
+        line-height: 1.2em;
+        border: none;
+        border-bottom: solid 1px $brand-dark;
+        background: none;
+    }
+    
+    .buttonContainer{
+        margin-top: 15px;
+        display: flex;
+        justify-content: flex-end;
+        .formButton{
+            padding: 3px 7px 3px 7px;
+            line-height: 1.5em;
+            font-size: 1.025em;
+            margin-bottom: 10px;
+            background-color: $brand-success;
+            color: $btn-opp-color;
+            border: solid 1px $brand-success;
+            cursor: pointer;
+            width: 100%;
+            // box-shadow: $shadow;
+        }
+    }
+
+}
+
+.linkContainer{
+    margin: 30px;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    .link{
+            display: inline-block;
+            cursor: pointer;
+            border-bottom: 1px solid $brand-link;
+            text-decoration: none;
+            &:visited {
+                color: $brand-dark;
+            }
+        }
+}
+
+
+input:-webkit-autofill {
+    -webkit-box-shadow: $input-remove-chrome-autofill-shadow;
+}
+
+input {
+    transition: .25s;
+    &:focus{
+        transition: .25s;
+        outline: none !important;
+        border-bottom: solid 1px $brand-success !important;
+    }
+}

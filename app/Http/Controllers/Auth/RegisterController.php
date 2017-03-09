@@ -71,5 +71,13 @@ class RegisterController extends Controller
             'ref' => uniqid(),
             'password' => bcrypt($data['password']),
         ]);
+        // $user = new User([
+        //     'username' => $data['username'],
+        //     'email' => $data['email'],
+        //     'api_token' => str_random(60),
+        //     'ref' => uniqid(),
+        //     'password' => bcrypt($data['password']),
+        // ]);
+        // dd($user);
     }
 }

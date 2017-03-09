@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
 
             // the reference is for public urls and places where we dont want to
             // leak the MySQL id (because its incremental and shows our structure)
-            $table->string('ref', 60)->unique()->default();
+            $table->string('ref', 60)->unique();
 
             $table->string('username')->unique();
             $table->string('email')->unique();
