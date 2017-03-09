@@ -12,7 +12,7 @@
   position: fixed;
   .bookmark {
     text-align: justify;
-    margin: 0 0 10px 1vw;
+    margin: 3px 3px 10px 1vw;
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -37,8 +37,12 @@
     }
   }
   .logoBox {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 25px;
     @include lighter_background_color($body-accent);
-    margin-bottom: 15px;
     box-shadow: $side-shadow !important;
+    //padding-top:20px;
   }
 }

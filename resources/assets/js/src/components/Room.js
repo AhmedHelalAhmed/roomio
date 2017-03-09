@@ -15,11 +15,11 @@ const Room = (props) => {
       <div className="sharedBody">
       <div className="roomInformation">
         <div className="description">
-          <h2 className="informationHeader">Room Description</h2>
+          <h2 className="informationHeader">Description</h2>
           <p>{room.description}</p>
         </div>
         <div className="admin">
-          <h2 className="informationHeader">Room Admin</h2>
+          <h2 className="informationHeader">Admin</h2>
           <p className="adminTag">{room.user.username}</p>
         </div>
       </div>

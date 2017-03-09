@@ -39,10 +39,10 @@ body {
 
 ::-webkit-scrollbar-track
 {
-  background: rgba(0, 0, 0, 0.1);
+  background: $scroll-track;
 }
 
 ::-webkit-scrollbar-thumb
 {
-  background: rgba(0, 0, 0, 0.5);
+  background: $scroll-thumb;
 }

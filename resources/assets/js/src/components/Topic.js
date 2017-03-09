@@ -36,7 +36,9 @@ const Topic = (props) => {
             {
             window.user ?
               <form onSubmit={props.sendMessage}>
-                <input 
+                <textarea 
+                  cols="40" 
+                  rows="5"
                   type="text" 
                   onChange={props.onChange} 
                   value={props.content} 

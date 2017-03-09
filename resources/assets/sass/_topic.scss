@@ -23,10 +23,11 @@
     form {
       display: flex;
       align-content: center;
-      input {
+      textarea {
         width: 100%;
         font-size: 18px;
         height: 50px;
+        resize: none;
       }
       button {
         width: 25% !important;
@@ -45,11 +46,12 @@
     font-size: 20px;
   }
   .sharedBody {
-    margin-bottom: 50px;
+    margin-bottom: 75px;
     .chatBubble {
         display: flex;
         flex-direction: column;
-        border-left: .3px grey solid;
+        //border-left: .3px grey solid;
+        word-wrap: break-word;
         padding-left: 10px;
         max-width: 75%;
     }
