@@ -7,7 +7,9 @@
 @import "forms";
 @import "mixins";
 @import "sidenav";
+@import "shared";
 @import "room";
+@import "topic";
 
 body {
   background-color: $body-bg;
@@ -23,5 +25,24 @@ body {
 
 
 .main-view {
-   width: 85vw;
+   width: 85vw;  
+   padding-left: 15vw;
+   text-overflow: ellipsis;
+   overflow-x: hidden;
+}
+
+::-webkit-scrollbar
+{
+  width: 8px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
 }

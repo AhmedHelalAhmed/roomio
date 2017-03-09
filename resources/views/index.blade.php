@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Jargon</title>
+        <title>Roomio</title>
         <script type="text/javascript">
             @if(Auth::check())
                 window.user = {

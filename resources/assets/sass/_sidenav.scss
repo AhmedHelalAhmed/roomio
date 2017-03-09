@@ -1,15 +1,20 @@
 .side-nav {
   width: 15vw;
-  min-height: 100vh;
-  display: flex;
-  align-self: stretch;
-  flex-direction: column;
+  height: 100vh;
+  z-index: 999;
+  // display: flex;
+  overflow-y: auto;
+  // flex-direction: column;
   text-align: center;
   background-color: $body-accent;
+  box-shadow: $side-shadow;
   color: $base-white;
+  position: fixed;
   .bookmark {
     text-align: justify;
     margin: 0 0 10px 1vw;
+    white-space: nowrap;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     a {
       text-decoration: none;
@@ -34,5 +39,6 @@
   .logoBox {
     @include lighter_background_color($body-accent);
     margin-bottom: 15px;
+    box-shadow: $side-shadow !important;
   }
 }

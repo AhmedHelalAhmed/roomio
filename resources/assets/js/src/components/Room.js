@@ -4,15 +4,15 @@ import { Link } from 'react-router';
 const Room = (props) => {
   const { room, topics } = props;
   return (
-    <div className="roomContainer">
-      <div className="roomTitleSep">
+    <div className="sharedContainer">
+      <div className="sharedTitleSep">
         <h1>
           <span>
             {room.title}
           </span>
         </h1>
       </div>
-      <div className="roomBody">
+      <div className="sharedBody">
       <div className="roomInformation">
         <div className="description">
           <h2 className="informationHeader">Room Description</h2>
@@ -24,7 +24,7 @@ const Room = (props) => {
         </div>
       </div>
         <h3>Topics</h3>
-        <div className="topicContainer">
+        <div className="sharedContainer">
           {topics.map((topic, key) => {
             return (
               <div key={key} className="topic">

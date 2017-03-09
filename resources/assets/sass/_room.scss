@@ -1,23 +1,7 @@
-
-.roomContainer{
-    display: flex;
-    align-self: stretch;
-    align-content: stretch;
-    flex-direction: column;
-    .roomTitleSep {
-        color: $base-white;
-        @include lighter_background_color($body-accent);
-        margin-bottom: 15px;
-        height: 100%;
-        &::before{
-            content: "";
-        }
-        span{
-            padding-left: 20px;
-        }
-    }
-    .roomBody {
-        margin: 0 20px 0 20px;
+.sharedContainer {
+    .sharedTitleSep {
+        @include darker_background_color($base-white);
+        color: $base-black;
     }
     .roomInformation {
         width: 100%;
@@ -40,7 +24,6 @@
                 margin-bottom: 0;
             }
         }
-
         .admin {
             width: 50%;
             margin: 10px;
@@ -51,21 +34,6 @@
             }
             .informationHeader {
                 margin-bottom: 0;
-            }
-        }
-    }
-    .topicContainer {
-        padding: 10px;
-        .topic {
-            margin: 5px;
-            padding-left: 7px;
-            border-left: solid 4px $body-accent;
-            a {
-                text-decoration: none;
-                color: $unvisited;
-                &:visited {
-                    color: $visited;
-                }
             }
         }
     }

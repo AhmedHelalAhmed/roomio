@@ -1,0 +1,67 @@
+.sharedContainer {
+  .topicInformation {
+    margin: 0 20px 0 20px;
+    p {
+      margin: 0;
+      display: inline-flex;
+      padding: 10px;
+      @include darker_background_color($base-white);
+      &::before{
+        content: "\""
+      }
+      &::after{
+        content: "\""
+      }
+    }
+  }
+  .topicMessenger {
+    background: $base-white;
+    position: fixed;
+    width: 85vw;
+    bottom: 0;
+    margin-right: 20px;
+    form {
+      display: flex;
+      align-content: center;
+      input {
+        width: 100%;
+        font-size: 18px;
+        height: 50px;
+      }
+      button {
+        width: 25% !important;
+        padding: 3px 7px 3px 7px;
+        line-height: 1.5em;
+        font-size: 1.025em;
+        background-color: $brand-success;
+        color: $btn-opp-color;
+        border: solid 1px $brand-success;
+        cursor: pointer;
+        width: 100%;
+      }
+    }
+  }
+  .topicTitle {
+    font-size: 20px;
+  }
+  .sharedBody {
+    margin-bottom: 50px;
+    .chatBubble {
+        display: flex;
+        flex-direction: column;
+        border-left: .3px grey solid;
+        padding-left: 10px;
+        max-width: 75%;
+    }
+    .user {
+      margin: 5px;
+      line-height: 2em;
+      color: $brand-primary;
+    }
+  }
+}
+
+.topicInformationCont {
+  border-bottom: solid 1px lighten($base-border, 30%);
+  padding-bottom: 20px;
+}

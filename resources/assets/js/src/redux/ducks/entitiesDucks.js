@@ -52,7 +52,7 @@ export default function reducer(state = initialState, action = {}) {
                 ...(state.messages[payload.topicRef] || []),
                 payload.message
               ], 'id'),
-              ['created_at'], ['desc']),
+              ['created_at'], ['asc']),
           ],
         }
       });
@@ -80,7 +80,7 @@ export default function reducer(state = initialState, action = {}) {
                 ...(state.topics[payload.topicRef] || []),
                 ...payload.messages
               ], 'id'),
-              ['created_at'], ['desc']),
+              ['created_at'], ['asc']),
           ],
         }
       });

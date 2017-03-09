@@ -2,6 +2,8 @@
 // Body
 $body-bg: #f5f8fa;
 $body-accent: indianred;
+$body-other: #5c95cd;
+//$body-accent: rgb(83.1%, 83.1%, 83.1%);
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -42,7 +44,9 @@ $input-autofill-border: 1px solid #ccc;
 // Panels
 $panel-default-heading-bg: #fff;
 $border-color: rgb(72.2%, 72.2%, 72.2%);
+$side-shadow: 7px 0px 8px -8px rgba(0,0,0,0.47);
 $shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+$shadowCnct: 0 3px 0px rgba(0,0,0,0.16), 0 3px 0px rgba(0,0,0,0.23);
 
 //media
 $breakpoint-tablet: 810px;
@@ -50,7 +54,8 @@ $breakpoint-tablet: 810px;
 //base
 $base-white: white;
 $base-black: black;
+$base-border: #636b6f;
 
 //topics
-$visited: blue ;
-$unvisited: black;
+$unvisited: rgb(0%, 34.7%, 49.5%);
+$visited: rgb(32.2%, 26.9%, 39.4%)

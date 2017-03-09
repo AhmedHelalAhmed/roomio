@@ -32,10 +32,42 @@ class Register extends Component {
       <div>
         <form onSubmit={this.onSubmit} className="form" >
           <h1>Register</h1>
-          Username: <input className="formInput" name="username" type="text" onChange={this.onChange} value={this.state.username} required/>
-          Email: <input className="formInput" name="email" type="text" onChange={this.onChange} value={this.state.email} required/>
-          Password: <input className="formInput" name="password" type="password" onChange={this.onChange} value={this.state.password} required />
-          Confirm Password: <input className="formInput" name="password_confirmation" type="password" onChange={this.onChange} value={this.state.password_confirmation} required />
+          <label htmlFor="username">Username: </label>
+          <input 
+            className="formInput" 
+            name="username" 
+            type="text" 
+            onChange={this.onChange} 
+            value={this.state.username} 
+            required
+          />
+          <label htmlFor="email">Email: </label>
+          <input 
+            className="formInput" 
+            name="email" 
+            type="text" 
+            onChange={this.onChange} 
+            value={this.state.email} 
+            required
+          />
+          <label htmlFor="password">Password: </label>
+          <input 
+            className="formInput" 
+            name="password" 
+            type="password" 
+            onChange={this.onChange} 
+            value={this.state.password} 
+            required 
+          />
+          <label htmlFor="password_confirmation">Confirm Password: </label>
+          <input 
+            className="formInput" 
+            name="password_confirmation" 
+            type="password" 
+            onChange={this.onChange} 
+            value={this.state.password_confirmation} 
+            required 
+          />
           <div className="buttonContainer">
               <button className="formButton" >Register!</button>
           </div>
