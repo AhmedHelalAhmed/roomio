@@ -31,15 +31,19 @@ class Register extends Component {
     render() {
         return (
             <div>
-            <div>
-                <h1>Register</h1>
-                <form onSubmit={this.handleRegister}>
-                    Username: <input name="username" type="text" onChange={this.onChange} value={this.state.username} required/>
-                    Email: <input name="email" type="text" onChange={this.onChange} value={this.state.email} required/>
-                    Password: <input name="password" type="password" onChange={this.onChange} value={this.state.password} required />
-                    Confirm Password: <input name="password_confirmation" type="password" onChange={this.onChange} value={this.state.password_confirmation} required />
-                    <button>Register!</button>
-                </form> </div>
+                <form onSubmit={this.handleRegister} className="form" >
+                    <h1>Register</h1>
+                    Username: <input className="formInput" name="username" type="text" onChange={this.onChange} value={this.state.username} required/>
+                    Email: <input className="formInput" name="email" type="text" onChange={this.onChange} value={this.state.email} required/>
+                    Password: <input className="formInput" name="password" type="password" onChange={this.onChange} value={this.state.password} required />
+                    Confirm Password: <input className="formInput" name="password_confirmation" type="password" onChange={this.onChange} value={this.state.password_confirmation} required />
+                    <div className="buttonContainer">
+                        <button className="formButton" >Register!</button>
+                    </div>
+                </form> 
+                <div className="linkContainer">
+                        <a href="/signin" className="link">sign in here.</a>
+                </div>
             </div>
         ); 
     }
