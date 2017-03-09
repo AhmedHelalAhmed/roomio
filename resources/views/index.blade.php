@@ -18,8 +18,8 @@
     <body>
         <div id="root"></div>
         @if(env('APP_ENV') === 'dev')
-            <!--<script src="http://localhost:8080/public/bundle.js" charset="utf-8"></script>-->
-            <script src="js/bundle.js" charset="utf-8"></script>
+            <script src="http://localhost:8080/public/bundle.js" charset="utf-8"></script>
+            <!--<script src="js/bundle.js" charset="utf-8"></script>-->
         @else
             <script src="js/bundle.js" charset="utf-8"></script>
         @endif
