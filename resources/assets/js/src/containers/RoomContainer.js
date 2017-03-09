@@ -4,7 +4,6 @@ import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
 import { updateActiveRoom } from '../redux/ducks/activeDucks';
 import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
-
 import Room from '../components/Room';
 
 class RoomContainer extends Component {
@@ -13,9 +12,9 @@ class RoomContainer extends Component {
     const newRoomName = nextProps.params.roomName;
     const currentRoomName = this.props.params.roomName;
 
-    if (newRoomName && newRoomName !== currentRoomName) {
+    if (newRoomName && (newRoomName !== currentRoomName)) {
       const { socket } = nextProps;
-      socket.emit('leave_room', { currentRoomName });
+      socket.emit('leave_room', { roomName: currentRoomName });
       this.checkCacheAndFetch(newRoomName);
     }
   }
