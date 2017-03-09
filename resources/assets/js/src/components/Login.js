@@ -39,6 +39,7 @@ class Login extends Component {
             onChange={this.onChange}
             value={this.state.email}
             className="formInput"
+            required
           />
           <label htmlFor="password">Password: </label>
           <input
@@ -47,6 +48,7 @@ class Login extends Component {
             onChange={this.onChange}
             value={this.state.password}
             className="formInput"
+            required
           />
           <div className="buttonContainer">
               <button className="formButton" >Sign In!</button>

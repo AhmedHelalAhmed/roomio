@@ -1,0 +1,38 @@
+.side-nav {
+  width: 15vw;
+  min-height: 100vh;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  text-align: center;
+  background-color: $body-accent;
+  color: $base-white;
+  .bookmark {
+    text-align: justify;
+    margin: 0 0 10px 1vw;
+    text-overflow: ellipsis;
+    a {
+      text-decoration: none;
+      color: $base-white;
+      cursor: pointer;
+      &:hover{
+        @include darker_color($base-white);
+      }
+    }
+  }
+  h1{
+    text-overflow: ellipsis;
+    &::after{
+      content: "Roomio"
+    }
+    @media screen and (max-width: $breakpoint-tablet) {
+      &::after{
+        content: "R";
+     }
+    }
+  }
+  .logoBox {
+    @include lighter_background_color($body-accent);
+    margin-bottom: 15px;
+  }
+}

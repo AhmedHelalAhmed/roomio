@@ -16,7 +16,7 @@ class Register extends Component {
     this.setState({ [e.target.name]:e.target.value });
   }
 
-  handleRegister = (e) => {
+  onSubmit = (e) => {
     e.preventDefault();
     axios.post(`/register`, { ...this.state })
         .then((res) => {
@@ -30,7 +30,7 @@ class Register extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleRegister} className="form" >
+        <form onSubmit={this.onSubmit} className="form" >
           <h1>Register</h1>
           Username: <input className="formInput" name="username" type="text" onChange={this.onChange} value={this.state.username} required/>
           Email: <input className="formInput" name="email" type="text" onChange={this.onChange} value={this.state.email} required/>

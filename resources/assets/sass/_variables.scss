@@ -1,6 +1,7 @@
 
 // Body
 $body-bg: #f5f8fa;
+$body-accent: indianred;
 
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
@@ -42,3 +43,14 @@ $input-autofill-border: 1px solid #ccc;
 $panel-default-heading-bg: #fff;
 $border-color: rgb(72.2%, 72.2%, 72.2%);
 $shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+//media
+$breakpoint-tablet: 810px;
+
+//base
+$base-white: white;
+$base-black: black;
+
+//topics
+$visited: blue ;
+$unvisited: black;
