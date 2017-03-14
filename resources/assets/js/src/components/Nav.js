@@ -17,6 +17,46 @@ const Nav = props => {
           Politics
         </Link>
       </div>
+      <div className="bookmark">
+        <Link to="/room/gifs">
+          Gifs
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/photography">
+          Photography
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/movies">
+          Movies
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/programming">
+          Programming
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/music">
+          Music
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/hiphop">
+          HipHop 
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/news">
+          News
+        </Link>
+      </div>
+      <div className="bookmark">
+        <Link to="/room/gaming">
+          Gaming
+        </Link>
+      </div>
     </div>
   );
 };

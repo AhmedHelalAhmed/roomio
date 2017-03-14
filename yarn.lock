@@ -3869,6 +3869,10 @@ react-dom@^15.3.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-fontawesome@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/react-fontawesome/-/react-fontawesome-1.5.0.tgz#879d1b2aa5c48bba551e9237f84993217b5645c4"
+
 react-hot-loader@^3.0.0-beta.6:
   version "3.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-3.0.0-beta.6.tgz#463fac0bfc8b63a8385258af20c91636abce75f4"
@@ -3905,6 +3909,12 @@ react-router@^3.0.2:
     invariant "^2.2.1"
     loose-envify "^1.2.0"
     warning "^3.0.0"
+
+react-scroll@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/react-scroll/-/react-scroll-1.4.7.tgz#e2823d0977ed76d5d5b9fd8dc8e1afb43ebb88fe"
+  dependencies:
+    object-assign "^4.0.1"
 
 react@^15.3.0:
   version "15.4.2"

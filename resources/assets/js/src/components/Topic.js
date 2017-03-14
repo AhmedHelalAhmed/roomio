@@ -5,17 +5,13 @@ const Topic = (props) => {
     return (
         <div className ="sharedContainer">
           <div className="sharedTitleSep">
-            <h1>
-              <span>
-                {topic.room_name}
-                  <span className="topicTitle" >
-                    {topic.title}
-                  </span>
-              </span>
-            </h1>
           </div>
           <div className="topicInformationCont">
             <div className="topicInformation">
+              <span className="topicTitle" >
+                <h3>Title</h3>
+                <p>{topic.room_name}/{topic.title}</p>
+                </span>
               <h3>Description</h3>
               <p>{topic.description}</p>
             </div>

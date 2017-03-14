@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Roomio</title>
+        <script src="https://use.fontawesome.com/b4eac05af7.js"></script>
         <script type="text/javascript">
             @if(Auth::check())
                 window.user = {

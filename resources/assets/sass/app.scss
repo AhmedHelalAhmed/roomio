@@ -10,6 +10,7 @@
 @import "shared";
 @import "room";
 @import "topic";
+@import "loading";
 
 body {
   background-color: $body-bg;
@@ -29,6 +30,12 @@ body {
    padding-left: 15vw;
    text-overflow: ellipsis;
    overflow-x: hidden;
+}
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
 ::-webkit-scrollbar
