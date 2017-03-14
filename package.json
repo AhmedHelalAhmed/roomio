@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
-    "start-socket": "node --harmony socket_server/server.js --laravelURI http://localhost:8888 --socketPort 3000",
+    "start-socket": "nodemon socket_server/server.js --laravelURI http://localhost:8888 --socketPort 3000",
     "start-php": "php artisan serve --port 8888",
     "start-all": "npm-run-all --parallel start-socket start-webpack start-php"
   },
