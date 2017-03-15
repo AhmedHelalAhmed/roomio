@@ -11,6 +11,11 @@ Route::get('ping', function() { //  test connection to API.
     return 'pong';
 });
 
+Route::group([ 'middleware' => 'web' ], function () {
+  Route::post('login', ['as' => 'login.post', 'uses' => 'Auth\LoginController@login']);
+  Route::post('register', ['as' => 'register.post', 'uses' => 'Auth\RegisterController@register']);
+});
+
 /** PUBLIC ROUTES (NO AUTH NEEDED) **/
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'UserController@index');

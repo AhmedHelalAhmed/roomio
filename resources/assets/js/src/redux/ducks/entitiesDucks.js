@@ -3,6 +3,7 @@ import { uniqBy, orderBy } from 'lodash';
 const ADD_ROOM   = 'entities/ADD';
 const ADD_TOPIC   = 'entities/ADD_TOPIC';
 const ADD_MULTIPLE_TOPICS = 'entities/ADD_MULTIPLE_TOPICS';
+const ADD_HOME_TOPICS = 'enitities/ADD_HOME_TOPICS';
 const ADD_MULTIPLE_MESSAGES = 'entities/ADD_MULTIPLE_MESSAGES';
 const ADD_MESSAGE   = 'entities/ADD_MESSAGE';
 
@@ -11,6 +12,7 @@ const initialState = {
   rooms: {}, //  roomName: { Room } - room information
   topics: {}, //  roomId: [Topic] - array of topics
   messages: {}, //  topicId: [Message] - array of messages
+  homeTopics: [], // array of topics
 };
 
 //  Reducer
@@ -70,6 +72,17 @@ export default function reducer(state = initialState, action = {}) {
           ],
         }
       });
+    case ADD_HOME_TOPICS:
+      return Object.assign({}, state, {
+        homeTopics: [
+          ...orderBy(
+            uniqBy([
+              ...state.homeTopics,
+              ...payload.topics
+            ], 'ref'),
+            ['created_at'], ['desc']),
+        ],
+      });
     case ADD_MULTIPLE_MESSAGES:
       return Object.assign({}, state, {
         messages: {
@@ -100,6 +113,10 @@ export const addTopic = (topic) => {
 
 export const addTopics = (roomName, topics = []) => {
   return { type: ADD_MULTIPLE_TOPICS, payload: { roomName, topics } };
+};  
+
+export const addHomeTopics = (topics = []) => {
+  return { type: ADD_HOME_TOPICS, payload: { topics } };
 };
 
 export const addMessages = (topicRef, messages = []) => {

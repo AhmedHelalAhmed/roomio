@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
+import { Link, browserHistory } from 'react-router';
 import axios from 'axios';
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      email: "",
-      password: ""
-    };
-  }
+  state = { 
+    email: "",
+    password: "",
+    error: null,
+  };
 
   onChange = (e) => {
     this.setState({
@@ -18,12 +17,12 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/login`, { ...this.state })
-      .then((res) => {
-          console.log(res);
+    axios.post(`/api/login`, { ...this.state })
+      .then(() => {
+        window.location = '/';
       })
       .catch((err) => {
-          console.log(err);
+        this.setState({ error: 'An error has occured' });
       });
   }
 
@@ -55,7 +54,7 @@ class Login extends Component {
           </div>
         </form> 
         <div className="linkContainer">
-          <a href="/signup" className="link">sign up here.</a>
+          <Link to="/signup" className="link">sign up here.</Link>
         </div>
       </div>
     ); 

@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router';
 import axios from 'axios';
 
 class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-        email: "",
-        username: "",
-        password: "",
-        password_confirmation: ""
-      };
-  }
+  state = { 
+    email: "",
+    username: "",
+    password: "",
+    password_confirmation: "",
+  };
 
   onChange = (e) => {
     this.setState({ [e.target.name]:e.target.value });
@@ -19,12 +17,12 @@ class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     axios.post(`/register`, { ...this.state })
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+      .then(() => {
+        window.location = '/';
+      })
+      .catch((err) => {
+        this.setState({ error: 'An error has occured' });
+      });
   }
 
   render() {
@@ -73,7 +71,7 @@ class Register extends Component {
           </div>
         </form> 
         <div className="linkContainer">
-          <a href="/signin" className="link">sign in here.</a>
+          <Link to="/signin" className="link">sign in here.</Link>
         </div>
       </div>
     ); 

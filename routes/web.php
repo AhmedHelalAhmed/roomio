@@ -3,7 +3,7 @@
 /**
  * /login and /register routes.
  */
-Auth::routes();
+// Auth::routes();
 
 Route::get('/logout', function () {
     Auth::logout();

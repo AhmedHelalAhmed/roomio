@@ -12,8 +12,11 @@ use Validator;
 class TopicController extends Controller {
 
     public function index() {
-        $topics = Topic::all();
-        return Response::json(compact('topics'), 400);
+        $topics = Topic::with(['room', 'user'])
+                    ->withCount('messages')
+                    ->paginate(20);
+
+        return Response::json(compact('topics'), 200);
     }
 
     public function show($topicRef) {
@@ -27,7 +30,7 @@ class TopicController extends Controller {
             ], 404);
         }
 
-        return Response::json(compact('topic'), 200);
+        return Response::json([compact('topic')], 200);
     }
 
     public function getTopicsFromRoomId($roomId) {

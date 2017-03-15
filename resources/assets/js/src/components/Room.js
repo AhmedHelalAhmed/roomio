@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import TopicList from './TopicList';
 
 const Room = (props) => {
   const { room, topics } = props;
@@ -13,27 +13,18 @@ const Room = (props) => {
         </h1>
       </div>
       <div className="sharedBody">
-      <div className="roomInformation">
-        <div className="description">
-          <h2 className="informationHeader">Description</h2>
-          <p>{room.description}</p>
+        <div className="roomInformation">
+          <div className="description">
+            <h2 className="informationHeader">Description</h2>
+            <p>{room.description}</p>
+          </div>
+          <div className="admin">
+            <h2 className="informationHeader">Admin</h2>
+            <p className="adminTag">{room.user.username}</p>
+          </div>
         </div>
-        <div className="admin">
-          <h2 className="informationHeader">Admin</h2>
-          <p className="adminTag">{room.user.username}</p>
-        </div>
-      </div>
         <h3>Topics</h3>
-        <div className="sharedContainer">
-          {topics.map((topic, key) => {
-            return (
-              <div key={key} className="topic">
-                <Link to={`/room/${room.name}/topic/${topic.ref}`}><h4>{topic.title}</h4></Link>
-                <p>{topic.description}</p>
-              </div>
-            )
-          })}
-        </div>
+        <TopicList topics={topics} />
       </div>
       {/*<h1>{room.title}</h1>*/}
     </div>
