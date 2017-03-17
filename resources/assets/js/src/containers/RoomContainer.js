@@ -76,7 +76,6 @@ const mapDispatchToProps = dispatch => ({
     return new Promise((resolve, reject) => {
       authGET(`/api/room/${roomName}?with=topics`)
         .then((res) => {
-          console.log(res);
           const { room, topics } = res.data;
           dispatch(addRoom(room));
           dispatch(addTopics(room.name, topics.data));

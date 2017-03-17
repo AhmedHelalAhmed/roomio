@@ -1,79 +1,43 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const Nav = props => {
-  console.log(window.user)
-  return (
-    <div className="side-nav">
-      <div className="logoBox">
-        <h1></h1>
-      </div>
-      {!window.user ? 
-      <div className="bookmark">
-        <Link to="/login" >
-          Login
-        </Link><br />
-        <Link to="/register" >
-          Register
-        </Link>
-      </div> :
-      <div className="bookmark">
-        {window.user.username}
-      </div>}
-      <hr />
-      <div className="bookmark">
-        <Link to="/room/javascript" >
-          Javascript
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/politics">
-          Politics
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/gifs">
-          Gifs
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/photography">
-          Photography
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/movies">
-          Movies
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/programming">
-          Programming
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/music">
-          Music
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/hiphop">
-          HipHop 
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/news">
-          News
-        </Link>
-      </div>
-      <div className="bookmark">
-        <Link to="/room/gaming">
-          Gaming
-        </Link>
-      </div>
+const Bookmark = ({ to, content }) => (
+  <div className="bookmark">
+    <Link to={to} >
+      {content}
+    </Link>
+  </div>
+);
+
+const Nav = props => (
+  <div className="side-nav">
+    <div className="logoBox">
+      <h1></h1>
     </div>
-  );
-};
+    {
+      !window.user ? 
+        <div>
+          <Bookmark to="/login" content="Login" />
+          <Bookmark to="/register" content="Register" />
+        </div>
+        :
+        <div className="bookmark">
+          {window.user.username}
+        </div>
+    }
+    <hr />
+    <Bookmark to="/room/javascript" content="Javascript" />
+    <Bookmark to="/room/politics" content="Politics" />
+    <Bookmark to="/room/gifs" content="Gifs" />
+    <Bookmark to="/room/photography" content="Photography" />
+    <Bookmark to="/room/movies" content="Movies" />
+    <Bookmark to="/room/programming" content="Programming" />
+    <Bookmark to="/room/music" content="Music" />
+    <Bookmark to="/room/hiphop" content="HipHop " />
+    <Bookmark to="/room/news" content="News" />
+    <Bookmark to="/room/gaming" content="Gaming" />
+  </div>
+);
 
 Nav.PropTypes = {
   locations: PropTypes.object,

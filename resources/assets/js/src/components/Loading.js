@@ -1,11 +1,11 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
-const Loading = (props) => {
+const Loading = ({ name }) => {
   return (
     <div className="outerLoad">
       <span className="loadingMessage">
-        loading {props.name}
+        loading {name}
       </span>
       <div className="spinner">
         <FontAwesome 
