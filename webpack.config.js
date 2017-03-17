@@ -25,7 +25,8 @@ module.exports = {
     publicPath: 'http://localhost:8080/public/',
     proxy: {
       "/api/*": "http://localhost:8888"
-    }
+    },
+    stats: 'errors-only',
   },
 
   module: {

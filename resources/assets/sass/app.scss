@@ -5,11 +5,17 @@
 // Variables
 @import "variables";
 @import "forms";
+@import "mixins";
+@import "sidenav";
+@import "shared";
+@import "room";
+@import "topic";
+@import "loading";
 
 body {
   background-color: $body-bg;
   font-family: $font-family-sans-serif;
-  color: black;
+  color: $base-black;
   padding: 0;
   margin: 0;
 }
@@ -18,21 +24,32 @@ body {
   display: flex;
 }
 
-.side-nav {
-  height: 100vh;
-  width: 15vw;
-  text-align: center;
-  margin-right: 10px;
-  background-color: indianred;
-  color: white;
-  .bookmark {
-    margin: 10px;
-    a {
-      color: white;
-    }
-  }
-}
 
 .main-view {
-   width: 70vw;
+   width: 85vw;  
+   padding-left: 15vw;
+   text-overflow: ellipsis;
+   overflow-x: hidden;
+}
+
+.Absolute-Center {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+::-webkit-scrollbar
+{
+  width: 8px;  /* for vertical scrollbars */
+  height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: $scroll-track;
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: $scroll-thumb;
 }

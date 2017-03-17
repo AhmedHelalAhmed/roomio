@@ -1,10 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import Scroll, { scrollToBottom } from 'react-scroll';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
 import { addTopic, addMessages, addMessage } from '../redux/ducks/entitiesDucks';
 import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import find from 'lodash/find';
+import Loading from '../components/Loading';
+
+var Element    = Scroll.Element;
+var scroll     = Scroll.animateScroll;
 
 /**
  * Components
@@ -45,6 +50,7 @@ class TopicContainer extends Component {
     const { content } = this.state;
     this.props.emit.sendMessage(content);
     this.setState({ content: '' });
+    scroll.scrollToBottom();
   }
 
   render() {
@@ -66,7 +72,7 @@ class TopicContainer extends Component {
     }
 
     return (
-      <p>spinner</p>
+      <Loading name="topic" />
     );
   }
 }

@@ -6,7 +6,7 @@
 - Node
 - NPM
 - MySQL
-- global webpack and webpack-dev-server.
+- global nodemon, webpack, and webpack-dev-server.
 
 #### Getting started:
 - Make sure you have MySQL running with a database named "roomio".

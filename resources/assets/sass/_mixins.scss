@@ -1,0 +1,15 @@
+@mixin darker_color($color) {
+    color: darken($color, 10%);
+}
+
+@mixin lighter_color($color) {
+    color: lighten($color, 10%);
+}
+
+@mixin darker_background_color($color) {
+    background-color: darken($color, 10%);
+}
+
+@mixin lighter_background_color($color) {
+    background-color: lighten($color, 10%);
+}

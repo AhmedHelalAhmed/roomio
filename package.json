@@ -4,8 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start-webpack": "webpack-dev-server",
-    "start-socket": "node --harmony socket_server/server.js --laravelURI http://localhost:8888 --socketPort 3000",
-    "start-php": "php artisan serve --port 8888"
+    "start-socket": "nodemon socket_server/server.js --laravelURI http://localhost:8888 --socketPort 3000",
+    "start-php": "php artisan serve --port 8888",
+    "start-all": "npm-run-all --parallel start-socket start-webpack start-php"
   },
   "author": "Tyler Bainbridge, Alex Cushing, James Erardi",
   "license": "ISC",
@@ -35,10 +36,13 @@
     "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "node-sass": "^4.5.0",
+    "npm-run-all": "^4.0.2",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-fontawesome": "^1.5.0",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
+    "react-scroll": "^1.4.7",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.2",

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Active = props => {
+const Active = ({ children, socket }) => {
   return (
     <div className="main-view">
-      {React.Children.map(props.children, child =>
-        React.cloneElement(child, { socket: props.socket }),
+      {React.Children.map(children, child =>
+        React.cloneElement(child, { socket }),
       )}
     </div>
   );
