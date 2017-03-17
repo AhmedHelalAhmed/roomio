@@ -17,12 +17,12 @@ const Routes = () => {
         <Route path="/room/:roomName" component={RoomContainer} />
         <Route path="/room/:roomName/topic/:topicRef" component={TopicsContainer} />
       </Route>
-      <Route path="/signin" component={() => (
+      <Route path="/login" component={() => (
         <AuthContainer>
           <Login/>
         </AuthContainer>
       )}/>
-      <Route path="/signup" component={() => (
+      <Route path="/register" component={() => (
         <AuthContainer>
           <Register/>
         </AuthContainer>

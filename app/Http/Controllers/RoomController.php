@@ -43,7 +43,8 @@ class RoomController extends Controller {
 
         if (Input::get("with") == 'topics') {
           $res['topics'] = Topic::with(['user'])
-                            ->where('room_name', $room->name)
+                            ->with('user')
+                            ->withCount('messages')
                             ->paginate(20);
         }
 
@@ -64,7 +65,7 @@ class RoomController extends Controller {
         $room['topics'] = Topic::where('room_name', $room->name)
                             ->with('user')
                             ->withCount('messages')
-                            ->paginate('20');
+                            ->paginate(20);
 
         if ($room == null) {
             return Response::json([

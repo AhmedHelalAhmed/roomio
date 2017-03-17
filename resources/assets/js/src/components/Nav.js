@@ -2,11 +2,25 @@ import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const Nav = props => {
+  console.log(window.user)
   return (
     <div className="side-nav">
       <div className="logoBox">
         <h1></h1>
       </div>
+      {!window.user ? 
+      <div className="bookmark">
+        <Link to="/login" >
+          Login
+        </Link><br />
+        <Link to="/register" >
+          Register
+        </Link>
+      </div> :
+      <div className="bookmark">
+        {window.user.username}
+      </div>}
+      <hr />
       <div className="bookmark">
         <Link to="/room/javascript" >
           Javascript
