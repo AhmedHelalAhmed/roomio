@@ -127,6 +127,7 @@ const mapDispatchToProps = (dispatch, props) => {
             resolve();
           })
           .catch((err) => {
+            console.log(err);
             dispatch(stopLoadingTopic(params.topicRef));
             reject(err);
           });

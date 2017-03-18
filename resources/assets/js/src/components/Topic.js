@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Topic = ({ topic, messages }) => (
+const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
   <div className ="sharedContainer">
     <div className="sharedTitleSep">
     </div>
@@ -29,14 +29,14 @@ const Topic = ({ topic, messages }) => (
     <span className="topicMessenger">
       {
       window.user ?
-        <form onSubmit={props.sendMessage}>
+        <form onSubmit={sendMessage}>
           <textarea 
             cols="40" 
             rows="5"
             type="text" 
-            onChange={props.onChange} 
-            value={props.content} 
-            autofocus
+            onChange={onChange} 
+            value={content} 
+            autoFocus
           />
           <button type="submit">Send</button>
         </form> : <div><p>

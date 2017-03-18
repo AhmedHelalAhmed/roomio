@@ -4,12 +4,6 @@ const STOP_LOADING = 'isLoaded/STOP';
 const START_LOADING_HOME = 'isLoaded/START_LOADING_HOME';
 const STOP_LOADING_HOME = 'isLoaded/STOP_LOADING_HOME';
 
-// //  Initial State
-// const initialState = {
-//   room: true,
-//   topic: true,
-// };
-
 const initialState = {
   rooms: {},
   topics: {},
