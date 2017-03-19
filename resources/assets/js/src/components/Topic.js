@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
+
 const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
   <div className ="sharedContainer">
     <div className="sharedTitleSep">

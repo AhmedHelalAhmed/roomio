@@ -19,6 +19,16 @@
     .profileBody {
         .flexSplit {
             flex: 1;
+            margin: 20px;
+            width: calc(50% - 40px);
+        }
+        .listNode {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow-x: hidden;
+            margin: 20px;
+            width: calc(100% - 40px);
+            flex: 1;
         }
     }
 }

@@ -17,7 +17,7 @@ const Profile = ({username, profile}) => {
         <ul className="roomsList flexSplit">
           {
             profile.rooms.map((info, key) => 
-            <li>
+            <li className="listNode flexSplit">
               <Link to={'/room/' + info.name}>
               {info.title}
               </Link>
@@ -28,7 +28,7 @@ const Profile = ({username, profile}) => {
           <ul className="topicsList flexSplit">
           {
             profile.topics.map((topic, key) => 
-            <li>
+            <li className="listNode flexSplit">
               <Link to={`/room/${topic.room_name}/topic/${topic.ref}`}>
               {topic.title}
               </Link>

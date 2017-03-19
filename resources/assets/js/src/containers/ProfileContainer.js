@@ -47,7 +47,7 @@ class ProfileContainer extends Component {
   }
   
   return(
-    <Loading name="room" />
+    <Loading name="profile" />
   );
 
   }
