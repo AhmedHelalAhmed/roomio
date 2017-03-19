@@ -69,6 +69,7 @@ export default function reducer(state = initialState, action = {}) {
         }
       });
     case ADD_MULTIPLE_TOPICS:
+      console.log(payload.roomName);
       return Object.assign({}, state, {
         topics: {
           ...state.topics,

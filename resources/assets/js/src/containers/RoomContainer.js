@@ -5,17 +5,17 @@ import { updateActiveRoom } from '../redux/ducks/activeDucks';
 import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import Room from '../components/Room';
-import Loading from '../components/Loading';
+import Loading from '../components/reusable/Loading';
 
 class RoomContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     const newRoomName = nextProps.params.roomName;
     const currentRoomName = this.props.params.roomName;
-
     if (newRoomName && (newRoomName !== currentRoomName)) {
       const { socket } = nextProps;
       socket.emit('leave_room', { roomName: currentRoomName });
+      console.log('new room');
       this.checkCacheAndFetch(newRoomName);
     }
   }
@@ -77,6 +77,7 @@ const mapDispatchToProps = dispatch => ({
       authGET(`/api/room/${roomName}?with=topics`)
         .then((res) => {
           const { room, topics } = res.data;
+          console.log(topics.data[1]);
           dispatch(addRoom(room));
           dispatch(addTopics(room.name, topics.data));
           dispatch(updateActiveRoom(room.name));

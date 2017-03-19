@@ -6,7 +6,7 @@ import { addTopic, addMessages, addMessage } from '../redux/ducks/entitiesDucks'
 import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import find from 'lodash/find';
-import Loading from '../components/Loading';
+import Loading from '../components/reusable/Loading';
 
 var Element    = Scroll.Element;
 var scroll     = Scroll.animateScroll;

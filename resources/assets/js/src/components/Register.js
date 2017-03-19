@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router';
 import axios from 'axios';
+import MakeForm from './HOCs/MakeForm';
+import FormError from './reusable/FormError';
 
 class Register extends Component {
-  state = { 
-    email: "",
-    username: "",
-    password: "",
-    password_confirmation: "",
-  };
-
-  onChange = (e) => {
-    this.setState({ [e.target.name]:e.target.value });
-  }
-
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/api/register`, { ...this.state })
-      .then(() => {
+    axios.post(`/api/register`, { ...this.props.fields })
+      .then((res) => {
+        console.log(res);
         window.location = '/';
       })
       .catch((err) => {
@@ -26,6 +18,7 @@ class Register extends Component {
   }
 
   render() {
+    const { fields, errors } = this.props;
     return (
       <div>
         <form onSubmit={this.onSubmit} className="form" >
@@ -35,37 +28,41 @@ class Register extends Component {
             className="formInput" 
             name="username" 
             type="text" 
-            onChange={this.onChange} 
-            value={this.state.username} 
-            required
+            onChange={this.props.onChange}
+            onBlur={this.props.validateFieldOnBlur}
+            value={fields.username}
           />
+          <FormError error={errors.username} />
           <label htmlFor="email">Email: </label>
           <input 
             className="formInput" 
             name="email" 
             type="text" 
-            onChange={this.onChange} 
-            value={this.state.email} 
-            required
+            onChange={this.props.onChange}
+            onBlur={this.props.validateFieldOnBlur}
+            value={fields.email}
           />
+          <FormError error={errors.email} />
           <label htmlFor="password">Password: </label>
           <input 
             className="formInput" 
             name="password" 
             type="password" 
-            onChange={this.onChange} 
-            value={this.state.password} 
-            required 
+            onChange={this.props.onChange}
+            onBlur={this.props.validateFieldOnBlur}
+            value={fields.password}
           />
+          <FormError error={errors.password} />
           <label htmlFor="password_confirmation">Confirm Password: </label>
           <input 
             className="formInput" 
             name="password_confirmation" 
             type="password" 
-            onChange={this.onChange} 
-            value={this.state.password_confirmation} 
-            required 
+            onChange={this.props.onChange}
+            onBlur={this.props.validateFieldOnBlur}
+            value={fields.password_confirmation}
           />
+          <FormError error={errors.password_confirmation} />
           <div className="buttonContainer">
               <button className="formButton" >Register!</button>
           </div>
@@ -78,4 +75,18 @@ class Register extends Component {
   }
 }
 
-export default Register;
+const fields = [
+  'email',
+  'username',
+  'password',
+  'password_confirmation',
+];
+
+const rules = {
+  email: 'isEmail|required',
+  username: 'required',
+  password: 'isPassword|required',
+  password_confirmation: 'isPassword|required|sameAs:password'
+};
+
+export default MakeForm(fields, rules)(Register);
