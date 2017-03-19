@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router';
 import axios from 'axios';
-import MakeForm from '../HOCs/MakeForm';
-import FormError from './FormError';
+import MakeForm from './HOCs/MakeForm';
+import FormError from './reusable/FormError';
 
 class Login extends Component {
   state = { error: null, loading: null };

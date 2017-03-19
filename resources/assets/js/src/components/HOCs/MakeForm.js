@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { validateField, validateForm } from '../shared/utils/validation';
+import { validateField, validateForm } from '../../shared/utils/validation';
 
 const MakeForm = (fields, validationRules) => (Form) => {
   return class extends Component {

@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router';
 import axios from 'axios';
-import MakeForm from '../HOCs/MakeForm';
-import FormError from './FormError';
+import MakeForm from './HOCs/MakeForm';
+import FormError from './reusable/FormError';
 
 class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/register`, { ...this.state })
-      .then(() => {
+    axios.post(`/api/register`, { ...this.props.fields })
+      .then((res) => {
+        console.log(res);
         window.location = '/';
       })
       .catch((err) => {

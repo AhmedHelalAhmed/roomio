@@ -4,7 +4,7 @@ import { addHomeTopics } from '../redux/ducks/entitiesDucks';
 import { startLoadingHome, stopLoadingHome } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import Home from '../components/Home';
-import Loading from '../components/Loading';
+import Loading from '../components/reusable/Loading';
 
 class HomeContainer extends Component {
   componentWillMount() {
