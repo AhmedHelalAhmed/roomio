@@ -43,3 +43,10 @@
 ```bash
   npm run start-webpack
 ```
+
+OR:
+- To start all the above processes in one terminal
+
+```bash
+  npm run start-all
+```

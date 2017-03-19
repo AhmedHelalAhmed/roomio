@@ -20,6 +20,7 @@ class HomeContainer extends Component {
   }
 
   render() {
+    console.table(this.props)
     const { topics, isLoaded } = this.props;
 
     if (isLoaded && topics) {

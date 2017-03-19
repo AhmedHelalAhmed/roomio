@@ -5,7 +5,11 @@ import { Link } from 'react-router';
 const TopicItem = ({ topic }) => (
   <div className="topic">
     <Link to={`/room/${topic.room_name}/topic/${topic.ref}`}><h4>{topic.title}</h4></Link>
-    <span>{topic.user.username}</span>
+    <span>
+      <Link to={'/user/' + topic.user.username}>
+        {topic.user.username}
+      </Link>
+    </span>
     <p>{topic.description}</p>
     <p>{topic.messages_count} messages</p>
   </div>

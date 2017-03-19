@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import TopicList from './TopicList';
+import { Link } from 'react-router';
 
 const Room = ({ room, topics }) => (
   <div className="sharedContainer">
@@ -18,7 +19,11 @@ const Room = ({ room, topics }) => (
         </div>
         <div className="admin">
           <h2 className="informationHeader">Admin</h2>
-          <p className="adminTag">{room.user.username}</p>
+          <p className="adminTag">
+            <Link to={'/user/' + room.user.username}>
+              {room.user.username}
+            </Link>
+          </p>
         </div>
       </div>
       <h3>Topics</h3>

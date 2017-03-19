@@ -71,7 +71,7 @@ class Register extends Component {
           </div>
         </form> 
         <div className="linkContainer">
-          <Link to="/signin" className="link">sign in here.</Link>
+          <Link to="/login" className="link">sign in here.</Link>
         </div>
       </div>
     ); 

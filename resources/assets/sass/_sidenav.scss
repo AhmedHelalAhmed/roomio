@@ -45,4 +45,12 @@
     box-shadow: $side-shadow !important;
     //padding-top:20px;
   }
+  .seperator{
+    border: 0;
+    height: 1px;
+    @include lighter_background_color($body-accent);
+    width: 85%;
+    margin-bottom: 15px;
+  }
+  
 }

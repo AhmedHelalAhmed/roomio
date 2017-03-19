@@ -1,40 +1,44 @@
 .sharedContainer {
-    .sharedTitleSep {
-        @include darker_background_color($base-white);
-        color: $base-black;
-    }
-    .roomInformation {
-        width: 100%;
+  .sharedTitleSep {
+    @include darker_background_color($base-white);
+    color: $base-black;
+  }
+  .roomInformation {
+    width: 100%;
+    display: inline-flex;
+    .description {
+      width: 50%;
+      margin: 10px 10px 10px 0px;
+      p {
         display: inline-flex;
-        .description {
-            width: 50%;
-            margin: 10px 10px 10px 0px;
-            p {
-                display: inline-flex;
-                padding: 10px;
-                @include darker_background_color($base-white);
-                &::before{
-                    content: "\""
-                }
-                &::after{
-                    content: "\""
-                }
-            }
-            .informationHeader {
-                margin-bottom: 0;
-            }
+        padding: 10px;
+        @include darker_background_color($base-white);
+        &::before{
+          content: "\""
         }
-        .admin {
-            width: 50%;
-            margin: 10px;
-            .adminTag {
-                display: inline-flex;
-                padding: 10px;
-                @include darker_background_color($base-white);
-            }
-            .informationHeader {
-                margin-bottom: 0;
-            }
+        &::after{
+          content: "\""
         }
+      }
+      .informationHeader {
+        margin-bottom: 0;
+      }
     }
+    .admin {
+      width: 50%;
+      margin: 10px;
+      .adminTag {
+        display: inline-flex;
+        a {
+          padding: 10px;
+          @include darker_background_color($base-white);
+          text-decoration: none;
+          color: $base-black;
+        }
+      }
+      .informationHeader {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
