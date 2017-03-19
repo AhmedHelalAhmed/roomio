@@ -54,7 +54,7 @@ class Login extends Component {
           </div>
         </form> 
         <div className="linkContainer">
-          <Link to="/signup" className="link">sign up here.</Link>
+          <Link to="/register" className="link">sign up here.</Link>
         </div>
       </div>
     ); 

@@ -16,7 +16,7 @@ class Register extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/register`, { ...this.state })
+    axios.post(`/api/register`, { ...this.state })
       .then(() => {
         window.location = '/';
       })
@@ -71,7 +71,7 @@ class Register extends Component {
           </div>
         </form> 
         <div className="linkContainer">
-          <Link to="/signin" className="link">sign in here.</Link>
+          <Link to="/login" className="link">sign in here.</Link>
         </div>
       </div>
     ); 

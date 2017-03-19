@@ -29,7 +29,6 @@ const Profile = ({username, profile}) => {
             </li>
             )}
         </ul>
-          {/*<TopicList topics={profile.topics} />*/}
           <ul className="topicsList flexSplit">
           {
             profile.topics.map((topic, key) => 

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { authGET } from '../shared/utils/authAxios';
 import { connect } from 'react-redux';
 import Profile from '../components/Profile';
+import { updateActiveProfile } from '../redux/ducks/activeDucks';
 import { addProfile } from '../redux/ducks/entitiesDucks';
 import { startLoadingProfile, stopLoadingProfile } from '../redux/ducks/isLoadedDucks';
 import Loading from '../components/Loading';
@@ -67,6 +68,7 @@ const mapDispatchToProps = dispatch => ({
           const { user } = res.data;
           console.table(user)
           dispatch(addProfile(user));
+          dispatch(updateActiveProfile(userName));
           dispatch(stopLoadingProfile(userName));
           document.title = `Roomio - ${user.username}`;
           resolve();
