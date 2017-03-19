@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
   <div className ="sharedContainer">
@@ -20,7 +21,9 @@ const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
           return (
             <p className="chatBubble" key={key}>
             <strong className="user">
-              {message.user.username}:
+              <Link to={'/user/' + message.user.username}>
+                {message.user.username}:
+              </Link>
             </strong> {message.content}</p>
           );
         }) : null
