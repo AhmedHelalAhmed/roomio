@@ -7,6 +7,7 @@ import TopicsContainer from './containers/TopicsContainer';
 import Login from './components/Login';
 import Register from './components/Register';
 import AuthContainer from './containers/AuthContainer';
+import ProfileContainer from './containers/ProfileContainer';
 
 // router would go here.
 const Routes = () => {
@@ -16,6 +17,7 @@ const Routes = () => {
         <IndexRoute component={HomeContainer} />
         <Route path="/room/:roomName" component={RoomContainer} />
         <Route path="/room/:roomName/topic/:topicRef" component={TopicsContainer} />
+        <Route path="/user/:userName" component={ProfileContainer} />
       </Route>
       <Route path="/login" component={() => (
         <AuthContainer>

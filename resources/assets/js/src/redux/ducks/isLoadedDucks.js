@@ -7,6 +7,7 @@ const STOP_LOADING_HOME = 'isLoaded/STOP_LOADING_HOME';
 const initialState = {
   rooms: {},
   topics: {},
+  profiles: {},
   home: false,
 };
 
@@ -83,6 +84,26 @@ export const stopLoadingTopic = (topicRef) => {
     payload: {
       type: 'topics',
       identifier: topicRef
+    }
+  };
+};
+
+export const startLoadingProfile = (profileRef) => {
+  return {
+    type: START_LOADING,
+    payload: {
+      type: 'profiles',
+      identifier: profileRef
+    }
+  };
+};
+
+export const stopLoadingProfile = (profileRef) => {
+  return {
+    type: STOP_LOADING,
+    payload: {
+      type: 'profiles',
+      identifier: profileRef
     }
   };
 };

@@ -47,7 +47,7 @@ class RoomContainer extends Component {
   render() {
     const { rooms, topics, isLoaded } = this.props;
     const { roomName } = this.props.params;
-
+    
     if (isLoaded || rooms[roomName]) {
       return (
         <Room

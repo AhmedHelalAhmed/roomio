@@ -1,6 +1,7 @@
 import { uniqBy, orderBy } from 'lodash';
 //  Actions
 const ADD_ROOM   = 'entities/ADD';
+const ADD_PROFILE   = 'entities/ADD_PROFILE';
 const ADD_TOPIC   = 'entities/ADD_TOPIC';
 const ADD_MULTIPLE_TOPICS = 'entities/ADD_MULTIPLE_TOPICS';
 const ADD_HOME_TOPICS = 'enitities/ADD_HOME_TOPICS';
@@ -10,6 +11,7 @@ const ADD_MESSAGE   = 'entities/ADD_MESSAGE';
 //  Initial State
 const initialState = {
   rooms: {}, //  roomName: { Room } - room information
+  profiles: {},
   topics: {}, //  roomId: [Topic] - array of topics
   messages: {}, //  topicId: [Message] - array of messages
   homeTopics: [], // array of topics
@@ -18,6 +20,7 @@ const initialState = {
 //  Reducer
 export default function reducer(state = initialState, action = {}) {
   const { type, payload } = action;
+  
   switch (type) {
     case ADD_ROOM:
       return Object.assign({}, state, {
@@ -28,6 +31,13 @@ export default function reducer(state = initialState, action = {}) {
         topics: {
           ...state.topics,
           [payload.room.name]: [],
+        },
+      });
+    case ADD_PROFILE:
+      return Object.assign({}, state, {
+        profiles: {
+          ...state.profiles,
+          [payload.profile.username]: payload.profile
         },
       });
     case ADD_TOPIC:
@@ -105,6 +115,10 @@ export default function reducer(state = initialState, action = {}) {
 //  Action Creators
 export const addRoom = (room) => {
   return { type: ADD_ROOM, payload: { room } };
+};
+
+export const addProfile = (profile) => {
+  return { type: ADD_PROFILE, payload: { profile } };
 };
 
 export const addTopic = (topic) => {

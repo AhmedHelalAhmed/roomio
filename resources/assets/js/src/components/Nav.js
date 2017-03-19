@@ -21,11 +21,12 @@ const Nav = props => (
           <Bookmark to="/register" content="Register" />
         </div>
         :
-        <div className="bookmark">
-          {window.user.username}
-        </div>
+        <Bookmark 
+          to={'/user/'+window.user.username}
+          content={window.user.username} 
+        />
     }
-    <hr />
+    <hr className="seperator" />
     <Bookmark to="/room/javascript" content="Javascript" />
     <Bookmark to="/room/politics" content="Politics" />
     <Bookmark to="/room/gifs" content="Gifs" />
