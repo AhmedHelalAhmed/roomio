@@ -49,7 +49,10 @@
             // box-shadow: $shadow;
         }
     }
-
+    .form-error {
+      display: block;
+      color: red;
+    }
 }
 
 .linkContainer{

@@ -38,6 +38,7 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+//  Action Creators
 export const startLoadingHome = () => {
   return { type: START_LOADING_HOME };
 };
@@ -46,7 +47,6 @@ export const stopLoadingHome = () => {
   return { type: STOP_LOADING_HOME };
 };
 
-//  Action Creators
 export const startLoadingRoom = (roomName) => {
   return {
     type: START_LOADING,
