@@ -5,7 +5,7 @@ import Profile from '../components/Profile';
 import { updateActiveProfile } from '../redux/ducks/activeDucks';
 import { addProfile } from '../redux/ducks/entitiesDucks';
 import { startLoadingProfile, stopLoadingProfile } from '../redux/ducks/isLoadedDucks';
-import Loading from '../components/Loading';
+import Loading from '../components/reusable/Loading';
 
 class ProfileContainer extends Component {
 
