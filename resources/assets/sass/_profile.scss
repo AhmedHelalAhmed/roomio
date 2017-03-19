@@ -1,34 +1,46 @@
 .sharedContainer {
-    .usernameOuter {
-        display: flex;
-        justify-content: center;
-    }
-    .profileSeperator {
-        border: 0;
-        height: 1px;
-        @include darker_background_color($base-white);
-        width: 85%;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-    .spaceAround {
-        display: flex;
+  .usernameOuter {
+    display: flex;
+    justify-content: center;
+      .profileDate {
+        align-self: flex-end;
+        position: absolute;
+        top: 5px;
+        right: 5px;
         flex: 1;
-        justify-content: space-around;
+      }
+  }
+  .profileSeperator {
+    border: 0;
+    height: 1px;
+    @include darker_background_color($base-white);
+    width: 85%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .spaceAround {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+  }
+  .profileBody {
+    .flexSplit {
+      flex: 1;
+      margin: 20px;
+      width: calc(50% - 40px);
     }
-    .profileBody {
-        .flexSplit {
-            flex: 1;
-            margin: 20px;
-            width: calc(50% - 40px);
-        }
-        .listNode {
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow-x: hidden;
-            margin: 20px;
-            width: calc(100% - 40px);
-            flex: 1;
-        }
+    .listNode {
+      padding: 10px;
+      overflow-x: hidden;
+      padding-left: 7px;
+      border-left: solid 4px $body-other;
+      margin: 20px;
+      width: calc(100% - 47px);
+      flex: 1;
+      a {
+        text-decoration: none;
+        color: $base-black;
+      }
     }
+  }
 }

@@ -69,7 +69,10 @@
     }
     .user {
       line-height: 2em;
-      color: $brand-primary;
+      a{
+        color: $brand-primary;
+        text-decoration: none;
+      }
     }
   }
 }
