@@ -9,18 +9,21 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/api/login`, { ...this.state })
+    axios.post(`/api/login`, { ...this.props.fields })
       .then(() => {
         window.location = '/';
       })
       .catch((err) => {
-        this.setState({ error: 'An error has occured' });
+        if (err.response.data.email) {
+          this.setState({ error: err.response.data.email });
+        } else {
+          this.setState({ error: 'An unknown error has occured.' });
+        }
       });
   }
 
   render() {
     const { fields, errors } = this.props;
-    console.log(this.props.errors);
     return (
       <div>
         <form onSubmit={this.onSubmit} className="form">
@@ -39,7 +42,7 @@ class Login extends Component {
           <input
             name="password"
             type="password"
-            onChange={this.onChange}
+            onChange={this.props.onChange}
             value={fields.password}
             className="formInput"
           />
@@ -47,6 +50,7 @@ class Login extends Component {
           <div className="buttonContainer">
               <button className="formButton" >Sign In!</button>
           </div>
+          <FormError error={this.state.error} />
         </form> 
         <div className="linkContainer">
           <Link to="/register" className="link">sign up here.</Link>
@@ -58,8 +62,8 @@ class Login extends Component {
 
 const fields = ['email', 'password'];
 const rules = {
-  email: 'isEmail|required',
-  password: 'isPassword|required',
+  email: 'required',
+  password: 'required',
 };
 
 export default MakeForm(fields, rules)(Login);

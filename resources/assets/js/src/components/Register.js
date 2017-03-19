@@ -13,6 +13,9 @@ class Register extends Component {
         window.location = '/';
       })
       .catch((err) => {
+        if (err.response.data) {
+          this.props.createErrorsFromResponse(err.response.data);
+        }
         this.setState({ error: 'An error has occured' });
       });
   }

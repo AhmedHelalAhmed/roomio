@@ -11,7 +11,6 @@ validator.isPassword = (fieldVal) => {
 };
 
 validator.sameAs = (fieldVal, [otherFieldName], allFields) => {
-  console.log(otherFieldName, allFields);
   return fieldVal === allFields[otherFieldName];
 };
 

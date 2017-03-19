@@ -47,7 +47,12 @@ const MakeForm = (fields, validationRules) => (Form) => {
       });
     }
 
-    createErrors = (errors) => {
+    createErrorsFromResponse = (data) => {
+      const errors = Object.keys(data).reduce((prev, fieldName) => {
+        prev[fieldName] = data[fieldName].pop();
+        return prev;
+      }, {});
+      console.log(errors);
       this.setState({
         errors: {
           ...this.state.errors,
@@ -64,7 +69,7 @@ const MakeForm = (fields, validationRules) => (Form) => {
           onChange={this.onChange}
           validateFieldOnBlur={this.validateFieldOnBlur}
           validateForm={this.validateForm}
-          createErrors={this.createErrors}
+          createErrorsFromResponse={this.createErrorsFromResponse}
         />
       );
     }

@@ -11,11 +11,11 @@ Route::group([ 'prefix' => 'api' ], function () {
 
 
 Route::get('/logout', function () {
-    Auth::logout();
-    return redirect()->intended('/');
+  Auth::logout();
+  return redirect()->intended('/');
 });
 
 // for all routes that aren't auth, send the index view (routing handled in react).
 Route::get('/{all}', function ($all) {
-    return view('index');
+  return view('index');
 })->where(['all' => '.*']);
