@@ -79,7 +79,8 @@
             @include darker_background_color($base-white);
             color: $base-black;
             cursor: pointer;
-            padding: 10px;
+            padding: 10px;        
+            line-height: 2em;
             margin-bottom: 10px;
           }
         }

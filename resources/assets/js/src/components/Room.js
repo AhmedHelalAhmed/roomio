@@ -21,7 +21,7 @@ const Room = ({ room, topics }) => (
         <br />
           <span className="newTopic">
             <Link to={`/newtopic?room=${room.name}`}>
-              + Create A Topic 
+              + New Topic 
             </Link>
           </span>
           <div className="description">
