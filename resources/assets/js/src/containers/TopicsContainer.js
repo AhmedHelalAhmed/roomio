@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Scroll, { scrollToBottom } from 'react-scroll';
+import { EditorState } from 'draft-js';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
 import { addTopic, addMessages, addMessage } from '../redux/ducks/entitiesDucks';
 import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/isLoadedDucks';
@@ -17,13 +18,13 @@ var scroll     = Scroll.animateScroll;
 import Topic from '../components/Topic';
 
 class TopicContainer extends Component {
-  state = { content: ''};
+  state = { content: '' };
 
   componentWillMount() {
     const { topics, socket, params: { topicRef, roomName } } = this.props;
     // check cache
     const topic = find(topics[roomName], { ref: topicRef });
-    console.log(this.props.loading);
+
     if (!topic) {
       // if not in the cache show spinner
       this.props.startLoading();
@@ -36,16 +37,21 @@ class TopicContainer extends Component {
       }).catch((err) => console.log(err));
   }
 
+  componentDidMount() {
+    scroll.scrollToBottom();
+  }
+
   componentWillUnmount() {
     this.props.emit.leaveTopic();
   }
 
-  onInputChange(event) {
+  onInputChange = (event) => {
+    // console.log(event);
     const { value } = event.target;
     this.setState({ content: value });
   }
 
-  sendMessage(event) {
+  sendMessage = (event) => {
     if (event) event.preventDefault();
     const { content } = this.state;
     this.props.emit.sendMessage(content);
@@ -64,8 +70,8 @@ class TopicContainer extends Component {
         <Topic
           topic={topic}
           messages={messages[topicRef]}
-          onChange={this.onInputChange.bind(this)}
-          sendMessage={this.sendMessage.bind(this)}
+          onChange={this.onInputChange}
+          sendMessage={this.sendMessage}
           content={this.state.content}
         />
       );
@@ -90,6 +96,7 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     initSocketListeners: () => {
       socket.on('topic:new_message', ({ message }) => {
+        scroll.scrollToBottom();
         dispatch(addMessage(message.topic_ref, message));
       });
     },
