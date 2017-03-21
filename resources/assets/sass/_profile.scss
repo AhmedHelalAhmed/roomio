@@ -2,6 +2,7 @@
   .usernameOuter {
     display: flex;
     justify-content: center;
+    padding-left: 20px;
       .profileDate {
         align-self: flex-end;
         position: absolute;
@@ -14,7 +15,7 @@
     border: 0;
     height: 1px;
     @include darker_background_color($base-white);
-    width: 85%;
+    width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
   }
@@ -24,6 +25,7 @@
     justify-content: space-around;
   }
   .profileBody {
+    padding-top: 5em;
     .flexSplit {
       flex: 1;
       margin: 20px;

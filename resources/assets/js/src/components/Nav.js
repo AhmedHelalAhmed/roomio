@@ -12,7 +12,9 @@ const Bookmark = ({ to, content }) => (
 const Nav = props => (
   <div className="side-nav">
     <div className="logoBox">
-      <h1></h1>
+      <Link to="/" >
+        <h1></h1>
+      </Link>
     </div>
     {
       !window.user ? 
@@ -21,10 +23,24 @@ const Nav = props => (
           <Bookmark to="/register" content="Register" />
         </div>
         :
-        <Bookmark 
-          to={'/user/'+window.user.username}
-          content={window.user.username} 
-        />
+        <div>
+          <Bookmark 
+            to={'/user/'+window.user.username}
+            content={window.user.username} 
+          />
+          <span className="createRoom">
+            <Bookmark
+              to={'/newroom'}
+              content="+ Room"
+            />
+          </span>
+          <span className="createRoom">
+            <Bookmark
+              to={'/newtopic'}
+              content="+ Topic"
+            />
+          </span>
+        </div>
     }
     <hr className="seperator" />
     <Bookmark to="/room/javascript" content="Javascript" />

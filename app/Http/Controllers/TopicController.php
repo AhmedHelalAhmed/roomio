@@ -14,6 +14,7 @@ class TopicController extends Controller {
     public function index() {
         $topics = Topic::with(['room', 'user'])
                     ->withCount('messages')
+                    ->orderBy('created_at', 'DESC')
                     ->paginate(20);
 
         return Response::json(compact('topics'), 200);
@@ -66,7 +67,7 @@ class TopicController extends Controller {
         $rules = array(
             'title' => 'required|string|max:160',
             'description' => 'string|max:1000',
-            'room_name' => 'string|alpha_num'
+            'room_name' => 'string|alpha_num|exists:rooms,name'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -76,13 +77,13 @@ class TopicController extends Controller {
         }
 
         // check if there is a room with that id
-        $room = Room::where('name', $request->input('room_name'))->first();
+        // $room = Room::where('name', $request->input('room_name'))->first();
         
-        if ($room === null) {
-            return Response::json([
-              'error' => 'There is no room with that id'
-            ], 400);
-        }
+        // if ($room === null) {
+        //     return Response::json([
+        //       'error' => 'There is no room with that id'
+        //     ], 400);
+        // }
 
 
         $topicFields = $request->all();

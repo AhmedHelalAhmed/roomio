@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 
 const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
+  <div className="messenger">
   <div className ="sharedContainer">
     <div className="sharedTitleSep">
     </div>
@@ -16,7 +17,7 @@ const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
         <p>{topic.description}</p>
       </div>
     </div>
-    <div className="sharedBody">
+    <div className="fortopic">
       {messages ?
         messages.map((message, key) => {
           return (
@@ -30,7 +31,8 @@ const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
         }) : null
       }
     </div>
-    <span className="topicMessenger">
+  </div>
+  <span className="topicMessenger">
       {
       window.user ?
         <form onSubmit={sendMessage}>

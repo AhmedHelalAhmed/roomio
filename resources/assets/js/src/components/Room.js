@@ -11,23 +11,35 @@ const Room = ({ room, topics }) => (
         </span>
       </h1>
     </div>
-    <div className="sharedBody">
+    <div className="sharedBody sidebyside">
+      <div className="topicsFlex">
+        <h3>Topics</h3>
+        <TopicList topics={topics} />
+      </div>
       <div className="roomInformation">
-        <div className="description">
-          <h2 className="informationHeader">Description</h2>
-          <p>{room.description}</p>
-        </div>
-        <div className="admin">
-          <h2 className="informationHeader">Admin</h2>
-          <p className="adminTag">
-            <Link to={'/user/' + room.user.username}>
-              {room.user.username}
+        <div className="fixed">
+        <br />
+          <span className="newTopic">
+            <Link to={`/newtopic?room=${room.name}`}>
+              + Create A Topic 
             </Link>
-          </p>
+          </span>
+          <div className="description">
+          <br />
+          <hr className="topicSeperator" />
+            <h2 className="informationHeader">Description</h2>
+            <p>{room.description}</p>
+          </div>
+          <div className="admin">
+            <h2 className="informationHeader">Admin</h2>
+            <p className="adminTag">
+              <Link to={'/user/' + room.user.username}>
+                {room.user.username}
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-      <h3>Topics</h3>
-      <TopicList topics={topics} />
     </div>
   </div>
 );

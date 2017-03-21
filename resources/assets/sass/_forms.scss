@@ -73,6 +73,39 @@
         }
 }
 
+.outerFormContainer {
+    background: $body-bg;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    flex: 1;
+    .formContainer {
+        margin-top: 50px;
+        width: 700px;
+        background: $body-bg;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        .form {
+            background: $body-bg;
+            align-self: flex-end;
+            width: 80%;
+            box-shadow: none;
+            padding: 30px;
+            line-height: 1.5em;
+            margin: auto;
+        }
+        .buttonContainer{
+        .formButton{
+            background-color: $body-accent;
+            color: $btn-opp-color;
+            border: solid 1px $body-accent;
+            cursor: pointer;
+        }
+    }
+    }
+}
+
 
 input:-webkit-autofill {
     -webkit-box-shadow: $input-remove-chrome-autofill-shadow;

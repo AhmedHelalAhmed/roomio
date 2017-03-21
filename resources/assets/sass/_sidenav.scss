@@ -36,6 +36,10 @@
      }
     }
   }
+  a {
+    text-decoration: none;
+    color: $base-white;
+  }
   .logoBox {
     display: flex;
     justify-content: center;

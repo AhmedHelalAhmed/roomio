@@ -1,15 +1,9 @@
 .sharedContainer {
   .topicInformation {
     transition: .2s;
-    // box-shadow: $shadow;
     border-bottom: solid .1px $base-border;
     padding: 20px;
     margin: 0 20px 0 20px;
-    // background: $base-white;
-    // &:hover{
-    //   box-shadow: $shadow;
-    //   transition: .2s;
-    // }
     p {
       margin: 0;
       display: inline-flex;
@@ -23,41 +17,12 @@
       }
     }
   }
-  .topicMessenger {
-    background: none;
-    position: fixed;
-    width: 85vw;
-    bottom: 0;
-    margin-right: 20px;
-    form {
-      display: flex;
-      align-content: center;
-      margin: 5px 20px 5px 20px;
-      textarea {
-        width: 100%;
-        font-size: 18px;
-        height: 90px;
-        resize: none;
-        margin: 10px 0 10px 10px;
-      }
-      button {
-        width: 15% !important;
-        padding: 3px 7px 3px 7px;
-        line-height: 1.5em;
-        font-size: 1.15em;
-        background-color: $brand-success;
-        color: $btn-opp-color;
-        border: solid 1px $brand-success;
-        margin: 10px 10px 10px 0;
-        cursor: pointer;
-        width: 100%;
-      }
-    }
-  }
+
   .topicTitle {
     font-size: 20px;
   }
-  .sharedBody {
+.fortopic{
+    margin: 0em 20px 0 20px;
     margin-bottom: 125px;
     .chatBubble {
         display: flex;
@@ -80,3 +45,35 @@
 .topicInformationCont {
   padding-bottom: 20px;
 }
+
+.topicMessenger {
+    background: none;
+    position: fixed;
+    width: 85vw;
+    bottom: 0;
+    margin-right: 20px;
+    form {
+      display: flex;
+      align-content: center;
+      margin: 5px 12px 0px 12px;
+      textarea {
+        width: 100%;
+        font-size: 18px;
+        height: 70px;
+        resize: none;
+        margin: 10px 0 10px 0px;
+      }
+      button {
+        width: 15% !important;
+        padding: 3px 7px 3px 7px;
+        line-height: 1.5em;
+        font-size: 1.15em;
+        background-color: $brand-success;
+        color: $btn-opp-color;
+        border: solid 1px $brand-success;
+        margin: 10px 0px 10px 0;
+        cursor: pointer;
+        width: 100%;
+      }
+    }
+  }

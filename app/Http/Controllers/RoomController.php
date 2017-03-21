@@ -81,7 +81,7 @@ class RoomController extends Controller {
         $rules = array(
             'name' => 'required|alpha_num|max:40|unique:rooms',
             'title' => 'required|string',
-            'description' => 'string'
+            'description' => 'required'
         );
 
         $validator = Validator::make($request->all(), $rules);
@@ -90,11 +90,11 @@ class RoomController extends Controller {
             $messages = $validator->messages();
             return Response::json(compact('messages'), 400);
         }
-
-        $roomFields = $request-all();
+        
+        $roomFields = $request->all();
         $roomFields['ref'] = uniqid();
         
-        $room = new Room(roomFields);
+        $room = new Room($roomFields);
         $room->user_id = $request->user()->id;
         $room->save();
 

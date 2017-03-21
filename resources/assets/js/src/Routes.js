@@ -6,6 +6,8 @@ import HomeContainer from './containers/HomeContainer';
 import TopicsContainer from './containers/TopicsContainer';
 import Login from './components/Login';
 import Register from './components/Register';
+import CreateRoom from './components/CreateRoom';
+import CreateTopic from './components/CreateTopic';
 import AuthContainer from './containers/AuthContainer';
 import ProfileContainer from './containers/ProfileContainer';
 
@@ -15,6 +17,8 @@ const Routes = () => {
     <Router history={browserHistory}>
       <Route path="/" component={AppContainer}>
         <IndexRoute component={HomeContainer} />
+        <Route path="/newroom" component={CreateRoom} />
+        <Route path="/newtopic" component={CreateTopic} />
         <Route path="/room/:roomName" component={RoomContainer} />
         <Route path="/room/:roomName/topic/:topicRef" component={TopicsContainer} />
         <Route path="/user/:userName" component={ProfileContainer} />

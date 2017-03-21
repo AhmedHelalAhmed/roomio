@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+	<link rel="shortcut icon" href="favicon.png">
         <title>Roomio</title>
         <script src="https://use.fontawesome.com/b4eac05af7.js"></script>
         <script type="text/javascript">

@@ -4,8 +4,14 @@ import TopicList from './TopicList';
 const Home = ({ topics }) => (
   <div>
     <div className="sharedContainer">
+      <div className="sharedTitleSep">
+        <h1>
+          <span>
+            Front Page
+          </span>
+        </h1>
+      </div>
       <div className="sharedBody">
-        <h1>Front page</h1>
         <TopicList topics={topics} />
       </div>
     </div>

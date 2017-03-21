@@ -52,12 +52,20 @@ const MakeForm = (fields, validationRules) => (Form) => {
         prev[fieldName] = data[fieldName].pop();
         return prev;
       }, {});
-      console.log(errors);
       this.setState({
         errors: {
           ...this.state.errors,
           ...errors,
         },
+      });
+    }
+
+    setFields = (fields) => {
+      this.setState({
+        fields: {
+          ...this.state.fields,
+          ...fields
+        }
       });
     }
 
@@ -70,6 +78,7 @@ const MakeForm = (fields, validationRules) => (Form) => {
           validateFieldOnBlur={this.validateFieldOnBlur}
           validateForm={this.validateForm}
           createErrorsFromResponse={this.createErrorsFromResponse}
+          setFields={this.setFields}
         />
       );
     }

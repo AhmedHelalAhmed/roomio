@@ -2,12 +2,21 @@
   .sharedTitleSep {
     @include darker_background_color($base-white);
     color: $base-black;
+    h1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex:1;
+      span {
+        text-justify: justify;
+      }
+    }
   }
   .roomInformation {
     width: 100%;
-    display: inline-flex;
+    display: flex;
+    flex-direction: column;
     .description {
-      width: 50%;
       margin: 10px 10px 10px 0px;
       p {
         display: inline-flex;
@@ -25,7 +34,6 @@
       }
     }
     .admin {
-      width: 50%;
       margin: 10px;
       .adminTag {
         display: inline-flex;
@@ -41,4 +49,42 @@
       }
     }
   }
+  .sidebyside {
+    display: flex;
+    flex-direction: row !important;
+    @media screen and (max-width: $breakpoint-tablet) {
+      flex-direction: column-reverse !important;
+      .roomInformation {
+        padding: 0 !important;
+        .fixed {
+          padding: 20px 0 20px;
+          position: inherit !important;
+        }
+      }
+    }
+    .topicsFlex {
+      flex:6;
+    }
+    .roomInformation {
+      padding: 20px;  
+      align-items: center;
+      flex:1;
+      .fixed {
+        position: fixed;
+        .newTopic {
+          font-size: 18px;
+          margin-right: 20px;
+          a {
+            text-decoration: none;
+            @include darker_background_color($base-white);
+            color: $base-black;
+            cursor: pointer;
+            padding: 10px;
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
 }
+

@@ -24,6 +24,7 @@ class Login extends Component {
 
   render() {
     const { fields, errors } = this.props;
+    document.title = "Login"
     return (
       <div>
         <form onSubmit={this.onSubmit} className="form">

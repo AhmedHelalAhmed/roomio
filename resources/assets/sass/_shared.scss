@@ -5,10 +5,11 @@
   align-content: stretch;
   flex-direction: column;
   .sharedTitleSep {
+    position: fixed;
+    width: 100%;
     color: $base-white;
     @include lighter_background_color($body-accent);
     margin-bottom: 15px;
-    height: 100%;
     &::before{
       content: "";
     }
@@ -22,7 +23,7 @@
     }
   }
   .sharedBody {
-      margin: 0 20px 0 20px;
+      margin: 5em 20px 0 20px;
     }
   .sharedContainer {
     padding: 10px;

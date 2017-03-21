@@ -10,6 +10,10 @@ validator.isPassword = (fieldVal) => {
   });
 };
 
+validator.isLower = (fieldVal) => {
+  return validator.isLowercase(fieldVal);
+};
+
 validator.sameAs = (fieldVal, [otherFieldName], allFields) => {
   return fieldVal === allFields[otherFieldName];
 };
@@ -18,6 +22,7 @@ const errorMessages = {
   required: 'This field is required.',
   isEmail: 'This field must be a valid email address.',
   isPassword: 'Password must be over four characters.',
+  isLower: 'Room names must be lowercase.',
   sameAs: 'Passwords must be the same',
 };
 
