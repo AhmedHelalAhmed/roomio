@@ -58,3 +58,17 @@
   }
   
 }
+.nameAndLog {
+  display: flex;
+  align-items: baseline;
+  //justify-content: space-around;
+  padding-right: 10px;
+  cursor: pointer;
+  .logout {
+    @include lighter_color_extra($body-accent);
+    padding-left: 10px;
+    &:hover {
+    color: $base-white;
+  }
+  }
+}

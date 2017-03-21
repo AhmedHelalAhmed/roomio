@@ -6,6 +6,10 @@
     color: lighten($color, 10%);
 }
 
+@mixin lighter_color_extra($color) {
+    color: lighten($color, 20%);
+}
+
 @mixin darker_background_color($color) {
     background-color: darken($color, 10%);
 }

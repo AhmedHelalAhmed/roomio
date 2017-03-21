@@ -60,6 +60,7 @@ class TopicContainer extends Component {
   }
 
   render() {
+    scroll.scrollToBottom();
     const { topics, isLoaded, messages } = this.props;
     const { roomName, topicRef } = this.props.params;
 

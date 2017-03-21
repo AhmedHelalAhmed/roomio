@@ -24,10 +24,13 @@ const Nav = props => (
         </div>
         :
         <div>
+        <div className="nameAndLog">
           <Bookmark 
             to={'/user/'+window.user.username}
             content={window.user.username} 
           />
+          <a className="logout" href="/logout">logout</a>
+          </div>
           <span className="createRoom">
             <Bookmark
               to={'/newroom'}
