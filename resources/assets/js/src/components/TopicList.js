@@ -11,7 +11,13 @@ const TopicItem = ({ topic }) => (
       </Link>
     </span>
     <p>{topic.description}</p>
-    <Link to={`/room/${topic.room_name}/topic/${topic.ref}`}><p>{topic.messages_count} messages</p></Link>
+    <Link to={`/room/${topic.room_name}/topic/${topic.ref}`}>
+    {
+      topic.messages_count != 1 ?
+      <p>{topic.messages_count} messages</p> : 
+      <p>{topic.messages_count} message</p>
+    }
+    </Link>
   </div>
 );
 
