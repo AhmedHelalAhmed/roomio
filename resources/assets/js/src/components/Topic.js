@@ -42,6 +42,12 @@ const Topic = ({ topic, messages, sendMessage, onChange, content }) => (
             type="text" 
             onChange={onChange} 
             value={content} 
+            onKeyPress={(e) => {
+              if(e.key === 'Enter' && !e.shiftKey){
+                e.preventDefault();
+                if (content) sendMessage();
+              } 
+            }}
             autoFocus
           />
           <button type="submit">Send</button>

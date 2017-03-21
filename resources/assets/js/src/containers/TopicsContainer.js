@@ -46,7 +46,7 @@ class TopicContainer extends Component {
   }
 
   sendMessage(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     const { content } = this.state;
     this.props.emit.sendMessage(content);
     this.setState({ content: '' });
@@ -90,7 +90,6 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     initSocketListeners: () => {
       socket.on('topic:new_message', ({ message }) => {
-        console.log(message);
         dispatch(addMessage(message.topic_ref, message));
       });
     },
@@ -118,7 +117,6 @@ const mapDispatchToProps = (dispatch, props) => {
         authGET(`/api/topic/${topicRef}/messages`)
           .then((res) => {
             const { messages, topic } = res.data;
-            console.log(messages);
             dispatch(addTopic(topic));
             dispatch(addMessages(topic.ref, messages.data));
             dispatch(updateActiveTopic(topic.ref));
