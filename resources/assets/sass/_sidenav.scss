@@ -68,7 +68,14 @@
     @include lighter_color_extra($body-accent);
     padding-left: 10px;
     &:hover {
-    color: $base-white;
+      @include lighter_color_medium($body-accent);
   }
+  }
+  @media screen and (max-width: $breakpoint-tablet) {
+    flex-direction: column;
+    .logout {
+      float: left;
+      padding-bottom: 10px;
+    }
   }
 }
