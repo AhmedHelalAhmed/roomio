@@ -83,7 +83,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ConnectedProfileContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ProfileContainer);
 
 export default ConnectedProfileContainer;

@@ -18,15 +18,15 @@ const Room = ({ room, topics }) => (
       </div>
       <div className="roomInformation">
         <div className="fixed">
-        <br />
+          <br />
           <span className="newTopic">
             <Link to={`/newtopic?room=${room.name}`}>
-              + New Topic 
+              + New Topic
             </Link>
           </span>
           <div className="description">
-          <br />
-          <hr className="topicSeperator" />
+            <br />
+            <hr className="topicSeperator" />
             <h2 className="informationHeader">Description</h2>
             <p>{room.description}</p>
           </div>

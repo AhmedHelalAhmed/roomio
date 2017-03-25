@@ -15,7 +15,6 @@ class RoomContainer extends Component {
     if (newRoomName && (newRoomName !== currentRoomName)) {
       const { socket } = nextProps;
       socket.emit('leave_room', { roomName: currentRoomName });
-      console.log('new room');
       this.checkCacheAndFetch(newRoomName);
     }
   }
@@ -47,7 +46,7 @@ class RoomContainer extends Component {
   render() {
     const { rooms, topics, isLoaded } = this.props;
     const { roomName } = this.props.params;
-    
+
     if (isLoaded || rooms[roomName]) {
       return (
         <Room
@@ -72,12 +71,11 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => ({
   startLoading: (roomName) => dispatch(startLoadingRoom(roomName)),
-  fetchRoom: (roomName, onSuccess) => {
+  fetchRoom: (roomName) => {
     return new Promise((resolve, reject) => {
       authGET(`/api/room/${roomName}?with=topics`)
         .then((res) => {
           const { room, topics } = res.data;
-          console.log(topics.data[1]);
           dispatch(addRoom(room));
           dispatch(addTopics(room.name, topics.data));
           dispatch(updateActiveRoom(room.name));

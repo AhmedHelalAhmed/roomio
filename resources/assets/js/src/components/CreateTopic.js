@@ -8,6 +8,7 @@ class CreateTopic extends Component {
   state = { error: null, loading: null };
 
   componentWillMount() {
+    document.title = "Create Topic";
     this.props.setFields({
       room_name: this.props.location.query.room
     });
@@ -18,7 +19,8 @@ class CreateTopic extends Component {
     authPOST(`/api/topic`, { ...this.props.fields })
       .then((res) => {
         const { topic } = res.data;
-       window.location = `/room/${topic.room_name}/topic/${topic.ref}`
+        const path = `/room/${topic.room_name}/topic/${topic.ref}`;
+        browserHistory.push(path);
       })
       .catch((err) => {
         console.log(err.response)
@@ -31,7 +33,6 @@ class CreateTopic extends Component {
 
   render() {
     const { fields, errors } = this.props;
-    document.title = "Create Topic"
     return (
       <div className="outerFormContainer">
         <div className="formContainer">
@@ -78,10 +79,9 @@ class CreateTopic extends Component {
   }
 }
 
-const fields = ['room_name', 'name', 'title', 'description'];
+const fields = ['room_name', 'title', 'description'];
 const rules = {
   room_name: 'required',
-  name: 'required',
   title: 'required',
   description: 'required',
 };

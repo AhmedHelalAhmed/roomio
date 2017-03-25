@@ -5,11 +5,14 @@ import MakeForm from './HOCs/MakeForm';
 import FormError from './reusable/FormError';
 
 class Register extends Component {
+  componentWillMount() {
+    document.title = "Register"
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     axios.post(`/api/register`, { ...this.props.fields })
       .then((res) => {
-        console.log(res);
         window.location = '/';
       })
       .catch((err) => {
@@ -22,7 +25,6 @@ class Register extends Component {
 
   render() {
     const { fields, errors } = this.props;
-    document.title = "Register"
     return (
       <div>
         <form onSubmit={this.onSubmit} className="form" >

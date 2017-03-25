@@ -7,12 +7,17 @@ import FormError from './reusable/FormError';
 class CreateRoom extends Component {
   state = { error: null, loading: null };
 
+  componentWillMount() {
+    document.title = "Create Room";
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     authPOST(`/api/room`, { ...this.props.fields })
       .then((res) => {
         const { room } = res.data;
-        browserHistory.push(`/room/${room.name}`);
+        const path = `/room/${room.name}`;
+        browserHistory.push(path);
       })
       .catch((err) => {
         console.log(err.response)
@@ -25,7 +30,6 @@ class CreateRoom extends Component {
 
   render() {
     const { fields, errors } = this.props;
-    document.title = "Create Room"
     return (
       <div className="outerFormContainer">
         <div className="formContainer">
