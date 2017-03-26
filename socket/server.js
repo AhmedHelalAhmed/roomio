@@ -1,8 +1,11 @@
 const app = require('express')();
 const http = require('http').Server(app);
+const cors = require('cors');
 const io = require('socket.io')(http);
 const events = require('./utils/events');
 const argv = require('minimist')(process.argv.slice(2));
+
+app.use(cors());
 
 /**
  * Socket Controllers
@@ -11,8 +14,11 @@ const connectionController = require('./controllers/connectionController');
 const roomController = require('./controllers/roomController');
 const topicController = require('./controllers/topicController');
 
-process.env.laravelURI = argv.laravelURI || 'http://localhost:8888';
-process.env.socketPort = argv.socketPort || 3000;
+process.env.laravelURI = process.env.laravelURI || 'http://localhost:8888';
+
+app.get('/test', (req, res) => {
+  res.send('hello world');
+});
 
 io.on(events.io.CONNECTION, (socket) => {
   connectionController.connect(io, socket);
@@ -46,7 +52,7 @@ io.on(events.io.CONNECTION, (socket) => {
 
 });
 
-http.listen(process.env.socketPort, () => {
+http.listen(8081, () => {
   console.log(`socket server running on port ${process.env.socketPort}`);
   console.log(`connected to api running at ${process.env.laravelURI}`);
 });

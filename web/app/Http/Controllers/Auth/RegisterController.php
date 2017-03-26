@@ -6,7 +6,6 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Hashids\Hashids;
 
 class RegisterController extends Controller
 {
@@ -63,7 +62,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $hashids = new Hashids(env('APP_NAME'));
         return User::create([
             'username' => $data['username'],
             'email' => $data['email'],

@@ -11,3 +11,7 @@ Homestead.yaml
 /public/js
 webpack.config.js
 /resources/views/index.blade.php
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

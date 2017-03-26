@@ -1,5 +1,6 @@
 // socket server to connect to
-export const SOCKET_SERVER = 'http://localhost:3000';
+// export const SOCKET_SERVER = 'http://localhost:3000';
+export const SOCKET_SERVER = 'http://roomio-socket.us-west-2.elasticbeanstalk.com/';
 
 // socket events
 export const NEW_MESSAGE = 'new_message';
