@@ -20,7 +20,6 @@ class HomeContainer extends Component {
   }
 
   render() {
-    console.table(this.props)
     const { topics, isLoaded } = this.props;
 
     if (isLoaded && topics) {
@@ -43,10 +42,10 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startLoading: (roomName) => dispatch(startLoadingHome()),
-  fetchHomeTopics: (roomName) => {
+  startLoading: () => dispatch(startLoadingHome()),
+  fetchHomeTopics: () => {
     return new Promise((resolve, reject) => {
-      authGET(`/api/topic`)
+      authGET('/api/topic')
         .then((res) => {
           dispatch(addHomeTopics(res.data.topics.data));
           dispatch(stopLoadingHome());

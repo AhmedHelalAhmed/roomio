@@ -24,8 +24,6 @@ const store = createStore(
   applyMiddleware(thunk),
 );
 
-console.log(store.getState());
-
 const render = (Component) => {
   ReactDOM.render(
     <AppContainer>
@@ -40,8 +38,10 @@ const render = (Component) => {
 render(Routes);
 
 // for hot module replacement, needs to point to the root file. (for recursive bundling)
-if (module.hot) {
-  module.hot.accept('./src/Routes', () => {
-    render(Routes);
-  });
+if (process.env.NODE_ENV === 'dev') {
+  if (module.hot) {
+    module.hot.accept('./src/Routes', () => {
+      render(Routes);
+    });
+  }
 }

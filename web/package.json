@@ -3,9 +3,10 @@
   "description": "Messenger App",
   "main": "index.js",
   "scripts": {
-    "start-webpack": "webpack-dev-server",
+    "start-webpack": "webpack-dev-server --config webpack.dev.config.js",
     "start-socket": "nodemon ../socket/server.js --laravelURI http://localhost:8888 --socketPort 3000",
     "start-php": "php artisan serve --port 8888",
+    "start-webpack-production": "webpack --config webpack.prod.config.js -p --optimize-minimize",
     "start-all": "npm-run-all --parallel start-socket start-webpack start-php"
   },
   "author": "Tyler Bainbridge, Alex Cushing, James Erardi",
@@ -25,7 +26,7 @@
     "postcss-loader": "^0.9.1",
     "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.13.1",
-    "webpack": "^2.1.0-beta.25",
+    "webpack": "^2.3.2",
     "webpack-dev-server": "^2.1.0-beta.0"
   },
   "dependencies": {

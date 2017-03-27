@@ -66,7 +66,6 @@ const mapDispatchToProps = dispatch => ({
       authGET(`/api/user/${userName}/profile`)
         .then((res) => {
           const { user } = res.data;
-          console.table(user)
           dispatch(addProfile(user));
           dispatch(updateActiveProfile(userName));
           dispatch(stopLoadingProfile(userName));

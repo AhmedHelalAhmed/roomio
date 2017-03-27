@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Chat from './Chat';
 
 const Topic = (props) => (
@@ -14,6 +15,8 @@ const Topic = (props) => (
           </span>
         <h3>Description</h3>
         <p>{props.topic.description}</p>
+        <h4>Room</h4>
+        <Link to={`/room/${props.topic.room_name}`}>{props.topic.room_name}</Link>
       </div>
     </div>
       <Chat {...props} />

@@ -86,12 +86,7 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_HOME_TOPICS:
       return Object.assign({}, state, {
         homeTopics: [
-          ...orderBy(
-            uniqBy([
-              ...state.homeTopics,
-              ...payload.topics
-            ], 'ref'),
-            ['created_at'], ['desc']),
+          ...payload.topics,
         ],
       });
     case ADD_MULTIPLE_MESSAGES:
