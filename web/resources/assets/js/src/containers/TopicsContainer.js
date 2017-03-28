@@ -62,9 +62,17 @@ class TopicContainer extends Component {
 
       if (!newMessage.seen && windowState === 'hidden') {
         const topic = find(topics[roomName], { ref: topicRef });
-
         this.setState({
           unseenMessages: this.state.unseenMessages + 1,
+        });
+
+        Push.create(`${newMessage.user.username} said: `, {
+          body: newMessage.content || ' ',
+          timeout: 5000,
+          icon: {
+            x16: 'http://i.imgur.com/X9LSYcX.png',
+            x32: 'http://i.imgur.com/X9LSYcX.png',
+          },
         });
       }
     }
@@ -136,16 +144,6 @@ const mapDispatchToProps = (dispatch, props) => {
       socket.on('topic:new_message', ({ message }) => {
         scroll.scrollToBottom();
         dispatch(addMessage(message.topic_ref, message));
-
-        Push.create(`${message.user.username} said: `, {
-          body: message.content || ' ',
-          timeout: 5000,
-           icon: {
-            x16: 'http://i.imgur.com/X9LSYcX.png',
-            x32: 'http://i.imgur.com/X9LSYcX.png',
-          },
-        });
-
       });
     },
     emit: {
