@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
-import Chat from './Chat';
+import MessageList from './MessageList';
 
 const Topic = (props) => (
   <div className="messenger">
@@ -19,7 +19,7 @@ const Topic = (props) => (
         <Link to={`/room/${props.topic.room_name}`}>{props.topic.room_name}</Link>
       </div>
     </div>
-      <Chat {...props} />
+      <MessageList {...props} />
     </div>
   </div>
 );

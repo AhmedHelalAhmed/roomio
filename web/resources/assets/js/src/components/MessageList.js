@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-// import 'draft-js/dist/Draft.css';
+import Message from './Message.js';
 import { Editor, RichUtils } from 'draft-js';
 
-class Chat extends Component {
-  render() {
-    const { topic, messages, sendMessage, onChange, content } = this.props;
 
-    return (
-      <div>
+class MessageList extends Component {
+  render() {
+     const { topic, messages, sendMessage, onChange, content } = this.props;
+     return (
+              <div>
         <div className="fortopic">
           {messages ?
             messages.map((message, key) => {
@@ -17,11 +17,7 @@ class Chat extends Component {
               return (
                 <p className="chatBubble" key={key}>
                   {   notFirst && messages[key - 1].user.username !== message.user.username ?
-                      <strong className="user">
-                        <Link to={'/user/' + message.user.username}>
-                          {message.user.username}:
-                        </Link>
-                      </strong> : null
+                      <Message message={message} ky={key} /> : null
                   }
                   <span
                     dangerouslySetInnerHTML={{
@@ -63,8 +59,8 @@ class Chat extends Component {
             </span>
         }
       </div>
-    );
-  }
+     );
+    }
 }
 
-export default Chat;
+export default MessageList;
