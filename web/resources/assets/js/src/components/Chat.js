@@ -12,13 +12,17 @@ class Chat extends Component {
         <div className="fortopic">
           {messages ?
             messages.map((message, key) => {
+              const notFirst = key !== 0;
+              
               return (
                 <p className="chatBubble" key={key}>
-                <strong className="user">
-                  <Link to={'/user/' + message.user.username}>
-                    {message.user.username}:
-                  </Link>
-                </strong>
+                  {   notFirst && messages[key - 1].user.username !== message.user.username ?
+                      <strong className="user">
+                        <Link to={'/user/' + message.user.username}>
+                          {message.user.username}:
+                        </Link>
+                      </strong> : null
+                  }
                   <span
                     dangerouslySetInnerHTML={{
                       __html: message.content

@@ -86,11 +86,12 @@ class TopicContainer extends Component {
   updateTitle() {
     const { windowState, topics, params: { topicRef, roomName } } = this.props;
     const topic = find(topics[roomName], { ref: topicRef });
+
     if (this.state.unseenMessages > 0 && windowState === 'hidden' && topic) {
       const title = `(${this.state.unseenMessages}) - ${topic.room.title} - ${topic.title}`
       document.title = title;
     } else if (topic) {
-      document.title = `${topic.room.title} - ${topic.title}`;
+      document.title = `${topic.room_name} - ${topic.title}`;
     }
   }
 
@@ -180,7 +181,7 @@ const mapDispatchToProps = (dispatch, props) => {
             dispatch(addMessages(topic.ref, messages.data));
             dispatch(updateActiveTopic(topic.ref));
             dispatch(stopLoadingTopic(params.topicRef));
-            document.title = `${topic.room.title} - ${topic.title}`;
+            document.title = `${topic.room_name} - ${topic.title}`;
             resolve();
           })
           .catch((err) => {
