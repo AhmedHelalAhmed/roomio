@@ -41,17 +41,17 @@ class RoomController extends Controller {
 
         $res['room'] = $room;          
 
+        if ($room == null) {
+            return Response::json([
+              'error' => 'No room with this name.'
+            ], 404);
+        }
+
         if (Input::get("with") == 'topics') {
           $res['topics'] = Topic::where('room_name', $room->name)
                             ->with('user')
                             ->withCount('messages')
                             ->paginate(20);
-        }
-
-        if ($room == null) {
-            return Response::json([
-              'error' => 'No room with this name.'
-            ], 404);
         }
 
         return Response::json($res, 200);

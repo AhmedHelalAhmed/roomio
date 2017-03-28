@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import validator from 'validator';
 import { validateField, validateForm } from '../../shared/utils/validation';
 
 const MakeForm = (fields, validationRules) => (Form) => {
@@ -68,6 +69,13 @@ const MakeForm = (fields, validationRules) => (Form) => {
         }
       });
     }
+    
+    getEscapedFields = (fields = this.state.fields) => {
+      return Object.keys(fields).reduce((prev, curr) => {
+        prev[curr] = validator.stripLow(fields[curr]);
+        return prev;
+      }, {});
+    }
 
     render() {
       return (
@@ -79,6 +87,7 @@ const MakeForm = (fields, validationRules) => (Form) => {
           validateForm={this.validateForm}
           createErrorsFromResponse={this.createErrorsFromResponse}
           setFields={this.setFields}
+          getEscapedFields={this.getEscapedFields}
         />
       );
     }

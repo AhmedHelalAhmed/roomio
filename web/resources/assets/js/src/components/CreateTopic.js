@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import validator from 'validator';
 import { Link, browserHistory } from 'react-router';
 import { authPOST } from '../shared/utils/authAxios';
 import MakeForm from './HOCs/MakeForm';
@@ -15,8 +16,9 @@ class CreateTopic extends Component {
   }
 
   onSubmit = (e) => {
+    const { fields } = this.props;
     e.preventDefault();
-    authPOST(`/api/topic`, { ...this.props.fields })
+    authPOST(`/api/topic`, this.props.getEscapedFields())
       .then((res) => {
         const { topic } = res.data;
         const path = `/room/${topic.room_name}/topic/${topic.ref}`;

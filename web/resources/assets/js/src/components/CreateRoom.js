@@ -9,11 +9,14 @@ class CreateRoom extends Component {
 
   componentWillMount() {
     document.title = "Create Room";
+    this.props.setFields({
+      name: this.props.location.query.roomName
+    });
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    authPOST(`/api/room`, { ...this.props.fields })
+    authPOST(`/api/room`, this.props.getEscapedFields())
       .then((res) => {
         const { room } = res.data;
         const path = `/room/${room.name}`;

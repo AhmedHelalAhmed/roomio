@@ -1,4 +1,6 @@
 import { uniqBy, orderBy } from 'lodash';
+import validator from 'validator';
+
 //  Actions
 const ADD_ROOM   = 'entities/ADD';
 const ADD_PROFILE   = 'entities/ADD_PROFILE';

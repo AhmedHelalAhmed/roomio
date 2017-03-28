@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Push from 'push.js';
+import validator from 'validator';
 import { connect } from 'react-redux';
 import Scroll, { scrollToBottom } from 'react-scroll';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
@@ -45,6 +46,10 @@ class TopicContainer extends Component {
   }
 
   componentDidMount() {
+    scroll.scrollToBottom();
+  }
+
+  componentDidUpdate() {
     scroll.scrollToBottom();
   }
 
@@ -97,7 +102,7 @@ class TopicContainer extends Component {
   sendMessage = (event) => {
     if (event) event.preventDefault();
     const { content } = this.state;
-    this.props.emit.sendMessage(content);
+    this.props.emit.sendMessage(validator.escape(content));
     this.setState({ content: '' });
     scroll.scrollToBottom();
   }
@@ -142,8 +147,8 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     initSocketListeners: () => {
       socket.on('topic:new_message', ({ message }) => {
-        scroll.scrollToBottom();
         dispatch(addMessage(message.topic_ref, message));
+        scroll.scrollToBottom();
       });
     },
     emit: {

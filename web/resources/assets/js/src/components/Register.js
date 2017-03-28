@@ -11,7 +11,7 @@ class Register extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/api/register`, { ...this.props.fields })
+    axios.post(`/api/register`, this.props.getEscapedFields())
       .then((res) => {
         window.location = '/';
       })

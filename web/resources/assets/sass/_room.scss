@@ -1,3 +1,9 @@
+.room404 {
+  margin: 0 auto;
+  width: 500px;
+}
+
+
 .sharedContainer {
   .sharedTitleSep {
     @include darker_background_color($base-white);
@@ -88,4 +94,3 @@
     }
   }
 }
-

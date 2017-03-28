@@ -9,7 +9,7 @@ class Login extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    axios.post(`/api/login`, { ...this.props.fields })
+    axios.post(`/api/login`, this.props.getEscapedFields())
       .then(() => {
         window.location = '/';
       })

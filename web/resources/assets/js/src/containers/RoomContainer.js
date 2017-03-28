@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
 import { updateActiveRoom } from '../redux/ducks/activeDucks';
@@ -8,6 +9,7 @@ import Room from '../components/Room';
 import Loading from '../components/reusable/Loading';
 
 class RoomContainer extends Component {
+  state = { error: false };
 
   componentWillReceiveProps(nextProps) {
     const newRoomName = nextProps.params.roomName;
@@ -35,7 +37,10 @@ class RoomContainer extends Component {
     this.props.fetchRoom(roomName)
       .then(() => {
         socket.emit('join_room', { roomName });
-      }).catch((err) => console.log(err));
+      }).catch((err) => {
+        console.log(err.response);
+        // this.setState({ error: err.response.data.error });
+      });
   }
 
   componentWillUnmount() {
@@ -47,7 +52,19 @@ class RoomContainer extends Component {
     const { rooms, topics, isLoaded } = this.props;
     const { roomName } = this.props.params;
 
-    if (isLoaded || rooms[roomName]) {
+    if (isLoaded && !rooms[roomName]) {
+      return (
+        <div className="room404">
+          <h1>
+            {roomName} is not a room yet.
+          </h1>
+          <br />
+          <Link to={`/newroom?roomName=${roomName}`}>Create it!</Link>
+        </div>
+      );
+    }
+
+    if (isLoaded) {
       return (
         <Room
           room={rooms[roomName]}
