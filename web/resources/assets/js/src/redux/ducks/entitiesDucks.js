@@ -7,6 +7,7 @@ const ADD_MULTIPLE_TOPICS = 'entities/ADD_MULTIPLE_TOPICS';
 const ADD_HOME_TOPICS = 'enitities/ADD_HOME_TOPICS';
 const ADD_MULTIPLE_MESSAGES = 'entities/ADD_MULTIPLE_MESSAGES';
 const ADD_MESSAGE   = 'entities/ADD_MESSAGE';
+const VIEW_ALL_MESSAGES = 'entities/VIEW_ALL_MESSAGES';
 
 //  Initial State
 const initialState = {
@@ -37,7 +38,7 @@ export default function reducer(state = initialState, action = {}) {
       return Object.assign({}, state, {
         profiles: {
           ...state.profiles,
-          [payload.profile.username]: payload.profile
+          [payload.profile.username]: payload.profile,
         },
       });
     case ADD_TOPIC:
@@ -48,7 +49,7 @@ export default function reducer(state = initialState, action = {}) {
             ...orderBy(
               uniqBy([
                 ...(state.topics[payload.topic.room_name] || []),
-                payload.topic
+                payload.topic,
               ], 'ref'),
               ['created_at'], ['desc']),
           ],
@@ -58,18 +59,29 @@ export default function reducer(state = initialState, action = {}) {
       return Object.assign({}, state, {
         messages: {
           ...state.messages,
-            [payload.topicRef]: [
+          [payload.topicRef]: [
             ...orderBy(
               uniqBy([
                 ...(state.messages[payload.topicRef] || []),
-                payload.message
+                payload.message,
               ], 'id'),
-              ['created_at'], ['asc']),
+            ['created_at'], ['asc']),
           ],
-        }
+        },
+      });
+    case VIEW_ALL_MESSAGES:
+      return Object.assign({}, state, {
+        messages: {
+          ...state.messages,
+          [payload.topicRef]: [
+            ...state.messages[payload.topicRef].map((message) => {
+              message.seen = true;
+              return message;
+            }),
+          ],
+        },
       });
     case ADD_MULTIPLE_TOPICS:
-      console.log(payload.roomName);
       return Object.assign({}, state, {
         topics: {
           ...state.topics,
@@ -77,7 +89,7 @@ export default function reducer(state = initialState, action = {}) {
             ...orderBy(
               uniqBy([
                 ...state.topics[payload.roomName],
-                ...payload.topics
+                ...payload.topics,
               ], 'ref'),
               ['created_at'], ['desc']),
           ],
@@ -97,7 +109,7 @@ export default function reducer(state = initialState, action = {}) {
             ...orderBy(
               uniqBy([
                 ...(state.topics[payload.topicRef] || []),
-                ...payload.messages
+                ...payload.messages,
               ], 'id'),
               ['created_at'], ['asc']),
           ],
@@ -134,5 +146,21 @@ export const addMessages = (topicRef, messages = []) => {
 };
 
 export const addMessage = (topicRef, message = {}) => {
-  return { type: ADD_MESSAGE, payload: { topicRef, message } };
+  return (dispatch, getState) => {
+    const { active } = getState();
+    dispatch({
+      type: ADD_MESSAGE,
+      payload: {
+        topicRef,
+        message: Object.assign({}, message, {
+          seen: active.window === 'visable',
+        }),
+      },
+    });
+  };
 };
+
+export const viewAllMessages = topicRef => ({
+  type: VIEW_ALL_MESSAGES,
+  payload: { topicRef },
+});

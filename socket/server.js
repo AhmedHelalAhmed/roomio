@@ -53,6 +53,6 @@ io.on(events.io.CONNECTION, (socket) => {
 });
 
 http.listen(8081, () => {
-  console.log(`socket server running on port ${process.env.socketPort}`);
+  console.log(`socket server running on port ${8081}`);
   console.log(`connected to api running at ${process.env.laravelURI}`);
 });

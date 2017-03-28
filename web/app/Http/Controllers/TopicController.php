@@ -49,6 +49,7 @@ class TopicController extends Controller {
 
         $messages = Message::with(['user'])
                     ->where('topic_ref', $topicRef)
+                    ->orderBy('created_at', 'DESC')
                     ->paginate(20);
 
         if ($topic == null) {

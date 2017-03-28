@@ -39,7 +39,10 @@ module.exports = {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+        SOCKET: JSON.stringify('http://roomio-socket.us-west-2.elasticbeanstalk.com'),
+      },
     }),
   ],
 };
