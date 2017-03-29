@@ -28,11 +28,7 @@ class MessageList extends Component {
               return (
                 <p className="chatBubble" key={key}>
                   {   isFirst || messages[key - 1].user.username !== message.user.username ?
-                      <strong className="user">
-                        <Link to={'/user/' + message.user.username}>
-                          {message.user.username}:
-                        </Link>
-                      </strong> : null
+                      <Message message={message} ky={key} /> : null
                   }
                   <span
                     style={{ whiteSpace: 'pre-wrap' }}
