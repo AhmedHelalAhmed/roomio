@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-// import 'draft-js/dist/Draft.css';
-import { Editor, RichUtils } from 'draft-js';
+import showdown from 'showdown';
 
 class Chat extends Component {
+
+  componentWillMount() {
+    this.converter = new showdown.Converter({
+      simplifiedAutoLink: true,
+      excludeTrailingPunctuationFromURLs: true,
+      omitExtraWLInCodeBlocks: true,
+      strikethrough: true,
+    });
+  }
+
   render() {
     const { topic, messages, sendMessage, onChange, content } = this.props;
 
@@ -12,11 +21,12 @@ class Chat extends Component {
         <div className="fortopic">
           {messages ?
             messages.map((message, key) => {
-              const notFirst = key !== 0;
-              
+              const isFirst = key === 0;
+              const html = this.converter.makeHtml(message.content);
+
               return (
                 <p className="chatBubble" key={key}>
-                  {   notFirst && messages[key - 1].user.username !== message.user.username ?
+                  {   isFirst || messages[key - 1].user.username !== message.user.username ?
                       <strong className="user">
                         <Link to={'/user/' + message.user.username}>
                           {message.user.username}:
@@ -24,9 +34,8 @@ class Chat extends Component {
                       </strong> : null
                   }
                   <span
-                    dangerouslySetInnerHTML={{
-                      __html: message.content
-                    }}
+                    style={{ whiteSpace: 'pre-wrap' }}
+                    dangerouslySetInnerHTML={{ __html: html }}
                   />
                 </p>
               );
