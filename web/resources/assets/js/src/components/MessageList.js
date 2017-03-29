@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import Message from './Message.js';
 import showdown from 'showdown';
 
-class Chat extends Component {
+class MessageList extends Component {
 
   componentWillMount() {
     this.converter = new showdown.Converter({
@@ -76,4 +77,4 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+export default MessageList;
