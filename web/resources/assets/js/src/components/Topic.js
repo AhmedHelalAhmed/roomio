@@ -5,19 +5,17 @@ import MessageList from './MessageList';
 const Topic = (props) => (
   <div className="messenger">
   <div className ="sharedContainer">
-    <div className="sharedTitleSep">
-    </div>
-    <div className="topicInformationCont">
-      <div className="topicInformation">
-        <span className="topicTitle" >
-          <h3>Title</h3>
-          <p>{props.topic.room_name}/{props.topic.title}</p>
-          </span>
-        <h3>Description</h3>
-        <p>{props.topic.description}</p>
-        <h4>Room</h4>
-        <Link to={`/room/${props.topic.room_name}`}>{props.topic.room_name}</Link>
-      </div>
+    <div className="sharedTitleSep topicSep">
+      <h1>
+        <span>
+          <Link 
+            to={`/room/${props.topic.room_name}`}
+            className="return"
+          >
+            {props.topic.room_name}
+          </Link> - {props.topic.title}
+        </span>
+      </h1>
     </div>
       <MessageList {...props} />
     </div>

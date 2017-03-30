@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Message from './Message.js';
 import showdown from 'showdown';
+import FontAwesome from 'react-fontawesome';
+import { Element } from 'react-scroll';
 
 class MessageList extends Component {
 
@@ -18,8 +20,8 @@ class MessageList extends Component {
     const { topic, messages, sendMessage, onChange, content } = this.props;
 
     return (
-      <div>
-        <div className="fortopic">
+      <div className="outerChat">
+        <div className="fortopic" id="fortopic">
           {messages ?
             messages.map((message, key) => {
               const isFirst = key === 0;
@@ -38,15 +40,16 @@ class MessageList extends Component {
               );
             }) : null
           }
+          <Element name="anchor" className="anchor" />
         </div>
+        <div className="bottomChat">
         {
           window.user ?
-            <div>
+            <div className="topicOuterMessenger">
               <span className="topicMessenger">
                 <form onSubmit={sendMessage}>
                   <textarea
-                    cols="40"
-                    rows="5"
+                    placeholder="Write your message"
                     type="text"
                     onChange={onChange}
                     value={content}
@@ -58,7 +61,9 @@ class MessageList extends Component {
                     }}
                     autoFocus
                   />
-                  <button type="submit">Send</button>
+                  <button type="submit">
+                    <FontAwesome name="paper-plane-o" />
+                  </button>
                 </form>
               </span>
             </div> :
@@ -68,6 +73,7 @@ class MessageList extends Component {
               </p>
             </span>
         }
+        </div>
       </div>
     );
   }

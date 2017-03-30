@@ -2,15 +2,24 @@ import React, { Component, PropTypes } from 'react';
 import Push from 'push.js';
 import validator from 'validator';
 import { connect } from 'react-redux';
-import Scroll, { scrollToBottom } from 'react-scroll';
+import Scroll, { scroller, scrollToBottom } from 'react-scroll';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
 import { addTopic, addMessages, addMessage, viewAllMessages } from '../redux/ducks/entitiesDucks';
 import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import find from 'lodash/find';
 import Loading from '../components/reusable/Loading';
-
+import scrollToComponent from 'react-scroll-to-component';
 const scroll = Scroll.animateScroll;
+
+const scrollBottom = () => {
+    scroll.scrollToBottom({
+      containerId: 'fortopic',
+      smooth: false,
+      duration: 0,
+      delay: 0
+    });
+}
 
 /**
  * Components
@@ -46,11 +55,12 @@ class TopicContainer extends Component {
   }
 
   componentDidMount() {
-    scroll.scrollToBottom();
+    scrollBottom();
+
   }
 
   componentDidUpdate() {
-    scroll.scrollToBottom();
+    scrollBottom();
   }
 
   componentWillUnmount() {
@@ -105,7 +115,7 @@ class TopicContainer extends Component {
     const { content } = this.state;
     this.props.emit.sendMessage(validator.escape(content));
     this.setState({ content: '' });
-    scroll.scrollToBottom();
+    scrollBottom();
   }
 
   render() {
@@ -149,7 +159,8 @@ const mapDispatchToProps = (dispatch, props) => {
     initSocketListeners: () => {
       socket.on('topic:new_message', ({ message }) => {
         dispatch(addMessage(message.topic_ref, message));
-        scroll.scrollToBottom();
+        //scroll.scrollToBottom();
+        scrollBottom();
       });
     },
     emit: {

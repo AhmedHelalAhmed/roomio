@@ -7,7 +7,7 @@ const Profile = ({ username, profile }) => {
       <div className="sharedTitleSep usernameOuter">
         <h1 className="username">{username}</h1>
       </div>
-      <div className="profileBody spaceAround">
+      <div className="sharedBody spaceAround">
 
         <ul className="roomsList flexSplit">
         {
