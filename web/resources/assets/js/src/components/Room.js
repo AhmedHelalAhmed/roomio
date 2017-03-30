@@ -25,7 +25,7 @@ const Room = ({ room, topics }) => (
             </Link>
           </span>
           <div className="description">
-            <br />
+            <br className="break" />
             <hr className="topicSeperator" />
             <h2 className="informationHeader">Description</h2>
             <p>{room.description}</p>
