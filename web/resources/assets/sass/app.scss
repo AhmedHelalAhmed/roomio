@@ -67,6 +67,15 @@ body {
 .ReactModal__Content--after-open {
   box-shadow: $shadow;
   animation: .3s fadeIn ease-in-out;
+  max-height: 600px;
+  overflow-y: auto;
+  h2 {
+    color: $body-accent;
+  }
+  p {
+    @include darker_background_color($base-white);
+    padding: 10px;
+  }
 }
 
 
