@@ -170,3 +170,7 @@
     cursor: pointer;
   }
 }
+
+img {
+  @include image_size(400px);
+}
