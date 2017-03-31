@@ -51,3 +51,12 @@
     }
   }
 }
+
+.fixedBody {
+  height: calc(100vh-80px) !important;
+  overflow-y: auto;
+}
+
+.limit {
+  max-height: 100vh;
+}

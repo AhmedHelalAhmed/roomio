@@ -3,7 +3,7 @@ import TopicList from './TopicList';
 import { Link } from 'react-router';
 
 const Room = ({ room, topics }) => (
-  <div className="sharedContainer">
+  <div className="sharedContainer limit">
     <div className="sharedTitleSep">
       <h1>
         <span>
@@ -11,7 +11,7 @@ const Room = ({ room, topics }) => (
         </span>
       </h1>
     </div>
-    <div className="sharedBody sidebyside">
+    <div className="sharedBody sidebyside fixedBody">
       <div className="topicsFlex">
         <h3>Topics</h3>
         <TopicList topics={topics} name={room.name} />
