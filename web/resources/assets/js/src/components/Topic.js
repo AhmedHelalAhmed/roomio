@@ -34,38 +34,44 @@ class Topic extends Component {
         <div className="messenger">
         <div className ="sharedContainer">
           <div className="sharedTitleSep topicSep">
-            <h1>
-              <span className='flexTitle'>
-                <Link 
-                  to={`/room/${this.props.topic.room_name}`}
-                  className="return"
-                >
-                  {this.props.topic.room_name}
-                </Link>
+            <div className="farRightBtn">
+              <div className="flexTopTopic">
+              <div className="flexTopTopicRight">
                 <FontAwesome
                  className='info' 
                  name='info-circle'
                  onClick={this.onClick}
-                /> 
-                <span>{this.props.topic.title}</span>
-              </span>
-            </h1>
-          </div>
-          {
-                  this.state.modalIsOpen ? 
-                    <Modal
-                    isOpen={this.state.modalIsOpen}
-                    onRequestClose={this.closeModal}
-                    style={customStyles}
-                    contentLabel="Example Modal"
+                />
+              </div>
+                <div className="leftTopTopic">
+                  <Link 
+                    to={`/room/${this.props.topic.room_name}`}
+                    className="return"
                   >
-
-                  <FontAwesome name="times" className='closeModal' onClick={this.closeModal} />
-                  <h2 ref="subtitle">{this.props.topic.title}</h2>
-                  <h3 ref="subtitle">Description: </h3>
-                  <p>{this.props.topic.description}</p>
-                </Modal> : null
-                }
+                    {this.props.topic.room_name}
+                  </Link>
+                </div>
+                <div className="rightTopTopic">
+                  <span>{ this.props.topic.title }</span>
+                </div>
+              </div>
+            </div>
+          </div>
+            {
+              this.state.modalIsOpen ? 
+                <Modal
+                isOpen={this.state.modalIsOpen}
+                onRequestClose={this.closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+              >
+              <FontAwesome name="times" className='closeModal' onClick={this.closeModal} />
+              <h2 ref="subtitle">{this.props.topic.title}</h2>
+              <h3 ref="subtitle">Description: </h3>
+              <p>{this.props.topic.description}</p>
+            </Modal> : null
+          }
+          
             <MessageList {...this.props} />
           </div>
         </div>

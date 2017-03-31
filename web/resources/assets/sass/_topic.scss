@@ -228,22 +228,54 @@
     }
 }
 
-.info {
-  font-size: 20px;
-  text-justify: right;
-  cursor: pointer;
-  span {
-  text-justify: right;
-    
-  }
-}
 
 .closeModal{
   float: right;
   cursor: pointer;
 }
 
-.flexTitle {
-  display: flex !important;
+.inTtopicDesc {
+  max-width: 90%;
+  overflow-x: hidden;
+  text-overflow: ellipses;
+  font-size: 25px;
+  padding: 0;
+}
+
+.farRightBtn{
+  margin: 0;
+  height: 75px;
+  display: flex;
+  width: 85vw;
   flex: 1;
+  .flexTopTopic {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 90%;
+    flex:1;
+    .leftTopTopic {
+      display: block;
+      font-size: 2em;
+      margin-left: 10px;
+      font-weight: bold;
+      flex-basis: 0;
+    }
+    .rightTopTopic {
+      flex-grow: 1;
+      flex-basis: 0;
+      font-size: 1.2em;
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  .flexTopTopicRight {
+    text-align: center;
+    display: flex;
+    color: $body-accent;
+    cursor: pointer;
+  }
 }

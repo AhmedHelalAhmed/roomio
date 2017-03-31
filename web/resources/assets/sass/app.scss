@@ -24,6 +24,26 @@ body {
   margin: 0;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
 
 .app-container {
   display: flex;
@@ -41,6 +61,12 @@ body {
   margin: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
+}
+
+//modal
+.ReactModal__Content--after-open {
+  box-shadow: $shadow;
+  animation: .3s fadeIn ease-in-out;
 }
 
 
