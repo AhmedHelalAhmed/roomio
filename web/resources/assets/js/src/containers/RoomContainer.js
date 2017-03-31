@@ -54,12 +54,12 @@ class RoomContainer extends Component {
 
     if (isLoaded && !rooms[roomName]) {
       return (
-        <div className="room404">
-          <h1>
+        <div className="room404 none">
+          <div className="noneinner">
             {roomName} is not a room yet.
-          </h1>
-          <br />
-          <Link to={`/newroom?roomName=${roomName}`}>Create it!</Link>
+          </div>
+          <div className="noneinner createNewTopic"><Link to={`/newroom?roomName=${roomName}`}>Create it!</Link>
+          </div>
         </div>
       );
     }
