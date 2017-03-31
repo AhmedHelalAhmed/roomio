@@ -16,11 +16,18 @@
     }
     span{
       padding-left: 20px;
+      align-items: center;
+      display: flex;
     }
     h1{
       white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
+      span {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      padding-right: 10px;
+      }
     }
   }
   .sharedBody {

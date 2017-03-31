@@ -227,3 +227,23 @@
       }
     }
 }
+
+.info {
+  font-size: 20px;
+  text-justify: right;
+  cursor: pointer;
+  span {
+  text-justify: right;
+    
+  }
+}
+
+.closeModal{
+  float: right;
+  cursor: pointer;
+}
+
+.flexTitle {
+  display: flex !important;
+  flex: 1;
+}
