@@ -6,7 +6,7 @@ const TopicItem = ({ topic }) => {
   return (
       <div className="topic">
         <Link to={`/room/${topic.room_name}/topic/${topic.ref}`}><h2>{topic.title}</h2></Link>
-        <p>{topic.description}</p>
+        <p><Link to={`/room/${topic.room_name}`}>{topic.room_name}</Link> - {topic.description}</p>
         <div className="commentsAndUser">
           <Link to={`/room/${topic.room_name}/topic/${topic.ref}`}>
           {
