@@ -3,7 +3,7 @@ import TopicList from './TopicList';
 
 const Home = ({ topics }) => (
   <div>
-    <div className="sharedContainer">
+    <div className="sharedContainer limit">
       <div className="sharedTitleSep">
         <h1>
           <span>
@@ -11,7 +11,7 @@ const Home = ({ topics }) => (
           </span>
         </h1>
       </div>
-      <div className="sharedBody">
+      <div className="sharedBody fixedBody">
         <TopicList topics={topics} />
       </div>
     </div>
