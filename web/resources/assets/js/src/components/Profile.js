@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Profile = ({ username, profile }) => {
   return (
     <div className="sharedContainer limit">
-      <div className="sharedTitleSep usernameOuter">
+      <div className="sharedTitleSep userLeft">
         <h1 className="username">{username}</h1>
       </div>
       <div className="sharedBody spaceAround fixedBody">
