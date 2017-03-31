@@ -5,8 +5,11 @@
 
 
 .sharedContainer {
-  height: 100vh;
+  //height: 100vh;
   .topic{
+    p {
+      margin: 5px;
+    }
     @media screen and (max-width: $breakpoint-tablet) {
       display: block;
     }
@@ -119,7 +122,7 @@
       .fixed {
         padding-left: 20px;
         padding-right: 20px;
-        position: fixed;
+        //position: fixed;
         .newTopic {
           font-size: 18px;
           margin-right: 20px;
@@ -152,5 +155,38 @@
       overflow-x: hidden;
       max-width: 200px;
     }
+  }
+}
+
+.subBy {
+  font-size: 13px;
+  color: $text-color;
+  margin-left: 15px;
+}
+
+.commentsAndUser {
+  display: flex;
+  align-items: center;
+}
+
+.none {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex:1;
+  .noneinner{
+    font-size: 3em;
+    text-align: center;
+    color: $border-color;
+  }
+  .createNewTopic{
+    a {
+    color: $border-color;
+      
+    }
+    font-size: 1.5em;
+    line-height: 2.5em;
+    text-decoration: underline;
   }
 }

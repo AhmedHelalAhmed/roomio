@@ -10,7 +10,7 @@ const customStyles = {
     left                  : '50%',
     right                 : 'auto',
     bottom                : 'auto',
-    width                 : '300px',
+    width                 : '400px',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
   }
@@ -67,7 +67,7 @@ class Topic extends Component {
               >
               <FontAwesome name="times" className='closeModal' onClick={this.closeModal} />
               <h2 ref="subtitle">{this.props.topic.title}</h2>
-              <h3 ref="subtitle">Description: </h3>
+              <h4 ref="subtitle">Description</h4>
               <p>{this.props.topic.description}</p>
             </Modal> : null
           }

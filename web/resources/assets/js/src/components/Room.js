@@ -14,7 +14,7 @@ const Room = ({ room, topics }) => (
     <div className="sharedBody sidebyside">
       <div className="topicsFlex">
         <h3>Topics</h3>
-        <TopicList topics={topics} />
+        <TopicList topics={topics} name={room.name} />
       </div>
       <div className="roomInformation">
         <div className="fixed">
