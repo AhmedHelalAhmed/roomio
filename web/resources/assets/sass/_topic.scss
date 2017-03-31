@@ -138,6 +138,7 @@
   .flexTopTopic {
     align-items: center;
     display: flex;
+    overflow-x: hidden;
     flex-grow: 1;
     flex-basis: 90%;
     flex:1;
