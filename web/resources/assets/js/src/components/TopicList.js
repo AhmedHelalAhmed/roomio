@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Waypoint from 'react-waypoint';
+import Delete from './Delete';
 
 const TopicItem = ({ topic }) => {
   return (
@@ -20,6 +21,7 @@ const TopicItem = ({ topic }) => {
               {topic.user ? topic.user.username : ''}
             </Link>
           </span>
+          { window.user.username == topic.user.username ? <Delete /> : ''}
         </div>
         
       </div>
