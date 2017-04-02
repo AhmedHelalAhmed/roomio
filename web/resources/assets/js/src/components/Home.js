@@ -1,7 +1,7 @@
 import React from 'react';
 import TopicList from './TopicList';
 
-const Home = ({ topics }) => (
+const Home = props => (
   <div>
     <div className="sharedContainer limit">
       <div className="sharedTitleSep">
@@ -12,7 +12,7 @@ const Home = ({ topics }) => (
         </h1>
       </div>
       <div className="sharedBody fixedBody">
-        <TopicList topics={topics} />
+        <TopicList {...props} />
       </div>
     </div>
   </div>

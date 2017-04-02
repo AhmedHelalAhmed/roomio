@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
-import Message from './Message.js';
 import showdown from 'showdown';
-import FontAwesome from 'react-fontawesome';
 import { Element } from 'react-scroll';
+import Infinite from 'react-infinite';
+
+import Message from './Message';
+import ChatBox from './Chatbox';
 
 class MessageList extends Component {
 
@@ -22,57 +23,34 @@ class MessageList extends Component {
     return (
       <div className="outerChat">
         <div className="fortopic" id="fortopic">
-          {messages ?
-            messages.map((message, key) => {
-              const isFirst = key === 0;
-              const html = this.converter.makeHtml(message.content);
-
-              return (
-                <p className="chatBubble" key={key}>
-                  {   isFirst || messages[key - 1].user.username !== message.user.username ?
-                      <Message message={message} ky={key} /> : null
-                  }
-                  <span
-                    style={{ whiteSpace: 'pre-wrap' }}
-                    dangerouslySetInnerHTML={{ __html: html }}
-                  />
-                </p>
-              );
-            }) : null
-          }
-          <Element name="anchor" className="anchor" />
+          <Infinite
+            elementHeight={40}
+            useWindowAsScrollContainer
+            displayBottomUpwards
+            onInfiniteLoad={() => {
+              console.log('grabbing things');
+            }}
+          >
+            {messages ?
+              messages.map((message, key) =>
+                <Message
+                  messages={messages}
+                  message={message}
+                  html={this.converter.makeHtml(message.content)}
+                  key={key}
+                  index={key}
+                />,
+              ) : null
+            }
+            <Element name="anchor" className="anchor" />
+          </Infinite>
         </div>
         <div className="bottomChat">
-        {
-          window.user ?
-            <div className="topicOuterMessenger">
-              <span className="topicMessenger">
-                <form onSubmit={sendMessage}>
-                  <textarea
-                    placeholder="Write your message"
-                    type="text"
-                    onChange={onChange}
-                    value={content}
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        if (content) sendMessage();
-                      }
-                    }}
-                    autoFocus
-                  />
-                  <button type="submit">
-                    <FontAwesome name="paper-plane-o" />
-                  </button>
-                </form>
-              </span>
-            </div> :
-            <span className="topicMessenger" style={{ textAlign: 'center' }}>
-              <p>
-                You must be logged in to send a message.
-              </p>
-            </span>
-        }
+          <ChatBox
+            sendMessage={sendMessage}
+            onChange={onChange}
+            content={content}
+          />
         </div>
       </div>
     );

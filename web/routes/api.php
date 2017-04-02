@@ -34,7 +34,7 @@ Route::group(['prefix' => 'topic'], function () {
     Route::get('/', 'TopicController@index');
     Route::get('/{topicRef}', 'TopicController@show');
     Route::get('/{topicRef}/messages', 'TopicController@getWithMessages'); // TODO: Paginate
-    Route::get('/room/${roomId}', 'TopicController@getTopicsFromRoomId');
+    Route::get('/room/{roomName}', 'TopicController@getTopicsFromRoomName');
     
     Route::group([ 'middleware' => 'auth:api' ], function () {
       Route::post('/', 'TopicController@store');
