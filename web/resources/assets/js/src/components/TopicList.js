@@ -36,10 +36,7 @@ const TopicList = ({ topics, name, loadMore, loading, end }) => (
       )}
       <div style={{ height: '30px' }}>
         <Waypoint
-          onEnter={() => {
-            console.log('load more');
-            loadMore();
-          }}
+          onEnter={loadMore}
         />
         {loading ? 'loading' : null}
         {end ? <h1 style={{ textAlign: 'center' }}>fin.</h1> : null}

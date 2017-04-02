@@ -23,27 +23,18 @@ class MessageList extends Component {
     return (
       <div className="outerChat">
         <div className="fortopic" id="fortopic">
-          <Infinite
-            elementHeight={40}
-            useWindowAsScrollContainer
-            displayBottomUpwards
-            onInfiniteLoad={() => {
-              console.log('grabbing things');
-            }}
-          >
-            {messages ?
-              messages.map((message, key) =>
-                <Message
-                  messages={messages}
-                  message={message}
-                  html={this.converter.makeHtml(message.content)}
-                  key={key}
-                  index={key}
-                />,
-              ) : null
-            }
-            <Element name="anchor" className="anchor" />
-          </Infinite>
+          {messages ?
+            messages.map((message, key) =>
+              <Message
+                messages={messages}
+                message={message}
+                html={this.converter.makeHtml(message.content)}
+                key={key}
+                index={key}
+              />,
+            ) : null
+          }
+          <Element name="anchor" className="anchor" />
         </div>
         <div className="bottomChat">
           <ChatBox
