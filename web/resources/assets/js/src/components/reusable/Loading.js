@@ -4,17 +4,20 @@ import FontAwesome from 'react-fontawesome';
 const Loading = ({ name }) => {
   return (
     <div className="outerLoad">
-      <span className="loadingMessage">
-        loading {name}
-      </span>
+      {
+        name ?
+          <span className="loadingMessage">
+            loading {name}
+          </span> : null
+      }
       <div className="spinner">
-        <FontAwesome 
+        <FontAwesome
           className="fa-circle-o-notch fa-spin spinner"
-          name='fa-circle-o-notch' 
+          name='fa-circle-o-notch'
         />
       </div>
     </div>
   );
-}
+};
 
 export default Loading;

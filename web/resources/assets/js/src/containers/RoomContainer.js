@@ -3,14 +3,13 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
 import { updateActiveRoom } from '../redux/ducks/activeDucks';
+import { updateRoomPagination } from '../redux/ducks/paginationDucks';
 import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import Room from '../components/Room';
 import Loading from '../components/reusable/Loading';
 
 class RoomContainer extends Component {
-  state = { error: false };
-
   componentWillReceiveProps(nextProps) {
     const newRoomName = nextProps.params.roomName;
     const currentRoomName = this.props.params.roomName;
@@ -32,6 +31,12 @@ class RoomContainer extends Component {
     if (!rooms[roomName]) {
       //  show spinner if nothing is in cache
       this.props.startLoading();
+      this.props.updateRoomPagination(roomName, {
+        page: 1,
+        loading: false,
+        end: false,
+      });
+      console.log(this.props.pagination);
     }
 
     this.props.fetchRoom(roomName)
@@ -41,6 +46,24 @@ class RoomContainer extends Component {
         console.log(err.response);
         // this.setState({ error: err.response.data.error });
       });
+  }
+
+  loadMore = () => {
+    const { page, end } = this.props.pagination;
+    const { roomName } = this.props.params;
+    this.props.updateRoomPagination(roomName, { loading: true });
+    if (!end) {
+      this.props.fetchRoomTopics(roomName, page)
+      .then((res) => {
+        console.log(`fetched page ${page}`);
+        console.log(res);
+        this.props.updateRoomPagination(roomName, {
+          page: page+1,
+          loading: false,
+          end: res.data.topics.data.length === 0,
+        });
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -69,6 +92,8 @@ class RoomContainer extends Component {
         <Room
           room={rooms[roomName]}
           topics={topics[roomName]}
+          loadMore={this.loadMore}
+          {...this.props.pagination}
         />
       );
     }
@@ -84,10 +109,12 @@ const mapStateToProps = (state, props) => ({
   topics: state.entities.topics,
   active: state.active,
   isLoaded: state.isLoaded.rooms[props.params.roomName],
+  pagination: state.pagination.rooms[props.params.roomName]
 });
 
 const mapDispatchToProps = dispatch => ({
   startLoading: (roomName) => dispatch(startLoadingRoom(roomName)),
+  updateRoomPagination: (roomName, pagination) => dispatch(updateRoomPagination(roomName, pagination)),
   fetchRoom: (roomName) => {
     return new Promise((resolve, reject) => {
       authGET(`/api/room/${roomName}?with=topics`)
@@ -98,10 +125,24 @@ const mapDispatchToProps = dispatch => ({
           dispatch(updateActiveRoom(room.name));
           dispatch(stopLoadingRoom(roomName));
           document.title = room.title;
-          resolve();
+          resolve(res);
         })
         .catch((err) => {
           dispatch(stopLoadingRoom(roomName));
+          reject(err);
+        });
+    })
+  },
+  fetchRoomTopics: (roomName, page) => {
+    return new Promise((resolve, reject) => {
+      const endpoint = `/api/topic/room/${roomName}?page=${page}`;
+      authGET(endpoint)
+        .then((res) => {
+          const { topics } = res.data;
+          dispatch(addTopics(roomName, topics.data));
+          resolve(res);
+        })
+        .catch((err) => {
           reject(err);
         });
     })

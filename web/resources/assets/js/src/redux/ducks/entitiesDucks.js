@@ -100,6 +100,7 @@ export default function reducer(state = initialState, action = {}) {
     case ADD_HOME_TOPICS:
       return Object.assign({}, state, {
         homeTopics: [
+          ...(state.homeTopics || []),
           ...payload.topics,
         ],
       });

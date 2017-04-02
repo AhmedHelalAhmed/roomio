@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-
+import Waypoint from 'react-waypoint';
 
 const TopicItem = ({ topic }) => {
   return (
@@ -27,14 +27,24 @@ const TopicItem = ({ topic }) => {
 }
 
 
-const TopicList = ({ topics, name }) => (
+const TopicList = ({ topics, name, loadMore, loading, end }) => (
   <div className="sharedContainer">
-    {topics.length >0 ? topics.map((topic, key) =>
-      <TopicItem topic={topic} key={key} />
-    ) : 
+    {topics.length > 0 ?
+    <div>
+      {topics.map((topic, key) =>
+        <TopicItem topic={topic} key={key} />
+      )}
+      <div style={{ height: '30px' }}>
+        <Waypoint
+          onEnter={loadMore}
+        />
+        {loading ? 'loading' : null}
+        {end ? <h1 style={{ textAlign: 'center' }}>fin.</h1> : null}
+      </div>
+    </div> : 
     <div className="none">
-      <div className="noneinner">There are no Topics in this room</div>
-      <div className="noneinner createNewTopic"><Link to={`/newtopic?room=${name}`}>create one</Link></div>
+      <div className="noneinner">There are no Topics :(</div>
+      <div className="noneinner createNewTopic"><Link to={name ? `/newtopic?room=${name}` : '/newtopic'}>create one!</Link></div>
     </div>}
   </div>
 );

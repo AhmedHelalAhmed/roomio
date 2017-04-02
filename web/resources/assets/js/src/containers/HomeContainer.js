@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { addHomeTopics } from '../redux/ducks/entitiesDucks';
 import { startLoadingHome, stopLoadingHome } from '../redux/ducks/isLoadedDucks';
+import { updateHomePagination } from '../redux/ducks/paginationDucks';
 import { authGET } from '../shared/utils/authAxios';
 import Home from '../components/Home';
 import Loading from '../components/reusable/Loading';
@@ -15,8 +16,22 @@ class HomeContainer extends Component {
     if (!this.props.topics) {
       this.props.startLoadingHome();
     }
-    this.props.fetchHomeTopics()
-      .then(() => console.log('fetchedHomeTopics'));
+    this.loadMore();
+  }
+
+  loadMore = () => {
+    const { page, end } = this.props.pagination;
+    this.props.updateHomePagination({ loading: true });
+    if (!end) {
+      this.props.fetchHomeTopics(page)
+      .then((res) => {
+        this.props.updateHomePagination({
+          page: page+1,
+          loading: false,
+          end: res.data.topics.data.length === 0,
+        });
+      });
+    }
   }
 
   render() {
@@ -26,6 +41,8 @@ class HomeContainer extends Component {
       return (
         <Home
           topics={topics}
+          loadMore={this.loadMore}
+          {...this.props.pagination}
         />
       );
     }
@@ -39,18 +56,21 @@ class HomeContainer extends Component {
 const mapStateToProps = (state, props) => ({
   topics: state.entities.homeTopics,
   isLoaded: state.isLoaded.home,
+  pagination: state.pagination.home
 });
 
 const mapDispatchToProps = dispatch => ({
   startLoading: () => dispatch(startLoadingHome()),
-  fetchHomeTopics: () => {
+  updateHomePagination: (pagination) => dispatch(updateHomePagination(pagination)),
+  fetchHomeTopics: (page) => {
     return new Promise((resolve, reject) => {
-      authGET('/api/topic')
+      const endpoint = page ? `/api/topic?page=${page}` : '/api/topic';
+      authGET(endpoint)
         .then((res) => {
           dispatch(addHomeTopics(res.data.topics.data));
           dispatch(stopLoadingHome());
           document.title = 'Home';
-          resolve();
+          resolve(res);
         })
         .catch((err) => {
           dispatch(stopLoadingHome());
