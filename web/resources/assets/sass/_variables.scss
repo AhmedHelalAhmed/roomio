@@ -6,6 +6,9 @@ $body-accent: indianred;
 $body-other: #5c95cd;
 //$body-accent: rgb(83.1%, 83.1%, 83.1%);
 
+//modal
+$modal-button: $body-other;
+
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border: $laravel-border-color;

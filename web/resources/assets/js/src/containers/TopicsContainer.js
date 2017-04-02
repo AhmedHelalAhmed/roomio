@@ -112,8 +112,8 @@ class TopicContainer extends Component {
 
   sendMessage = (event) => {
     if (event) event.preventDefault();
-    const { content } = this.state;
-    this.props.emit.sendMessage(validator.escape(content));
+    const  content = Htmlspecialchars(this.state.content);
+    this.props.emit.sendMessage(content);
     this.setState({ content: '' });
     scrollBottom();
   }
@@ -209,5 +209,17 @@ const ConnectedTopicContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TopicContainer);
+
+const Htmlspecialchars = (str) => {
+    const map = {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    };
+    return str.replace(/[&<>"']/g, m => map[m]);
+}
+
 
 export default ConnectedTopicContainer;
