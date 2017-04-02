@@ -13,6 +13,8 @@ class MessageList extends Component {
       excludeTrailingPunctuationFromURLs: true,
       omitExtraWLInCodeBlocks: true,
       strikethrough: true,
+      openLinksInNewWindow: true,
+      ghCodeBlocks: true
     });
   }
 
