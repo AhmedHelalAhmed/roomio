@@ -23,12 +23,11 @@ class Delete extends Component {
           ? <span>
               - deleted</span>
           : <span>
-            -
             <span onClick={this.onClick}>
               {
                 this.state.check == true
                 ? <span>are you sure?</span>
-                : 'delete?'
+                : '- delete?'
               }
             </span>
             {
