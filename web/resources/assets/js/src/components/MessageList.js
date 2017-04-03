@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import showdown from 'showdown';
 import { Element } from 'react-scroll';
-import Infinite from 'react-infinite';
+import Waypoint from 'react-waypoint';
 
 import Message from './Message';
 import ChatBox from './Chatbox';
@@ -15,26 +15,59 @@ class MessageList extends Component {
       omitExtraWLInCodeBlocks: true,
       strikethrough: true,
       openLinksInNewWindow: true,
-      ghCodeBlocks: true
+      ghCodeBlocks: true,
     });
   }
 
+  renderScollElement = ({ index, page, message, length }) => {
+    // console.log(message.content);
+    // console.log(page);
+    return (
+      <div>
+        <Element name={`message-${(message.id)}`} />
+      </div>
+    )
+  }
+
   render() {
-    const { topic, messages, sendMessage, onChange, content } = this.props;
+    const {
+      topic,
+      messages,
+      sendMessage,
+      onChange,
+      content,
+      loadMore,
+      loading,
+      end,
+      page,
+    } = this.props;
+
+    const cursors = {};
 
     return (
       <div className="outerChat">
         <div className="fortopic" id="fortopic">
+          <div style={{ height: '20px' }}>
+            <Waypoint
+              onEnter={loadMore}
+            />
+            {loading ? 'loading' : null}
+            {end ? <p style={{ textAlign: 'center' }}>fin.</p> : null}
+          </div>
           {messages ?
-            messages.map((message, key) =>
-              <Message
-                messages={messages}
-                message={message}
-                html={this.converter.makeHtml(message.content)}
-                key={key}
-                index={key}
-              />,
-            ) : null
+            messages.map((message, index) => {
+              return (
+                <div key={index}>
+                  {index % 50 === 0 ? this.renderScollElement({ index, page, message, length: messages.length }) : null}
+                  <Message
+                    messages={messages}
+                    message={message}
+                    html={this.converter.makeHtml(message.content)}
+                    index={index}
+                  />
+                </div>
+              );
+            }) : null
           }
           <Element name="anchor" className="anchor" />
         </div>

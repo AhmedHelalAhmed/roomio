@@ -5,21 +5,30 @@ import { connect } from 'react-redux';
 import Scroll, { scroller, scrollToBottom } from 'react-scroll';
 import { updateActiveTopic } from '../redux/ducks/activeDucks';
 import { addTopic, addMessages, addMessage, viewAllMessages } from '../redux/ducks/entitiesDucks';
+import { updateTopicPagination } from '../redux/ducks/paginationDucks';
 import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import find from 'lodash/find';
 import Loading from '../components/reusable/Loading';
-import scrollToComponent from 'react-scroll-to-component';
 const scroll = Scroll.animateScroll;
 
 const scrollBottom = () => {
-    scroll.scrollToBottom({
-      containerId: 'fortopic',
-      smooth: false,
-      duration: 0,
-      delay: 0
-    });
+  scroll.scrollToBottom({
+    containerId: 'fortopic',
+    smooth: false,
+    duration: 0,
+    delay: 0
+  });
 }
+
+// const scrollToTop = () => {
+//   scroll.scrollToTop({
+//     containerId: 'fortopic',
+//     smooth: false,
+//     duration: 0,
+//     delay: 0
+//   });
+// }
 
 /**
  * Components
@@ -38,12 +47,19 @@ class TopicContainer extends Component {
     if (!topic) {
       // if not in the cache show spinner
       this.props.startLoading();
+      this.props.updateTopicPagination(topicRef, {
+        page: 1,
+        loading: false,
+        end: false,
+      });
+      scrollBottom();
     }
 
     this.props.fetchTopic(topicRef)
       .then(() => {
           this.props.initSocketListeners();
           this.props.emit.joinTopic();
+          scrollBottom();
       }).catch((err) => console.log(err));
 
     document.addEventListener('visibilitychange', () => {
@@ -56,15 +72,35 @@ class TopicContainer extends Component {
 
   componentDidMount() {
     scrollBottom();
-
-  }
-
-  componentDidUpdate() {
-    scrollBottom();
   }
 
   componentWillUnmount() {
     this.props.emit.leaveTopic();
+  }
+
+  loadMore = () => {
+    const { page, end, loading } = this.props.pagination;
+    const { topicRef } = this.props.params;
+
+    this.props.updateTopicPagination(topicRef, { loading: true });
+    if (!end && !loading) {
+      this.props.fetchMoreMessages(topicRef, page)
+      .then((res) => {
+        console.log(`fetched page ${page}`);
+        console.log(`message-${(res.data.messages.data.pop().id)}`);
+        // scroller.scrollTo(`message-${(res.data.messages.data.pop().id)}`, {
+        //   smooth: false,
+        //   duration: 0,
+        //   delay: 0,
+        //   containerId: 'fortopic'
+        // });
+        this.props.updateTopicPagination(topicRef, {
+          page: page+1,
+          loading: false,
+          end: res.data.messages.data.length === 0,
+        });
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -134,6 +170,8 @@ class TopicContainer extends Component {
           onChange={this.onInputChange}
           sendMessage={this.sendMessage}
           content={this.state.content}
+          loadMore={this.loadMore}
+          {...this.props.pagination}
         />
       );
     }
@@ -149,6 +187,7 @@ const mapStateToProps = (state, props) => ({
   messages: state.entities.messages,
   active: state.active,
   isLoaded: state.isLoaded.topics[props.params.topicRef],
+  pagination: state.pagination.topics[props.params.topicRef],
   windowState: state.active.window,
 });
 
@@ -159,7 +198,6 @@ const mapDispatchToProps = (dispatch, props) => {
     initSocketListeners: () => {
       socket.on('topic:new_message', ({ message }) => {
         dispatch(addMessage(message.topic_ref, message));
-        //scroll.scrollToBottom();
         scrollBottom();
       });
     },
@@ -183,17 +221,25 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     viewAllMessages: () => dispatch(viewAllMessages(params.topic_ref)),
     startLoading: () => dispatch(startLoadingTopic(params.topicRef)),
+    updateTopicPagination: (topicRef, pagination) => dispatch(updateTopicPagination(topicRef, pagination)),
     fetchTopic: (topicRef) => {
       return new Promise((resolve, reject) => {
         authGET(`/api/topic/${topicRef}/messages`)
           .then((res) => {
             const { messages, topic } = res.data;
+            dispatch(
+              updateTopicPagination(params.topicRef, {
+                end: messages.data.length < 50,
+                loading: false,
+              })
+            );
             dispatch(addTopic(topic));
             dispatch(addMessages(topic.ref, messages.data));
             dispatch(updateActiveTopic(topic.ref));
             dispatch(stopLoadingTopic(params.topicRef));
+
             document.title = `${topic.room_name} - ${topic.title}`;
-            resolve();
+            resolve(res);
           })
           .catch((err) => {
             console.log(err);
@@ -201,7 +247,26 @@ const mapDispatchToProps = (dispatch, props) => {
             reject(err);
           });
       })
-    }
+    },
+    fetchMoreMessages: (topicRef, page) => {
+      return new Promise((resolve, reject) => {
+        authGET(`/api/message/topic/${topicRef}?page=${page}`)
+          .then((res) => {
+            const { messages } = res.data;
+            dispatch(addMessages(topicRef, messages.data));
+            dispatch(
+              updateTopicPagination(params.topicRef, {
+                end: messages.data.length < 50,
+                loading: false,
+              })
+            );
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      })
+    },
   }
 };
 

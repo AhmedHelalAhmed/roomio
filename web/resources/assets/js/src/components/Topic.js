@@ -18,17 +18,16 @@ const customStyles = {
 
 
 class Topic extends Component {
-  state = {
-      modalIsOpen: false
-    };
+  state = { modalIsOpen: false };
+
   onClick = () => {
-    console.log("clicked")
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal = () => {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
+
   render() {
     return(
         <div className="messenger">

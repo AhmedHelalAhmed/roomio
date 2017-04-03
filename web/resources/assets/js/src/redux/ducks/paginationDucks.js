@@ -1,6 +1,7 @@
 //  Actions
 const UPDATE_PAGINATION_ROOM = 'pagination/UPDATE_PAGINATION_ROOM';
 const UPDATE_PAGINATION_HOME = 'pagination/UPDATE_PAGINATION_HOME';
+const UPDATE_PAGINATION_TOPIC = 'pagination/UPDATE_PAGINATION_TOPIC';
 
 const initialState = {
   rooms: {},
@@ -34,6 +35,16 @@ export default function reducer(state = initialState, action = {}) {
           ...payload.pagination,
         },
       });
+    case UPDATE_PAGINATION_TOPIC:
+      return Object.assign({}, state, {
+        topics: {
+          ...state.topics,
+          [payload.topicRef]: {
+            ...(state.topics[payload.topicRef] || {}),
+            ...payload.pagination,
+          },
+        },
+      });
     default:
       return state;
   }
@@ -43,6 +54,11 @@ export default function reducer(state = initialState, action = {}) {
 export const updateRoomPagination = (roomName, pagination) => ({
   type: UPDATE_PAGINATION_ROOM,
   payload: { roomName, pagination },
+});
+
+export const updateTopicPagination = (topicRef, pagination) => ({
+  type: UPDATE_PAGINATION_TOPIC,
+  payload: { topicRef, pagination },
 });
 
 export const updateHomePagination = pagination => ({

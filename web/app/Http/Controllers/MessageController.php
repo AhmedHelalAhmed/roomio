@@ -16,7 +16,8 @@ class MessageController extends Controller {
     public function getMessagesForTopic($topicRef) {
         $messages = Message::with(['user'])
                       ->where('topic_ref', '=', $topicRef)
-                      ->paginate(20);
+                      ->orderBy('created_at', 'DESC')
+                      ->paginate(50);
 
         return Response::json(compact('messages'), 200);                
     }

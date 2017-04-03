@@ -108,10 +108,10 @@ export default function reducer(state = initialState, action = {}) {
       return Object.assign({}, state, {
         messages: {
           ...state.messages,
-            [payload.topicRef]: [
+          [payload.topicRef]: [
             ...orderBy(
               uniqBy([
-                ...(state.topics[payload.topicRef] || []),
+                ...(state.messages[payload.topicRef] || []),
                 ...payload.messages,
               ], 'id'),
               ['created_at'], ['asc']),
