@@ -1,0 +1,13 @@
+.deleteOuter {
+  display: flex;
+  align-content: center;
+  color: $base-black;
+  cursor: pointer;
+  font-size: 13px;
+  margin-left: 10px;
+  .delCon{
+    &:hover {
+      color:$brand-danger;
+    }
+  }
+}

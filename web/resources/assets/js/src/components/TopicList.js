@@ -21,7 +21,7 @@ const TopicItem = ({ topic }) => {
               {topic.user ? topic.user.username : ''}
             </Link>
           </span>
-          { window.user.username == topic.user.username ? <Delete /> : ''}
+          { window.user.username == topic.user.username ? <Delete topic={topic} /> : ''}
         </div>
         
       </div>

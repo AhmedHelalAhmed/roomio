@@ -2,42 +2,54 @@ import React, {Component} from 'react';
 
 class Delete extends Component {
   state = {
-    check : false,
-    doubleCheck : false
+    check: false,
+    doubleCheck: false
   }
   onClick = () => {
-    let check = true;
-    this.setState({check})
+    this.setState({check: true})
   }
   confirm = () => {
-    let doubleCheck = true;
-    this.setState({doubleCheck})
+    this.setState({doubleCheck: true})
     console.log('send delete request here');
   }
   deny = () => {
-    let check = false;
-    this.setState({check})
+    this.setState({check: false})
   }
   render() {
     return (
-      <span>
-      {
-        this.state.doubleCheck == true ? <span> - deleted</span> :
-      <span>
-         - <span onClick={this.onClick}>
-            {this.state.check==true ? 
-              <span>are you sure?</span> : 'delete?'
+      <span className="deleteOuter">
+        {
+          this.state.doubleCheck == true
+          ? <span>
+              - deleted</span>
+          : <span>
+            -
+            <span onClick={this.onClick}>
+              {
+                this.state.check == true
+                ? <span>are you sure?</span>
+                : 'delete?'
+              }
+            </span>
+            {
+              this.state.check == true
+              ? <span>
+                  <span onClick={this.confirm}>
+                    -
+                    <span className='delCon'>yes</span>
+                  </span>
+                  <span onClick={this.deny}>
+                    -
+                    <span className='delCon'>no</span>
+                  </span>
+                </span>
+              : ''
             }
           </span>
-          {this.state.check==true ? 
-            <span><span onClick={this.confirm}> - yes </span> <span onClick={this.deny}> - no </span></span> : ''
-          }
+        }
       </span>
-    }
-    </span>
     )
   }
 }
-
 
 export default Delete;

@@ -1,5 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router';
+import ReactPlayer from 'react-player'
+import getUrls from 'get-urls'
+import VideoPlayer from './Video';
+
+const getSentUrls = (url) => {
+  const val = getUrls(url).values().next().value;
+  if(matchYoutubeUrl(val)) { 
+      return val;
+    }
+    return false;
+}
+
+const matchYoutubeUrl = (url) => {
+  console.log('memes', url);
+  const p = /youtube\.com/;
+  if(p.test(url)){  
+      return true;
+  }
+  return false;
+}
 
 const Message = ({ messages, message, index, html }) => {
   const isFirst = index === 0;
@@ -13,12 +33,25 @@ const Message = ({ messages, message, index, html }) => {
             </Link>
           </strong> : null
       }
-      <span
-        style={{ whiteSpace: 'pre-wrap' }}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      {
+        getSentUrls(message.content) ? 
+        <span>
+          <span
+            style={{ whiteSpace: 'pre-wrap' }}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+          <VideoPlayer getSentUrls={getSentUrls} message={message} />
+        </span> : 
+        <span
+          style={{ whiteSpace: 'pre-wrap' }}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      }
     </p>
   );
 };
+
+
+
 
 export default Message;
