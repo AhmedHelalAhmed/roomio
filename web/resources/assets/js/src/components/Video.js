@@ -3,28 +3,28 @@ import ReactPlayer from 'react-player'
 import FontAwesome from 'react-fontawesome';
 
 class VideoPlayer extends Component {
-  state = {
-    collapse : false
-  }
+  state = { collapse : false };
+
   onClick = () => {
-    const collapse = this.state.collapse;
+    const { collapse } = this.state;
     this.setState({collapse: !collapse});
   }
+
   render() {
-    return(
-    <span className="expandable">
+    return (
+      <span className="expandable">
         {
           this.state.collapse ? 
           <span>
             <FontAwesome className='showHide' name="expand" onClick={this.onClick} />
-          </span> 
-          :<span>
+          </span> :
+          <span>
             <FontAwesome className='showHide' name="compress" onClick={this.onClick} />
-            <ReactPlayer url={this.props.getSentUrls(this.props.message.content)} frameborder="0" controls="true" />
+            <ReactPlayer url={this.props.playerURL} frameborder="0" control={true} />
           </span> 
-      }
-    </span>
-    )
+        }
+      </span>
+    );
   }
 }
 

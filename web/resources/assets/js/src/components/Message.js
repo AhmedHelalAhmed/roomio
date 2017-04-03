@@ -1,35 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router';
-import ReactPlayer from 'react-player'
-import getUrls from 'get-urls'
+import ReactPlayer from 'react-player';
+import * as linkify from 'linkifyjs';
 import VideoPlayer from './Video';
 
-const getSentUrls = (url) => {
-  const val = getUrls(url).values().next().value;
-  if(matchYoutubeUrl(val)) { 
-      return val;
-    }
-    return false;
-}
+const matchPlayerUrl = (url) => {
+  const youtube = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/.test(url);
+  const vimeo = /^(http\:\/\/|https\:\/\/)?(www\.)?(vimeo\.com\/)([0-9]+)$/.test(url);
+  const streamable = /^https?:\/\/(streamable\.com)\/(.*)$/.test(url);
+  const vidme = /^https?:\/\/(vid\.me)\/(.*)$/.test(url);
+  return (youtube || vimeo || streamable || vidme);
+};
 
-const matchYoutubeUrl = (url) => {
-  console.log('memes', url);
-  const youtube = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-  const vimeo = /^(http\:\/\/|https\:\/\/)?(www\.)?(vimeo\.com\/)([0-9]+)$/;
-  //const soundcloud =  /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/;
-  const streamable =  /^https?:\/\/(streamable\.com)\/(.*)$/;
-  const vidme =  /^https?:\/\/(vid\.me)\/(.*)$/;
-  if(youtube.test(url) || vimeo.test(url) || streamable.test(url) || vidme.test(url) /*|| soundcloud.test(url)*/){  
-      return true;
-  }
-  return false;
-}
+const getUrlsFromContent = (content) => {
+  const link = linkify.find(content).pop();
+  return matchPlayerUrl(link ? link.href : '') ? link.href : null;
+};
 
 const Message = ({ messages, message, index, html }) => {
   const isFirst = index === 0;
+  const playerURL = getUrlsFromContent(message.content);
 
   return (
-    <p className="chatBubble" key={index}>
+    <div className="chatBubble" key={index}>
       {   isFirst || messages[index - 1].user.username !== message.user.username ?
           <strong className="user">
             <Link to={'/user/' + message.user.username}>
@@ -38,20 +31,20 @@ const Message = ({ messages, message, index, html }) => {
           </strong> : null
       }
       {
-        getSentUrls(message.content) ? 
+        playerURL ? 
         <span>
           <span
             style={{ whiteSpace: 'pre-wrap' }}
             dangerouslySetInnerHTML={{ __html: html }}
           />
-          <VideoPlayer getSentUrls={getSentUrls} message={message} />
+          <VideoPlayer playerURL={playerURL} message={message} />
         </span> : 
         <span
           style={{ whiteSpace: 'pre-wrap' }}
           dangerouslySetInnerHTML={{ __html: html }}
         />
       }
-    </p>
+    </div>
   );
 };
 
