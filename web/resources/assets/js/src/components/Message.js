@@ -14,7 +14,7 @@ const getSentUrls = (url) => {
 
 const matchYoutubeUrl = (url) => {
   console.log('memes', url);
-  const p = /youtube\.com/;
+  const p = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
   if(p.test(url)){  
       return true;
   }
