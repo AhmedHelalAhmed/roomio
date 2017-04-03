@@ -14,8 +14,12 @@ const getSentUrls = (url) => {
 
 const matchYoutubeUrl = (url) => {
   console.log('memes', url);
-  const p = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
-  if(p.test(url)){  
+  const youtube = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
+  const vimeo = /^(http\:\/\/|https\:\/\/)?(www\.)?(vimeo\.com\/)([0-9]+)$/;
+  //const soundcloud =  /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/;
+  const streamable =  /^https?:\/\/(streamable\.com)\/(.*)$/;
+  const vidme =  /^https?:\/\/(vid\.me)\/(.*)$/;
+  if(youtube.test(url) || vimeo.test(url) || streamable.test(url) || vidme.test(url) /*|| soundcloud.test(url)*/){  
       return true;
   }
   return false;
