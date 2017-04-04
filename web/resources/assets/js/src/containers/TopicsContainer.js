@@ -81,19 +81,22 @@ class TopicContainer extends Component {
   loadMore = () => {
     const { page, end, loading } = this.props.pagination;
     const { topicRef } = this.props.params;
-
-    this.props.updateTopicPagination(topicRef, { loading: true });
+    const messages = this.props.messages[topicRef];
     if (!end && !loading) {
+      this.props.updateTopicPagination(topicRef, { loading: true });
       this.props.fetchMoreMessages(topicRef, page)
       .then((res) => {
+        const lastMessage = res.data.messages.data.pop();
         console.log(`fetched page ${page}`);
-        console.log(`message-${(res.data.messages.data.pop().id)}`);
-        // scroller.scrollTo(`message-${(res.data.messages.data.pop().id)}`, {
-        //   smooth: false,
-        //   duration: 0,
-        //   delay: 0,
-        //   containerId: 'fortopic'
-        // });
+        // console.log(`message - ${lastMessage.user.username} - message-${lastMessage.id}`);
+        if (page !== 1) {
+          scroller.scrollTo(`message-${lastMessage.id}`, {
+            smooth: false,
+            duration: 100,
+            delay: 100,
+            containerId: 'fortopic'
+          });
+        }
         this.props.updateTopicPagination(topicRef, {
           page: page+1,
           loading: false,

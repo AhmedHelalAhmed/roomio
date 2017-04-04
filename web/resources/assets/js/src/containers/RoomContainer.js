@@ -51,8 +51,9 @@ class RoomContainer extends Component {
   loadMore = () => {
     const { page, end } = this.props.pagination;
     const { roomName } = this.props.params;
-    this.props.updateRoomPagination(roomName, { loading: true });
+    
     if (!end) {
+      this.props.updateRoomPagination(roomName, { loading: true });
       this.props.fetchRoomTopics(roomName, page)
       .then((res) => {
         console.log(`fetched page ${page}`);

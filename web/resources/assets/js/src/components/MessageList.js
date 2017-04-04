@@ -32,7 +32,7 @@ class MessageList extends Component {
   render() {
     const {
       topic,
-      messages,
+      messages = [],
       sendMessage,
       onChange,
       content,
@@ -49,22 +49,26 @@ class MessageList extends Component {
         <div className="fortopic" id="fortopic">
           <div style={{ height: '20px' }}>
             <Waypoint
-              onEnter={loadMore}
+              onEnter={() => {
+                loadMore([...messages].shift())
+              }}
             />
             {loading ? 'loading' : null}
-            {end ? <p style={{ textAlign: 'center' }}>fin.</p> : null}
+            {end ? <p style={{ textAlign: 'center' }}>
+              {messages.length ? 'fin.': 'No messages yet.'}
+            </p> : null}
           </div>
           {messages ?
             messages.map((message, index) => {
               return (
                 <div key={index}>
-                  {index % 50 === 0 ? this.renderScollElement({ index, page, message, length: messages.length }) : null}
                   <Message
                     messages={messages}
                     message={message}
                     html={this.converter.makeHtml(message.content)}
                     index={index}
                   />
+                  <Element name={`message-${(message.id)}`} />
                 </div>
               );
             }) : null
