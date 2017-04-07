@@ -209,7 +209,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  color: $body-accent;
+  color: $body-accent !important;
   font-size: 2.5em;
   span {
     position: relative;
@@ -217,7 +217,7 @@
   a{
   text-decoration: none;
     &:visited {
-      color: $body-accent;
+      color: $body-accent !important;
     }
     .new {
       position: absolute;
