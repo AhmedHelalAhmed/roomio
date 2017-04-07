@@ -6,7 +6,7 @@ const Home = props => (
     <div className="sharedContainer limit">
       <div className="sharedTitleSep">
         <h1>
-          <span>
+          <span className='frontPage'>
             Front Page
           </span>
         </h1>

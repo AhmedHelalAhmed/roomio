@@ -2,19 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Link } from 'react-router';
 import MessageList from './MessageList';
 import FontAwesome from 'react-fontawesome';
-import Modal from 'react-modal';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    width                 : '400px',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
+import ModalContainer from './Modal';
 
 
 class Topic extends Component {
@@ -22,7 +10,6 @@ class Topic extends Component {
       modalIsOpen: false
     };
   onClick = () => {
-    console.log("clicked")
     this.setState({modalIsOpen: true});
   }
 
@@ -59,17 +46,12 @@ class Topic extends Component {
           </div>
             {
               this.state.modalIsOpen ? 
-                <Modal
-                isOpen={this.state.modalIsOpen}
-                onRequestClose={this.closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-              >
-              <FontAwesome name="times" className='closeModal' onClick={this.closeModal} />
-              <h2 ref="subtitle">{this.props.topic.title}</h2>
-              <h4 ref="subtitle">Description</h4>
-              <p>{this.props.topic.description}</p>
-            </Modal> : null
+                <ModalContainer
+                  topic = {this.props.topic}
+                  modalIsOpen = {this.state.modalIsOpen}
+                  closeModal = {this.closeModal}
+                  type = 'topic'
+                /> : null
           }
           
             <MessageList {...this.props} />

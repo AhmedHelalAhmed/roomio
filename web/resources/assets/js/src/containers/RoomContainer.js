@@ -10,6 +10,11 @@ import Room from '../components/Room';
 import Loading from '../components/reusable/Loading';
 
 class RoomContainer extends Component {
+
+  state = {
+    modalIsOpen: false
+  }
+
   componentWillReceiveProps(nextProps) {
     const newRoomName = nextProps.params.roomName;
     const currentRoomName = this.props.params.roomName;
@@ -66,6 +71,15 @@ class RoomContainer extends Component {
     }
   }
 
+  onClick = () => {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal = () => {
+    console.log('test')
+    this.setState({modalIsOpen: false});
+  }
+
   componentWillUnmount() {
     const { socket, params: { roomName } } = this.props;
     socket.emit('leave_room', { roomName });
@@ -90,6 +104,9 @@ class RoomContainer extends Component {
     if (isLoaded) {
       return (
         <Room
+          onClick = {this.onClick}
+          closeModal = {this.closeModal}
+          modal = {this.state}
           room={rooms[roomName]}
           topics={topics[roomName]}
           loadMore={this.loadMore}
