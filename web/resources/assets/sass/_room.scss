@@ -8,9 +8,7 @@
   text-align: center;
 }
 
-.info {
-  cursor: pointer;
-}
+
 
 .sharedContainer {
   //height: 100vh;
@@ -205,25 +203,75 @@
   }
 }
 
+// .bottomStickBubble {
+//   position: fixed;
+//   bottom: 20px;
+//   right: 20px;
+//   color: $body-accent !important;
+//   font-size: 2.3em;
+//   span {
+//     position: relative;
+//   }
+//   .newTopicBtn{
+//   text-decoration: none;
+//     &:visited {
+//       color: $body-accent !important;
+//     }
+//     .new {
+//       position: absolute;
+//       left: 30%;
+//       color: $base-white;
+//       z-index: 1;
+//     }
+//   }
+// }
+
 .bottomStickBubble {
+  cursor: pointer;
+  box-sizing: border-box;
   position: fixed;
+  background: $body-accent;
   bottom: 20px;
   right: 20px;
-  color: $body-accent !important;
-  font-size: 2.5em;
+  transition: ease-in-out .3s;
+  
+  padding: 18px;
+  border-radius: 50%;
+  z-index: 2;
   span {
     position: relative;
-  }
-  a{
-  text-decoration: none;
-    &:visited {
-      color: $body-accent !important;
-    }
+    display: inline-block;
     .new {
+      font-size: 20px;
       position: absolute;
-      left: 30%;
-      color: $base-white;
-      z-index: 1;
+      left: 7px;
+      color: $body-accent;
+      z-index: 3;
     }
   }
+}
+
+.moved {
+  bottom: unquote("-webkit-calc(50% - 350px)");
+  right: unquote("-webkit-calc(50% - 360px)");
+  transition: ease-in-out .3s;
+  
+}
+
+.fa-comment {
+  color: $base-white !important;
+  font-size: 1.5em;
+}
+
+.info {
+  cursor: pointer;
+}
+
+.topicEx {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $body-accent;
+  cursor: pointer;
+  margin: 5px;
 }

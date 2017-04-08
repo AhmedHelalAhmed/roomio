@@ -4,21 +4,24 @@ import { connect } from 'react-redux';
 import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
 import { updateActiveRoom } from '../redux/ducks/activeDucks';
 import { updateRoomPagination } from '../redux/ducks/paginationDucks';
-import { startLoadingRoom, stopLoadingRoom } from '../redux/ducks/isLoadedDucks';
+import {
+  startLoadingRoom,
+  stopLoadingRoom,
+} from '../redux/ducks/isLoadedDucks';
 import { authGET } from '../shared/utils/authAxios';
 import Room from '../components/Room';
 import Loading from '../components/reusable/Loading';
 
 class RoomContainer extends Component {
-
   state = {
-    modalIsOpen: false
-  }
+    modalIsOpen: false,
+    newTopicIsOpen: false,
+  };
 
   componentWillReceiveProps(nextProps) {
     const newRoomName = nextProps.params.roomName;
     const currentRoomName = this.props.params.roomName;
-    if (newRoomName && (newRoomName !== currentRoomName)) {
+    if (newRoomName && newRoomName !== currentRoomName) {
       const { socket } = nextProps;
       socket.emit('leave_room', { roomName: currentRoomName });
       this.checkCacheAndFetch(newRoomName);
@@ -44,10 +47,12 @@ class RoomContainer extends Component {
       console.log(this.props.pagination);
     }
 
-    this.props.fetchRoom(roomName)
+    this.props
+      .fetchRoom(roomName)
       .then(() => {
         socket.emit('join_room', { roomName });
-      }).catch((err) => {
+      })
+      .catch(err => {
         console.log(err.response);
         // this.setState({ error: err.response.data.error });
       });
@@ -58,27 +63,34 @@ class RoomContainer extends Component {
     const { roomName } = this.props.params;
     this.props.updateRoomPagination(roomName, { loading: true });
     if (!end) {
-      this.props.fetchRoomTopics(roomName, page)
-      .then((res) => {
+      this.props.fetchRoomTopics(roomName, page).then(res => {
         console.log(`fetched page ${page}`);
         console.log(res);
         this.props.updateRoomPagination(roomName, {
-          page: page+1,
+          page: page + 1,
           loading: false,
           end: res.data.topics.data.length === 0,
         });
       });
     }
-  }
+  };
 
-  onClick = () => {
-    this.setState({modalIsOpen: true});
-  }
+  onClickModal = () => {
+    this.setState({ modalIsOpen: true });
+  };
 
   closeModal = () => {
-    console.log('test')
-    this.setState({modalIsOpen: false});
-  }
+    this.setState({ modalIsOpen: false });
+  };
+
+  onClickNewTopic = () => {
+    //window.location = this.props.params.roomName;
+    this.setState({ newTopicIsOpen: true });
+  };
+
+  closeTopicScreen = () => {
+    this.setState({ newTopicIsOpen: false });
+  };
 
   componentWillUnmount() {
     const { socket, params: { roomName } } = this.props;
@@ -95,7 +107,8 @@ class RoomContainer extends Component {
           <div className="noneinner">
             {roomName} is not a room yet.
           </div>
-          <div className="noneinner createNewTopic"><Link to={`/newroom?roomName=${roomName}`}>Create it!</Link>
+          <div className="noneinner createNewTopic">
+            <Link to={`/newroom?roomName=${roomName}`}>Create it!</Link>
           </div>
         </div>
       );
@@ -104,9 +117,11 @@ class RoomContainer extends Component {
     if (isLoaded) {
       return (
         <Room
-          onClick = {this.onClick}
-          closeModal = {this.closeModal}
-          modal = {this.state}
+          closeTopicScreen={this.closeTopicScreen}
+          onClickNewTopic={this.onClickNewTopic}
+          onClick={this.onClickModal}
+          closeModal={this.closeModal}
+          localstate={this.state}
           room={rooms[roomName]}
           topics={topics[roomName]}
           loadMore={this.loadMore}
@@ -115,9 +130,7 @@ class RoomContainer extends Component {
       );
     }
 
-    return (
-      <Loading name="room" />
-    );
+    return <Loading name="room" />;
   }
 }
 
@@ -126,16 +139,17 @@ const mapStateToProps = (state, props) => ({
   topics: state.entities.topics,
   active: state.active,
   isLoaded: state.isLoaded.rooms[props.params.roomName],
-  pagination: state.pagination.rooms[props.params.roomName]
+  pagination: state.pagination.rooms[props.params.roomName],
 });
 
 const mapDispatchToProps = dispatch => ({
-  startLoading: (roomName) => dispatch(startLoadingRoom(roomName)),
-  updateRoomPagination: (roomName, pagination) => dispatch(updateRoomPagination(roomName, pagination)),
-  fetchRoom: (roomName) => {
+  startLoading: roomName => dispatch(startLoadingRoom(roomName)),
+  updateRoomPagination: (roomName, pagination) =>
+    dispatch(updateRoomPagination(roomName, pagination)),
+  fetchRoom: roomName => {
     return new Promise((resolve, reject) => {
       authGET(`/api/room/${roomName}?with=topics`)
-        .then((res) => {
+        .then(res => {
           const { room, topics } = res.data;
           dispatch(addRoom(room));
           dispatch(addTopics(room.name, topics.data));
@@ -144,31 +158,30 @@ const mapDispatchToProps = dispatch => ({
           document.title = room.title;
           resolve(res);
         })
-        .catch((err) => {
+        .catch(err => {
           dispatch(stopLoadingRoom(roomName));
           reject(err);
         });
-    })
+    });
   },
   fetchRoomTopics: (roomName, page) => {
     return new Promise((resolve, reject) => {
       const endpoint = `/api/topic/room/${roomName}?page=${page}`;
       authGET(endpoint)
-        .then((res) => {
+        .then(res => {
           const { topics } = res.data;
           dispatch(addTopics(roomName, topics.data));
           resolve(res);
         })
-        .catch((err) => {
+        .catch(err => {
           reject(err);
         });
-    })
+    });
   },
 });
 
-const ConnectedRoomContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(RoomContainer);
+const ConnectedRoomContainer = connect(mapStateToProps, mapDispatchToProps)(
+  RoomContainer,
+);
 
 export default ConnectedRoomContainer;

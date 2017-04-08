@@ -10,9 +10,13 @@ class CreateTopic extends Component {
 
   componentWillMount() {
     document.title = "Create Topic";
+    this.props.room == null ? 
     this.props.setFields({
       room_name: this.props.location.query.room
-    });
+    }) : 
+    this.props.setFields({
+      room_name: this.props.room.name
+    })
   }
 
   onSubmit = (e) => {

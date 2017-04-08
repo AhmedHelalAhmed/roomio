@@ -4,21 +4,41 @@ import { Link } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import ModalContainer from './Modal';
 
-const Room = ({ room, topics, loadMore, loading, end, onClick, closeModal, modal }) => (
+const Room = (
+  {
+    room,
+    topics,
+    loadMore,
+    loading,
+    end,
+    onClick,
+    closeModal,
+    localstate,
+    closeTopicScreen,
+    onClickNewTopic,
+  },
+) => (
   <div className="sharedContainer limit">
-    <span className="bottomStickBubble">
-      <span><Link to={`/newtopic?room=${room.name}`}>
-        <span className = "new">+</span> <FontAwesome name="comment" />
-      </Link></span>
+    {localstate.newTopicIsOpen ? 
+      <span className="bottomStickBubble moved" onClick={onClickNewTopic}>
+      <span>
+        <div className="newTopicBtn">
+          <span className="new">+</span> <FontAwesome name="comment" />
+        </div>
+      </span>
     </span>
+      :
+      <span className="bottomStickBubble" onClick={onClickNewTopic}>
+      <span>
+        <div className="newTopicBtn">
+          <span className="new">+</span> <FontAwesome name="comment" />
+        </div>
+      </span>
+    </span>}
     <div className="sharedTitleSep">
       <h1>
-      <div className="flexTopTopicRight">
-          <FontAwesome
-            className='info' 
-            name='info-circle'
-            onClick={onClick}
-          />
+        <div className="flexTopTopicRight">
+          <FontAwesome className="info" name="info-circle" onClick={onClick} />
         </div>
         <span>
           {room.title}
@@ -36,16 +56,25 @@ const Room = ({ room, topics, loadMore, loading, end, onClick, closeModal, modal
           end={end}
         />
       </div>
-        {
-          modal.modalIsOpen ? 
-            <ModalContainer
-              description = {room.description}
-              admin = {room.user.username}
-              modalIsOpen = {modal.modalIsOpen}
-              closeModal = {closeModal}
-              type = 'room'
-            /> : null
-      }
+      {localstate.modalIsOpen
+        ? <ModalContainer
+          description={room.description}
+          admin={room.user.username}
+          modalIsOpen={localstate.modalIsOpen}
+          closeModal={closeModal}
+          type="room"
+        />
+        : null}
+      {localstate.newTopicIsOpen
+        ? <ModalContainer
+          description={room.description}
+          admin={room.user.username}
+          modalIsOpen={localstate.newTopicIsOpen}
+          closeModal={closeTopicScreen}
+          room = {room}
+          type="create"
+        />
+        : null}
     </div>
   </div>
 );
