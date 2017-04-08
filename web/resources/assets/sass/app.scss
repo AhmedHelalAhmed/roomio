@@ -25,6 +25,32 @@ body {
   margin: 0;
 }
 
+@keyframes bounce {
+  0% {
+    margin-right: 7px;
+    margin-bottom: 7px;
+  }33% {
+    margin-right:-5px;
+    margin-bottom: -5px;
+  }
+  100% {
+    margin: 0 0 0 0;
+  }
+}
+
+@keyframes bounceOn {
+  0% {
+    margin: 5px 0 0 0;
+  }25% {
+    margin: 0 5px 0 0;
+  }50% {
+    margin: 0 0 5px 0;
+  }
+  100% {
+    margin: 0 0 0 5px;
+  }
+}
+
 
 @keyframes flyIn {
   from {

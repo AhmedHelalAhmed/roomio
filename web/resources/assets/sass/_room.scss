@@ -230,29 +230,31 @@
   background: $body-accent;
   bottom: 20px;
   right: 20px;
-  transition: ease-in-out .3s;
+  transition: ease-in-out .2s;
   padding: 18px;
   border-radius: 50%;
   span {
     position: relative;
     display: inline-block;
     .new {
-      font-size: 20px;
+      font-size: 22px;
       position: absolute;
       left: 7px;
       color: $body-accent;
       z-index: 3;
     }
   }
+  
 }
 
 .moved {
   bottom: unquote("-webkit-calc(50% - 350px)");
   right: unquote("-webkit-calc(50% - 360px)");
   z-index: 2;
+  animation: .7s bounce ease-in-out;
+  animation-delay: .2s;
   box-shadow: $shadow;
-  transition: ease-in-out .3s;
-  
+  transition: ease-in-out .2s;
 }
 
 .fa-comment {

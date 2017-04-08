@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import validator from 'validator';
 import { Link, browserHistory } from 'react-router';
 import { authPOST } from '../shared/utils/authAxios';
@@ -9,33 +9,33 @@ class CreateTopic extends Component {
   state = { error: null, loading: null };
 
   componentWillMount() {
-    document.title = "Create Topic";
-    this.props.room == null ? 
-    this.props.setFields({
-      room_name: this.props.location.query.room
-    }) : 
-    this.props.setFields({
-      room_name: this.props.room.name
-    })
+    document.title = 'Create Topic';
+    this.props.room == null
+      ? this.props.setFields({
+          room_name: this.props.location.query.room,
+        })
+      : this.props.setFields({
+          room_name: this.props.room.name,
+        });
   }
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     const { fields } = this.props;
     e.preventDefault();
     authPOST(`/api/topic`, this.props.getEscapedFields())
-      .then((res) => {
+      .then(res => {
         const { topic } = res.data;
         const path = `/room/${topic.room_name}/topic/${topic.ref}`;
         browserHistory.push(path);
       })
-      .catch((err) => {
-        console.log(err.response)
+      .catch(err => {
+        console.log(err.response);
         if (err.response.data) {
           this.props.createErrorsFromResponse(err.response.data.messages);
         }
         this.setState({ error: 'An error has occured' });
       });
-  }
+  };
 
   render() {
     const { fields, errors } = this.props;
@@ -68,20 +68,23 @@ class CreateTopic extends Component {
             <textarea
               name="description"
               type="text"
-              rows="8" cols="50"
+              rows="8"
+              cols="50"
               onChange={this.props.onChange}
               value={fields.description}
               className="formInput"
             />
             <FormError error={errors.description} />
             <div className="buttonContainer">
-                <button className="formButton" >Create!</button>
+              {this.state.loading
+                ? <button className="formButton">Creating ...</button>
+                : <button className="formButton">Create!</button>}
             </div>
             <FormError error={this.state.error} />
           </form>
         </div>
       </div>
-    ); 
+    );
   }
 }
 
