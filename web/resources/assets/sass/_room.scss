@@ -178,12 +178,17 @@
   align-items: center;
 }
 
+.emptytopic {
+  margin-left: 15%;
+}
+
 .none {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   flex:1;
+  margin-bottom: 30%;
   .noneinner{
     font-size: 3em;
     text-align: center;
@@ -247,7 +252,12 @@
   
 }
 
+.usSep {
+  margin-left: 5px;
+}
+
 .moved {
+  // border-radius: 0px !important;
   bottom: unquote("-webkit-calc(50% - 350px)");
   right: unquote("-webkit-calc(50% - 360px)");
   z-index: 2;

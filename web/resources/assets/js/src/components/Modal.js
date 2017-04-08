@@ -59,7 +59,8 @@ class ModalContainer extends Component {
           onClick={this.props.closeModal}
         />
         <h2 className="adminTag" ref="subtitle">
-            Admin :
+            Admin 
+            <FontAwesome name='user' className='usSep' />
             <Link to={`/user/${this.props.admin}`}>
               {this.props.admin}
             </Link>

@@ -44,7 +44,7 @@ const TopicList = ({ topics, name, loadMore, loading, end }) => (
         {end ? <h1 style={{ textAlign: 'center' }}>fin.</h1> : null}
       </div>
     </div> : 
-    <div className="none">
+    <div className="none emptytopic">
       <div className="noneinner">There are no Topics :(</div>
       <div className="noneinner createNewTopic"><Link to={name ? `/newtopic?room=${name}` : '/newtopic'}>create one!</Link></div>
     </div>}
