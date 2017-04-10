@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { Link, browserHistory } from 'react-router';
-import axios from 'axios';
-import MakeForm from './HOCs/MakeForm';
-import FormError from './reusable/FormError';
+import React, { Component } from "react";
+import { Link, browserHistory } from "react-router";
+import axios from "axios";
+import MakeForm from "./HOCs/MakeForm";
+import FormError from "./reusable/FormError";
 
 class Login extends Component {
   state = { error: null, loading: null };
@@ -12,20 +12,20 @@ class Login extends Component {
     axios
       .post(`/api/login`, this.props.getEscapedFields())
       .then(() => {
-        window.location = '/';
+        window.location = "/";
       })
       .catch(err => {
         if (err.response.data.email) {
           this.setState({ error: err.response.data.email });
         } else {
-          this.setState({ error: 'An unknown error has occured.' });
+          this.setState({ error: "An unknown error has occured." });
         }
       });
   };
 
   render() {
     const { fields, errors } = this.props;
-    document.title = 'Login';
+    document.title = "Login";
     return (
       <div>
         <form onSubmit={this.onSubmit} className="form">
@@ -64,10 +64,10 @@ class Login extends Component {
   }
 }
 
-const fields = ['email', 'password'];
+const fields = ["email", "password"];
 const rules = {
-  email: 'required',
-  password: 'required',
+  email: "required",
+  password: "required"
 };
 
 export default MakeForm(fields, rules)(Login);

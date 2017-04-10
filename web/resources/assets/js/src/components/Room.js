@@ -19,22 +19,20 @@ const Room = (
   },
 ) => (
   <div className="sharedContainer limit">
-    {localstate.newTopicIsOpen ? 
-      <span className="bottomStickBubble moved" onClick={onClickNewTopic}>
-      <span>
-        <div className="newTopicBtn">
-          <span className="new">+</span> <FontAwesome name="comment" />
-        </div>
+    {window.user
+      ? <span
+        className={
+            `bottomStickBubble ${localstate.newTopicIsOpen ? 'moved' : null}`
+          }
+        onClick={onClickNewTopic}
+      >
+        <span>
+          <div className="newTopicBtn">
+            <span className="new">+</span> <FontAwesome name="comment" />
+          </div>
+        </span>
       </span>
-    </span>
-      :
-      <span className="bottomStickBubble" onClick={onClickNewTopic}>
-      <span>
-        <div className="newTopicBtn">
-          <span className="new">+</span> <FontAwesome name="comment" />
-        </div>
-      </span>
-    </span>}
+      : null}
     <div className="sharedTitleSep">
       <h1>
         <div className="flexTopTopicRight">
@@ -71,7 +69,7 @@ const Room = (
           admin={room.user.username}
           modalIsOpen={localstate.newTopicIsOpen}
           closeModal={closeTopicScreen}
-          room = {room}
+          room={room}
           type="create"
         />
         : null}

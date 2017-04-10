@@ -5,9 +5,7 @@ export const authPOST = (url, data, args = {}) => {
   const headers = { ...auth };
   const reqArgs = { headers, ...args };
   return new Promise((resolve, reject) => {
-    axios.post(url, data, reqArgs)
-      .then(resolve)
-      .catch(reject);
+    axios.post(url, data, reqArgs).then(resolve).catch(reject);
   });
 };
 
@@ -15,8 +13,6 @@ export const authGET = (url, args) => {
   const headers = { ...auth };
   const reqArgs = { headers, ...args };
   return new Promise((resolve, reject) => {
-    axios.get(url, reqArgs)
-      .then(resolve)
-      .catch(reject);
+    axios.get(url, reqArgs).then(resolve).catch(reject);
   });
 };

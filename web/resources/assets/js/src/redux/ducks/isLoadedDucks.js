@@ -40,71 +40,54 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 //  Action Creators
-export const startLoadingHome = () => {
-  return { type: START_LOADING_HOME };
-};
+export const startLoadingHome = () => ({ type: START_LOADING_HOME });
 
-export const stopLoadingHome = () => {
-  return { type: STOP_LOADING_HOME };
-};
+export const stopLoadingHome = () => ({ type: STOP_LOADING_HOME });
 
-export const startLoadingRoom = (roomName) => {
-  return {
-    type: START_LOADING,
-    payload: {
-      type: 'rooms',
-      identifier: roomName
-    }
-  };
-};
+export const startLoadingRoom = roomName => ({
+  type: START_LOADING,
+  payload: {
+    type: 'rooms',
+    identifier: roomName,
+  },
+});
 
-export const stopLoadingRoom = (roomName) => {
-  return {
-    type: STOP_LOADING,
-    payload: {
-      type: 'rooms',
-      identifier: roomName
-    }
-  };
-};
+export const stopLoadingRoom = roomName => ({
+  type: STOP_LOADING,
+  payload: {
+    type: 'rooms',
+    identifier: roomName,
+  },
+});
 
-export const startLoadingTopic = (topicRef) => {
-  return {
-    type: START_LOADING,
-    payload: {
-      type: 'topics',
-      identifier: topicRef
-    }
-  };
-};
+export const startLoadingTopic = topicRef => ({
+  type: START_LOADING,
+  payload: {
+    type: 'topics',
+    identifier: topicRef,
+  },
+});
 
-export const stopLoadingTopic = (topicRef) => {
-  return {
-    type: STOP_LOADING,
-    payload: {
-      type: 'topics',
-      identifier: topicRef
-    }
-  };
-};
+export const stopLoadingTopic = topicRef => ({
+  type: STOP_LOADING,
+  payload: {
+    type: 'topics',
+    identifier: topicRef,
+  },
+});
 
-export const startLoadingProfile = (profileRef) => {
-  return {
-    type: START_LOADING,
-    payload: {
-      type: 'profiles',
-      identifier: profileRef
-    }
-  };
-};
+export const startLoadingProfile = profileRef => ({
+  type: START_LOADING,
+  payload: {
+    type: 'profiles',
+    identifier: profileRef,
+  },
+});
 
-export const stopLoadingProfile = (profileRef) => {
-  return {
-    type: STOP_LOADING,
-    payload: {
-      type: 'profiles',
-      identifier: profileRef
-    }
-  };
-};
-
+export const stopLoadingProfile = profileRef => ({
+  type: STOP_LOADING,
+  payload: {
+    type: 'profiles',
+    identifier: profileRef,
+  },
+});

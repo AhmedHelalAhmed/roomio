@@ -2,7 +2,6 @@ import React from 'react';
 import FontAwesome from 'react-fontawesome';
 
 const Chatbox = ({ sendMessage, onChange, content }) => {
-
   if (!window.user) {
     return (
       <span className="topicMessenger" style={{ textAlign: 'center' }}>

@@ -1,33 +1,41 @@
-import React, { Component, PropTypes } from 'react';
-import Push from 'push.js';
-import validator from 'validator';
-import { connect } from 'react-redux';
-import Scroll, { scroller, scrollToBottom } from 'react-scroll';
-import { updateActiveTopic } from '../redux/ducks/activeDucks';
-import { addTopic, addMessages, addMessage, viewAllMessages } from '../redux/ducks/entitiesDucks';
-import { startLoadingTopic, stopLoadingTopic } from '../redux/ducks/isLoadedDucks';
-import { authGET } from '../shared/utils/authAxios';
-import find from 'lodash/find';
-import Loading from '../components/reusable/Loading';
-import scrollToComponent from 'react-scroll-to-component';
+import React, { Component, PropTypes } from "react";
+import Push from "push.js";
+import validator from "validator";
+import { connect } from "react-redux";
+import Scroll, { scroller, scrollToBottom } from "react-scroll";
+import { updateActiveTopic } from "../redux/ducks/activeDucks";
+import {
+  addTopic,
+  addMessages,
+  addMessage,
+  viewAllMessages
+} from "../redux/ducks/entitiesDucks";
+import {
+  startLoadingTopic,
+  stopLoadingTopic
+} from "../redux/ducks/isLoadedDucks";
+import { authGET } from "../shared/utils/authAxios";
+import find from "lodash/find";
+import Loading from "../components/reusable/Loading";
+import scrollToComponent from "react-scroll-to-component";
 const scroll = Scroll.animateScroll;
 
 const scrollBottom = () => {
-    scroll.scrollToBottom({
-      containerId: 'fortopic',
-      smooth: false,
-      duration: 0,
-      delay: 0
-    });
-}
+  scroll.scrollToBottom({
+    containerId: "fortopic",
+    smooth: false,
+    duration: 0,
+    delay: 0
+  });
+};
 
 /**
  * Components
  */
-import Topic from '../components/Topic';
+import Topic from "../components/Topic";
 
 class TopicContainer extends Component {
-  state = { content: '', unseenMessages: 0 };
+  state = { content: "", unseenMessages: 0 };
 
   componentWillMount() {
     const { topics, socket, params: { topicRef, roomName } } = this.props;
@@ -40,14 +48,16 @@ class TopicContainer extends Component {
       this.props.startLoading();
     }
 
-    this.props.fetchTopic(topicRef)
+    this.props
+      .fetchTopic(topicRef)
       .then(() => {
-          this.props.initSocketListeners();
-          this.props.emit.joinTopic();
-      }).catch((err) => console.log(err));
+        this.props.initSocketListeners();
+        this.props.emit.joinTopic();
+      })
+      .catch(err => console.log(err));
 
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") {
         this.setState({ unseenMessages: 0 });
         this.updateTitle();
       }
@@ -56,7 +66,6 @@ class TopicContainer extends Component {
 
   componentDidMount() {
     scrollBottom();
-
   }
 
   componentDidUpdate() {
@@ -68,26 +77,30 @@ class TopicContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { windowState,  params: { topicRef, roomName }, topics } = this.props;
-    const newMessagesLen = nextProps.messages[topicRef] ? nextProps.messages[topicRef].length : 0;
-    const currMessagesLen = this.props.messages[topicRef] ? this.props.messages[topicRef].length : 0;
+    const { windowState, params: { topicRef, roomName }, topics } = this.props;
+    const newMessagesLen = nextProps.messages[topicRef]
+      ? nextProps.messages[topicRef].length
+      : 0;
+    const currMessagesLen = this.props.messages[topicRef]
+      ? this.props.messages[topicRef].length
+      : 0;
 
     if (newMessagesLen > currMessagesLen) {
       const newMessage = nextProps.messages[topicRef][newMessagesLen - 1];
 
-      if (!newMessage.seen && windowState === 'hidden') {
+      if (!newMessage.seen && windowState === "hidden") {
         const topic = find(topics[roomName], { ref: topicRef });
         this.setState({
-          unseenMessages: this.state.unseenMessages + 1,
+          unseenMessages: this.state.unseenMessages + 1
         });
 
         Push.create(`${newMessage.user.username} said: `, {
-          body: newMessage.content || ' ',
+          body: newMessage.content || " ",
           timeout: 5000,
           icon: {
-            x16: 'http://i.imgur.com/X9LSYcX.png',
-            x32: 'http://i.imgur.com/X9LSYcX.png',
-          },
+            x16: "http://i.imgur.com/X9LSYcX.png",
+            x32: "http://i.imgur.com/X9LSYcX.png"
+          }
         });
       }
     }
@@ -97,26 +110,26 @@ class TopicContainer extends Component {
     const { windowState, topics, params: { topicRef, roomName } } = this.props;
     const topic = find(topics[roomName], { ref: topicRef });
 
-    if (this.state.unseenMessages > 0 && windowState === 'hidden' && topic) {
-      const title = `(${this.state.unseenMessages}) - ${topic.room.title} - ${topic.title}`
+    if (this.state.unseenMessages > 0 && windowState === "hidden" && topic) {
+      const title = `(${this.state.unseenMessages}) - ${topic.room.title} - ${topic.title}`;
       document.title = title;
     } else if (topic) {
       document.title = `${topic.room_name} - ${topic.title}`;
     }
   }
 
-  onInputChange = (event) => {
+  onInputChange = event => {
     const { value: content } = event.target;
     this.setState({ content });
-  }
+  };
 
-  sendMessage = (event) => {
+  sendMessage = event => {
     if (event) event.preventDefault();
-    const  content = Htmlspecialchars(this.state.content);
+    const content = Htmlspecialchars(this.state.content);
     this.props.emit.sendMessage(content);
-    this.setState({ content: '' });
+    this.setState({ content: "" });
     scrollBottom();
-  }
+  };
 
   render() {
     const { topics, isLoaded, messages } = this.props;
@@ -138,9 +151,7 @@ class TopicContainer extends Component {
       );
     }
 
-    return (
-      <Loading name="topic" />
-    );
+    return <Loading name="topic" />;
   }
 }
 
@@ -149,7 +160,7 @@ const mapStateToProps = (state, props) => ({
   messages: state.entities.messages,
   active: state.active,
   isLoaded: state.isLoaded.topics[props.params.topicRef],
-  windowState: state.active.window,
+  windowState: state.active.window
 });
 
 const mapDispatchToProps = (dispatch, props) => {
@@ -157,7 +168,7 @@ const mapDispatchToProps = (dispatch, props) => {
 
   return {
     initSocketListeners: () => {
-      socket.on('topic:new_message', ({ message }) => {
+      socket.on("topic:new_message", ({ message }) => {
         dispatch(addMessage(message.topic_ref, message));
         //scroll.scrollToBottom();
         scrollBottom();
@@ -166,27 +177,27 @@ const mapDispatchToProps = (dispatch, props) => {
     emit: {
       joinTopic: () => {
         const { topicRef, roomName } = params;
-        socket.emit('topic:join', { topicRef, roomName });
+        socket.emit("topic:join", { topicRef, roomName });
       },
       leaveTopic: () => {
         const { topicRef, roomName } = params;
-        socket.emit('topic:leave', { topicRef, roomName });
+        socket.emit("topic:leave", { topicRef, roomName });
       },
-      sendMessage: (content) => {
+      sendMessage: content => {
         const { topicRef, roomName } = params;
-        socket.emit('topic:send_message', {
-          content, 
-          topic_ref: topicRef, 
-          ...window.user,
+        socket.emit("topic:send_message", {
+          content,
+          topic_ref: topicRef,
+          ...window.user
         });
-      },
+      }
     },
     viewAllMessages: () => dispatch(viewAllMessages(params.topic_ref)),
     startLoading: () => dispatch(startLoadingTopic(params.topicRef)),
-    fetchTopic: (topicRef) => {
+    fetchTopic: topicRef => {
       return new Promise((resolve, reject) => {
         authGET(`/api/topic/${topicRef}/messages`)
-          .then((res) => {
+          .then(res => {
             const { messages, topic } = res.data;
             dispatch(addTopic(topic));
             dispatch(addMessages(topic.ref, messages.data));
@@ -195,31 +206,29 @@ const mapDispatchToProps = (dispatch, props) => {
             document.title = `${topic.room_name} - ${topic.title}`;
             resolve();
           })
-          .catch((err) => {
+          .catch(err => {
             console.log(err);
             dispatch(stopLoadingTopic(params.topicRef));
             reject(err);
           });
-      })
+      });
     }
-  }
+  };
 };
 
-const ConnectedTopicContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TopicContainer);
+const ConnectedTopicContainer = connect(mapStateToProps, mapDispatchToProps)(
+  TopicContainer
+);
 
-const Htmlspecialchars = (str) => {
-    const map = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "\"": "&quot;",
-        "'": "&#39;"
-    };
-    return str.replace(/[&<>"']/g, m => map[m]);
-}
-
+const Htmlspecialchars = str => {
+  const map = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  };
+  return str.replace(/[&<>"']/g, m => map[m]);
+};
 
 export default ConnectedTopicContainer;

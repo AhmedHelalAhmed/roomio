@@ -1,21 +1,21 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { addRoom, addTopics } from '../redux/ducks/entitiesDucks';
-import { updateActiveRoom } from '../redux/ducks/activeDucks';
-import { updateRoomPagination } from '../redux/ducks/paginationDucks';
+import React, { Component, PropTypes } from "react";
+import { Link } from "react-router";
+import { connect } from "react-redux";
+import { addRoom, addTopics } from "../redux/ducks/entitiesDucks";
+import { updateActiveRoom } from "../redux/ducks/activeDucks";
+import { updateRoomPagination } from "../redux/ducks/paginationDucks";
 import {
   startLoadingRoom,
-  stopLoadingRoom,
-} from '../redux/ducks/isLoadedDucks';
-import { authGET } from '../shared/utils/authAxios';
-import Room from '../components/Room';
-import Loading from '../components/reusable/Loading';
+  stopLoadingRoom
+} from "../redux/ducks/isLoadedDucks";
+import { authGET } from "../shared/utils/authAxios";
+import Room from "../components/Room";
+import Loading from "../components/reusable/Loading";
 
 class RoomContainer extends Component {
   state = {
     modalIsOpen: false,
-    newTopicIsOpen: false,
+    newTopicIsOpen: false
   };
 
   componentWillReceiveProps(nextProps) {
@@ -23,7 +23,7 @@ class RoomContainer extends Component {
     const currentRoomName = this.props.params.roomName;
     if (newRoomName && newRoomName !== currentRoomName) {
       const { socket } = nextProps;
-      socket.emit('leave_room', { roomName: currentRoomName });
+      socket.emit("leave_room", { roomName: currentRoomName });
       this.checkCacheAndFetch(newRoomName);
     }
   }
@@ -42,15 +42,14 @@ class RoomContainer extends Component {
       this.props.updateRoomPagination(roomName, {
         page: 1,
         loading: false,
-        end: false,
+        end: false
       });
-      console.log(this.props.pagination);
     }
 
     this.props
       .fetchRoom(roomName)
       .then(() => {
-        socket.emit('join_room', { roomName });
+        socket.emit("join_room", { roomName });
       })
       .catch(err => {
         console.log(err.response);
@@ -69,7 +68,7 @@ class RoomContainer extends Component {
         this.props.updateRoomPagination(roomName, {
           page: page + 1,
           loading: false,
-          end: res.data.topics.data.length === 0,
+          end: res.data.topics.data.length === 0
         });
       });
     }
@@ -94,7 +93,7 @@ class RoomContainer extends Component {
 
   componentWillUnmount() {
     const { socket, params: { roomName } } = this.props;
-    socket.emit('leave_room', { roomName });
+    socket.emit("leave_room", { roomName });
   }
 
   render() {
@@ -139,7 +138,7 @@ const mapStateToProps = (state, props) => ({
   topics: state.entities.topics,
   active: state.active,
   isLoaded: state.isLoaded.rooms[props.params.roomName],
-  pagination: state.pagination.rooms[props.params.roomName],
+  pagination: state.pagination.rooms[props.params.roomName]
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -177,11 +176,11 @@ const mapDispatchToProps = dispatch => ({
           reject(err);
         });
     });
-  },
+  }
 });
 
 const ConnectedRoomContainer = connect(mapStateToProps, mapDispatchToProps)(
-  RoomContainer,
+  RoomContainer
 );
 
 export default ConnectedRoomContainer;

@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import validator from 'validator';
-import { Link, browserHistory } from 'react-router';
-import { authPOST } from '../shared/utils/authAxios';
-import MakeForm from './HOCs/MakeForm';
-import FormError from './reusable/FormError';
+import React, { Component } from "react";
+import validator from "validator";
+import { Link, browserHistory } from "react-router";
+import { authPOST } from "../shared/utils/authAxios";
+import MakeForm from "./HOCs/MakeForm";
+import FormError from "./reusable/FormError";
 
 class CreateTopic extends Component {
   state = { error: null, loading: null };
 
   componentWillMount() {
-    document.title = 'Create Topic';
+    document.title = "Create Topic";
     this.props.room == null
       ? this.props.setFields({
-          room_name: this.props.location.query.room,
+          room_name: this.props.location.query.room
         })
       : this.props.setFields({
-          room_name: this.props.room.name,
+          room_name: this.props.room.name
         });
   }
 
@@ -33,7 +33,7 @@ class CreateTopic extends Component {
         if (err.response.data) {
           this.props.createErrorsFromResponse(err.response.data.messages);
         }
-        this.setState({ error: 'An error has occured' });
+        this.setState({ error: "An error has occured" });
       });
   };
 
@@ -88,11 +88,11 @@ class CreateTopic extends Component {
   }
 }
 
-const fields = ['room_name', 'title', 'description'];
+const fields = ["room_name", "title", "description"];
 const rules = {
-  room_name: 'required',
-  title: 'required',
-  description: 'required',
+  room_name: "required",
+  title: "required",
+  description: "required"
 };
 
 export default MakeForm(fields, rules)(CreateTopic);

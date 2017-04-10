@@ -1,11 +1,14 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { addHomeTopics } from '../redux/ducks/entitiesDucks';
-import { startLoadingHome, stopLoadingHome } from '../redux/ducks/isLoadedDucks';
-import { updateHomePagination } from '../redux/ducks/paginationDucks';
-import { authGET } from '../shared/utils/authAxios';
-import Home from '../components/Home';
-import Loading from '../components/reusable/Loading';
+import React, { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { addHomeTopics } from "../redux/ducks/entitiesDucks";
+import {
+  startLoadingHome,
+  stopLoadingHome
+} from "../redux/ducks/isLoadedDucks";
+import { updateHomePagination } from "../redux/ducks/paginationDucks";
+import { authGET } from "../shared/utils/authAxios";
+import Home from "../components/Home";
+import Loading from "../components/reusable/Loading";
 
 class HomeContainer extends Component {
   componentWillMount() {
@@ -23,16 +26,15 @@ class HomeContainer extends Component {
     const { page, end } = this.props.pagination;
     this.props.updateHomePagination({ loading: true });
     if (!end) {
-      this.props.fetchHomeTopics(page)
-      .then((res) => {
+      this.props.fetchHomeTopics(page).then(res => {
         this.props.updateHomePagination({
-          page: page+1,
+          page: page + 1,
           loading: false,
-          end: res.data.topics.data.length === 0,
+          end: res.data.topics.data.length === 0
         });
       });
     }
-  }
+  };
 
   render() {
     const { topics, isLoaded } = this.props;
@@ -47,9 +49,7 @@ class HomeContainer extends Component {
       );
     }
 
-    return (
-      <Loading name="room" />
-    );
+    return <Loading name="room" />;
   }
 }
 
@@ -61,28 +61,27 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = dispatch => ({
   startLoading: () => dispatch(startLoadingHome()),
-  updateHomePagination: (pagination) => dispatch(updateHomePagination(pagination)),
-  fetchHomeTopics: (page) => {
-    return new Promise((resolve, reject) => {
-      const endpoint = page ? `/api/topic?page=${page}` : '/api/topic';
+  updateHomePagination: pagination =>
+    dispatch(updateHomePagination(pagination)),
+  fetchHomeTopics: page =>
+    new Promise((resolve, reject) => {
+      const endpoint = page ? `/api/topic?page=${page}` : "/api/topic";
       authGET(endpoint)
-        .then((res) => {
+        .then(res => {
           dispatch(addHomeTopics(res.data.topics.data));
           dispatch(stopLoadingHome());
-          document.title = 'Home';
+          document.title = "Home";
           resolve(res);
         })
-        .catch((err) => {
+        .catch(err => {
           dispatch(stopLoadingHome());
           reject(err);
         });
-    });
-  },
+    })
 });
 
-const ConnectedHomeContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeContainer);
+const ConnectedHomeContainer = connect(mapStateToProps, mapDispatchToProps)(
+  HomeContainer
+);
 
 export default ConnectedHomeContainer;

@@ -9,7 +9,7 @@ const matchPlayerUrl = (url) => {
   const vimeo = /^(http\:\/\/|https\:\/\/)?(www\.)?(vimeo\.com\/)([0-9]+)$/.test(url);
   const streamable = /^https?:\/\/(streamable\.com)\/(.*)$/.test(url);
   const vidme = /^https?:\/\/(vid\.me)\/(.*)$/.test(url);
-  return (youtube || vimeo || streamable || vidme);
+  return youtube || vimeo || streamable || vidme;
 };
 
 const getUrlsFromContent = (content) => {
@@ -23,32 +23,27 @@ const Message = ({ messages, message, index, html }) => {
 
   return (
     <div className="chatBubble" key={index}>
-      {   isFirst || messages[index - 1].user.username !== message.user.username ?
-          <strong className="user">
-            <Link to={'/user/' + message.user.username}>
-              {message.user.username}:
+      {isFirst || messages[index - 1].user.username !== message.user.username
+        ? <strong className="user">
+          <Link to={`/user/${message.user.username}`}>
+            {message.user.username}:
             </Link>
-          </strong> : null
-      }
-      {
-        playerURL ? 
-        <span>
+        </strong>
+        : null}
+      {playerURL
+        ? <span>
           <span
             style={{ whiteSpace: 'pre-wrap' }}
             dangerouslySetInnerHTML={{ __html: html }}
           />
           <VideoPlayer playerURL={playerURL} message={message} />
-        </span> : 
-        <span
+        </span>
+        : <span
           style={{ whiteSpace: 'pre-wrap' }}
           dangerouslySetInnerHTML={{ __html: html }}
-        />
-      }
+        />}
     </div>
   );
 };
-
-
-
 
 export default Message;

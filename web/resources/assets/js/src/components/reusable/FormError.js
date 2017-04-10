@@ -7,6 +7,6 @@ const FormError = ({ error }) => {
       {error}
     </span>
   );
-}
+};
 
 export default FormError;

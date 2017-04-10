@@ -7,7 +7,6 @@ import Message from './Message';
 import ChatBox from './Chatbox';
 
 class MessageList extends Component {
-
   componentWillMount() {
     this.converter = new showdown.Converter({
       simplifiedAutoLink: true,
@@ -15,7 +14,7 @@ class MessageList extends Component {
       omitExtraWLInCodeBlocks: true,
       strikethrough: true,
       openLinksInNewWindow: true,
-      ghCodeBlocks: true
+      ghCodeBlocks: true,
     });
   }
 
@@ -25,17 +24,17 @@ class MessageList extends Component {
     return (
       <div className="outerChat">
         <div className="fortopic" id="fortopic">
-          {messages ?
-            messages.map((message, key) =>
+          {messages
+            ? messages.map((message, key) => (
               <Message
                 messages={messages}
                 message={message}
                 html={this.converter.makeHtml(message.content)}
                 key={key}
                 index={key}
-              />,
-            ) : null
-          }
+              />
+              ))
+            : null}
           <Element name="anchor" className="anchor" />
         </div>
         <div className="bottomChat">

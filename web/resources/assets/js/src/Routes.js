@@ -11,30 +11,45 @@ import CreateTopic from './components/CreateTopic';
 import AuthContainer from './containers/AuthContainer';
 import ProfileContainer from './containers/ProfileContainer';
 
-// router would go here.
-const Routes = () => {
-  return (
-    <Router history={browserHistory}>
-      <Route path="/" component={AppContainer}>
-        <IndexRoute component={HomeContainer} />
-        <Route path="/newroom" component={CreateRoom} />
-        <Route path="/newtopic" component={CreateTopic} />
-        <Route path="/room/:roomName" component={RoomContainer} />
-        <Route path="/room/:roomName/topic/:topicRef" component={TopicsContainer} />
-        <Route path="/user/:userName" component={ProfileContainer} />
-      </Route>
-      <Route path="/login" component={() => (
-        <AuthContainer>
-          <Login/>
-        </AuthContainer>
-      )}/>
-      <Route path="/register" component={() => (
-        <AuthContainer>
-          <Register/>
-        </AuthContainer>
-      )}/>
-    </Router>
-  );
+const requireAuth = (nextState, replace, callback) => {
+  if (!window.user) {
+    browserHistory.push('/login');
+  } else {
+    callback();
+  }
 };
+
+// router would go here.
+const Routes = () => (
+  <Router history={browserHistory}>
+    <Route path="/" component={AppContainer}>
+      <IndexRoute component={HomeContainer} />
+      <Route path="/newroom" component={CreateRoom} onEnter={requireAuth} />
+      <Route path="/newtopic" component={CreateTopic} onEnter={requireAuth} />
+      <Route path="/room/:roomName" component={RoomContainer} />
+      <Route
+        path="/room/:roomName/topic/:topicRef"
+        component={TopicsContainer}
+      />
+      <Route path="/user/:userName" component={ProfileContainer} />
+    </Route>
+    <Route
+      path="/login"
+      component={() => (
+        <AuthContainer>
+          <Login />
+        </AuthContainer>
+        )}
+    />
+    <Route
+      path="/register"
+      component={() => (
+        <AuthContainer>
+          <Register />
+        </AuthContainer>
+        )}
+    />
+  </Router>
+  );
 
 export default Routes;

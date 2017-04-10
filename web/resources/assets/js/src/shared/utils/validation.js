@@ -1,22 +1,14 @@
 import validator from 'validator';
 
-validator.required = (fieldVal) => {
-  return !!fieldVal;
-};
+validator.required = fieldVal => !!fieldVal;
 
-validator.isPassword = (fieldVal) => {
-  return validator.isLength(fieldVal, {
-    min: 4
-  });
-};
+validator.isPassword = fieldVal => validator.isLength(fieldVal, {
+  min: 4,
+});
 
-validator.isLower = (fieldVal) => {
-  return validator.isLowercase(fieldVal);
-};
+validator.isLower = fieldVal => validator.isLowercase(fieldVal);
 
-validator.sameAs = (fieldVal, [otherFieldName], allFields) => {
-  return fieldVal === allFields[otherFieldName];
-};
+validator.sameAs = (fieldVal, [otherFieldName], allFields) => fieldVal === allFields[otherFieldName];
 
 const errorMessages = {
   required: 'This field is required.',
@@ -32,24 +24,31 @@ const _validator = (rule, fieldVal, allFields) => {
     console.log(ruleName, args);
     const isValid = validator[ruleName](fieldVal, args, allFields);
     return { isValid, rule: ruleName };
-  } else {
-    const isValid = validator[rule](fieldVal);
-    return { isValid, rule };
   }
+  const isValid = validator[rule](fieldVal);
+  return { isValid, rule };
 };
 
-export const validateField = (fieldName, fieldVal, fieldValidation, allFields) => {
+export const validateField = (
+  fieldName,
+  fieldVal,
+  fieldValidation,
+  allFields,
+) => {
   const rules = fieldValidation.split('|');
-  const errors = rules.map((rule) => {
-    return _validator(rule, fieldVal, allFields);
-  }).filter(elem => !elem.isValid);
+  const errors = rules
+    .map(rule => _validator(rule, fieldVal, allFields))
+    .filter(elem => !elem.isValid);
   if (errors.length) return errorMessages[errors.pop().rule];
   return null;
 };
 
-export const validateForm = (fields, validationRules) => {
-  return Object.keys(fields).reduce((errors, fieldName) => {
-    errors[fieldName] = validateField(fieldName, fields[fieldName], validationRules[fieldName]);
-  }, {});
-};
-
+export const validateForm = (fields, validationRules) =>
+  Object.keys(fields).reduce(
+    (errors, fieldName) => {
+      errors[fieldName] = validateField(
+        fieldName,
+        fields[fieldName],
+        validationRules[fieldName],
+      );
+    }, {});
