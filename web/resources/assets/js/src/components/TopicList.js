@@ -41,7 +41,7 @@ const TopicList = ({ topics, name, loadMore, loading, end }) => (
           onEnter={loadMore}
         />
         {loading ? 'loading' : null}
-        {end ? <h1 style={{ textAlign: 'center' }}>fin.</h1> : null}
+        {end ? <h1 className='fin'>fin.</h1> : null}
       </div>
     </div> : 
     <div className="none emptytopic">

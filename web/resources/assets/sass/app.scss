@@ -1,6 +1,7 @@
 
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 // Variables
 @import "variables";
@@ -30,9 +31,12 @@ body {
 }
 
 .mlogo {
-      height: 80px;
+    height: 80px;
     display: flex;
     align-items: center;
+    h1 {
+      font-family: $font-family-sans-serif !important;
+    }
 }
 
 @keyframes bounce {
@@ -115,8 +119,23 @@ body {
   top: 0; left: 0; bottom: 0; right: 0;
 }
 
+
 .ReactModal__Content {
   z-index: 999 !important;
+  .outerFormContainer {
+    width: 400px !important;
+    .formContainer {
+      height: auto;
+      margin-top: 0px;
+      .form {
+        align-self: center;
+        margin: 15px;
+        width: 0px;
+        width: auto !important;
+        min-width: 0;
+      }
+    }
+  }
 
 }
 

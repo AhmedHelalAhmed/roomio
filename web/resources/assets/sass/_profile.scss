@@ -2,7 +2,6 @@
   .usernameOuter {
     display: flex;
     justify-content: center;
-    padding-left: 20px;
       .profileDate {
         align-self: flex-end;
         position: absolute;
@@ -26,21 +25,35 @@
   }
   .sharedBody {
     .flexSplit {
-      flex: 1;
-      margin: 20px;
-      width: calc(50% - 40px);
+      padding: 10px 20px 10px 20px;
+      box-sizing: border-box;
+      // flex: 1;
+      // margin: 20px;
+      // padding: 20px;
+      width: 50%;
     }
     .listNode {
-      padding: 10px;
+      display: inline-block;
+      padding: 3px;
+      border-radius: 0 10px 10px 0;
       overflow-x: hidden;
+      border-left: solid 4px $base-white;
       padding-left: 7px;
-      border-left: solid 4px $body-other;
-      margin: 20px;
-      width: calc(100% - 47px);
-      flex: 1;
+      // &::after {
+      //   content: " , "
+      // }
+      &:hover{
+        border-left: solid 4px $body-other;
+        cursor: pointer;
+        // padding-left: 15px;
+        // @include darker_background_color($base-white);
+      }
+      margin: 5px;
       a {
         text-decoration: none;
         color: $base-black;
+        text-overflow: none;
+        word-break: none;
       }
     }
   }

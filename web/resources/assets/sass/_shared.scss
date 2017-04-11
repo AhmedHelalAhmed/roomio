@@ -3,7 +3,9 @@
   display: flex;
   align-self: stretch;
   align-content: stretch;
-  flex-direction: column;
+  flex-direction: column;     
+  position: relative;
+
   // height: 100vh;
   // max-height: 100vh;
   // min-height: 100vh;
@@ -32,7 +34,7 @@
     }
   }
   .sharedBody {
-      margin: 0 0 0 20px;
+      padding: 0 20px 0 20px;
       flex:1;
       overflow-y: auto;
     }
@@ -44,9 +46,9 @@
       a {
           cursor: pointer;
           text-decoration: none;
-          color: $unvisited;
+          // color: $unvisited;
           &:visited {
-              color: $visited;
+              // color: $visited;
           }
       }
     }
@@ -59,7 +61,7 @@
 }
 
 .limit {
-  max-height: 100vh;
+  height: 100vh;
 }
 
 .userLeft {
@@ -81,7 +83,8 @@
 }
 
 .expandable {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
+  margin-bottom: 10px;
   display: inline-block;
   span {
     margin-left: 0 !important;
@@ -93,6 +96,13 @@
     margin-left: 0 !important;
 }
 
-.sharedContainer {
-  height: 100vh;
+.errorIcon {
+  margin: 0 5px 10px 0;
+}
+
+.modalAdmin {
+  display: block;
+  font-size: 14px;
+  margin-left: 5px;
+  @include lighter_color_extra($body-accent);
 }

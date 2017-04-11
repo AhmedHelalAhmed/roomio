@@ -13,6 +13,7 @@
 .sharedContainer {
   //height: 100vh;
   .topic{
+      margin-top: 15px !important;
     p {
       margin: 5px;
     }
@@ -109,7 +110,7 @@
             }
           }
           .admin {
-            p{
+            p {
               a {
                 text-overflow: ellipsis;
                 overflow-x: hidden;
@@ -122,6 +123,13 @@
     }
     .topicsFlex {
       width: 85%;
+      margin-top: 20px;
+      .sharedContainer {
+        position: initial;
+        div {
+          position: relative !important;
+        }
+      }
     }
     .roomInformation {
       padding: 20px;  
@@ -134,6 +142,11 @@
       }
     }
   }
+}
+
+.fin {
+  position: absolute;
+  bottom: 0;
 }
 
 .newTopic {
@@ -188,6 +201,7 @@
   align-items: center;
   flex-direction: column;
   flex:1;
+      margin-top: 20%;
   margin-bottom: 30%;
   .noneinner{
     font-size: 3em;
@@ -242,9 +256,10 @@
     position: relative;
     display: inline-block;
     .new {
-      font-size: 22px;
+      font-size: 24px;
+      line-height: 1.02;
       position: absolute;
-      left: 7px;
+      left: 5px;
       color: $body-accent;
       z-index: 3;
     }
@@ -258,8 +273,12 @@
 
 .moved {
   // border-radius: 0px !important;
-  bottom: unquote("-webkit-calc(50% - 350px)");
-  right: unquote("-webkit-calc(50% - 360px)");
+  bottom: unquote("-moz-calc(50% - 285px)");
+  bottom: unquote("-webkit-calc(50% - 285px)");
+  // bottom: 50%;
+  // right: 50%;
+  right: unquote("-moz-calc(50% - 260px)");
+  right: unquote("-webkit-calc(50% - 260px)");
   z-index: 2;
   animation: .7s bounce ease-in-out;
   animation-delay: .2s;

@@ -18,11 +18,11 @@ const customStyles = {
 
 const loginStyle = {
   content: {
-    top: '45%',
+    top: '48%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
-    width: '600px',
+    //width: '600px',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
@@ -59,11 +59,11 @@ class ModalContainer extends Component {
               onClick={this.props.closeModal}
             />
             <h2 className="adminTag" ref="subtitle">
-                Admin
-                <FontAwesome name="user" className="usSep" />
+              <FontAwesome name="user" className="usSep" />
               <Link to={`/user/${this.props.admin}`}>
                 {this.props.admin}
               </Link>
+              <span className='modalAdmin'>Room Admin</span>
             </h2>
             <h4 ref="subtitle">Description</h4>
             <p>{this.props.description}</p>

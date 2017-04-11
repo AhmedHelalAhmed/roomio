@@ -79,13 +79,28 @@
     height: 100%;
     padding: 10px 0 0 0;
     .chatBubble {
-        margin: 0;
-        margin-left: 10px;
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        padding-left: 1%;
         display: flex;
         flex-direction: column;
         //border-left: .3px grey solid;
         word-wrap: break-word;
-        max-width: 75%;
+        width: 74%;
+        padding-right: 25%;
+        &:hover {
+          background-color: $body-hover;
+        }
+        div {
+          margin: 10px 0 0 0;
+          .date-trigger {
+            cursor: default;
+            font-size: 14px;
+            &::before {
+              content: " - ";
+            }
+          }
+        }
     }
     span {
       margin-left: 20px;
@@ -108,9 +123,13 @@
     .user {
         margin: 10px 0 0 0;
         width: 100%;
+        &:hover {
+          cursor: pointer;
+        }
         // display: block;
       a{
         color: $brand-primary;
+        font-weight: bold;
         text-decoration: none;
       }
     }

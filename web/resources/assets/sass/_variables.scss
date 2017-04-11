@@ -2,9 +2,11 @@
 // Body
 $body-bg: white;
 $body-accent: indianred;
+// $body-accent: #ffa968;
 //$body-accent: rgb(0%, 34.7%, 49.5%);
 $body-other: #5c95cd;
 $body-slight-grey: #e6e6e6;
+$body-hover: #f2f2f2;
 //$body-accent: rgb(83.1%, 83.1%, 83.1%);
 
 //modal
@@ -18,7 +20,8 @@ $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
 
 // Brands
-$brand-primary: #3097D1;
+// $brand-primary: #3097D1;
+$brand-primary: #5c95cd;
 $brand-info: #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;
@@ -68,6 +71,6 @@ $base-black: black;
 $base-border: #636b6f;
 
 //topics
-$unvisited: rgb(0%, 34.7%, 49.5%);
-$visited: rgb(32.2%, 26.9%, 39.4%)
+// $unvisited: rgb(0%, 34.7%, 49.5%);
+// $visited: rgb(32.2%, 26.9%, 39.4%)
 

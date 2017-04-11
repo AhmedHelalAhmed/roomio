@@ -58,7 +58,7 @@ const Message = ({ messages, message, index, html }) => {
   const playerURL = getUrlsFromContent(message.content);
 
   return (
-    <div className="chatBubble" key={index}>
+    <div className="chatBubble" id={`message-${message.id}`}>
       <UsernameDate
         isFirst={isFirst}
         prevMessage={messages[index > 0 ? index - 1 : index]}
