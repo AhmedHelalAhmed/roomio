@@ -108,11 +108,14 @@
     .user {
         margin: 10px 0 0 0;
         width: 100%;
-        display: block;
+        // display: block;
       a{
         color: $brand-primary;
         text-decoration: none;
       }
+    }
+    .date-trigger {
+      @include lighter_color_extra($text-color);
     }
 }
 

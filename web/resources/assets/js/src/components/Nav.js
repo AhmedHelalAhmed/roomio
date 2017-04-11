@@ -26,7 +26,7 @@ class Nav extends Component {
     return (
       <div className="side-nav">
         <div className="logoBox">
-          <Link to="/">
+          <Link to="/" className='mlogo'>
             <h1 />
           </Link>
         </div>

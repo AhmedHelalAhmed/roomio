@@ -17,12 +17,22 @@
 @import "loading";
 @import "draft-js";
 
+* {
+  box-sizing: content-box !important;
+}
+
 body {
   background-color: $body-bg;
   font-family: $font-family-sans-serif;
   color: $base-black;
   padding: 0;
   margin: 0;
+}
+
+.mlogo {
+      height: 80px;
+    display: flex;
+    align-items: center;
 }
 
 @keyframes bounce {

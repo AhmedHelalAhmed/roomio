@@ -14,15 +14,16 @@
     &::before{
       content: "";
     }
-    span{
+    span {
       padding-left: 20px;
       align-items: center;
       display: flex;
     }
-    h1{
+    h1 {
       white-space: nowrap;
       overflow-x: hidden;
       text-overflow: ellipsis;
+      height: 80px;
       span {
       overflow-x: hidden;
       text-overflow: ellipsis;

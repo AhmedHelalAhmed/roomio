@@ -24,8 +24,9 @@ class HomeContainer extends Component {
 
   loadMore = () => {
     const { page, end } = this.props.pagination;
-    this.props.updateHomePagination({ loading: true });
+
     if (!end) {
+      this.props.updateHomePagination({ loading: true });
       this.props.fetchHomeTopics(page).then(res => {
         this.props.updateHomePagination({
           page: page + 1,

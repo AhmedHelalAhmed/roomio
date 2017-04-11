@@ -30,7 +30,7 @@ class VideoPlayer extends Component {
               <ReactPlayer
                 url={this.props.playerURL}
                 frameborder="0"
-                control={true}
+                controls={true}
               />
             </span>}
       </span>
