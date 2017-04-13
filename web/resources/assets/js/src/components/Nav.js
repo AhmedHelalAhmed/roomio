@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from "react";
 import { Link } from "react-router";
 import { authGET } from "../shared/utils/authAxios";
+import Loading from "./reusable/Loading";
 
 const Bookmark = ({ to, content }) => (
   <div className="bookmark">
@@ -12,11 +13,15 @@ const Bookmark = ({ to, content }) => (
 
 class Nav extends Component {
   state = {
-    rooms: []
+    rooms: [],
+    loading: false,
   };
 
   componentDidMount() {
-    authGET("/api/room").then(res => {
+    this.setState({loading: true})
+    authGET("/api/room")
+    .then(res => {
+      this.setState({loading: false})
       res => res.json();
       this.setState({ rooms: res.data.rooms });
     });
@@ -51,11 +56,15 @@ class Nav extends Component {
               </span>
             </div>}
         <hr className="seperator" />
-        {this.state.rooms.map((val, index) => {
+        {this.state.loading ? 
+              <Loading name="sidebar" />
+        : 
+        this.state.rooms.map((val, index) => {
           return (
             <Bookmark to={`/room/${val.name}`} content={val.name} key={index} />
           );
-        })}
+        })
+        }
       </div>
     );
   }

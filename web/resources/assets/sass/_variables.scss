@@ -2,6 +2,7 @@
 // Body
 $body-bg: white;
 $body-accent: indianred;
+$accent-offset: lighten($body-accent, 10%);
 // $body-accent: #ffa968;
 //$body-accent: rgb(0%, 34.7%, 49.5%);
 $body-other: #5c95cd;

@@ -5,13 +5,15 @@ import MakeForm from "./HOCs/MakeForm";
 import FormError from "./reusable/FormError";
 
 class Login extends Component {
-  state = { error: null, loading: null };
+  state = { error: null, loading: false };
 
   onSubmit = e => {
     e.preventDefault();
+    this.setState({loading: true})
     axios
       .post(`/api/login`, this.props.getEscapedFields())
       .then(() => {
+        this.setState({loading: false})
         window.location = "/";
       })
       .catch(err => {
@@ -22,6 +24,8 @@ class Login extends Component {
         }
       });
   };
+
+
 
   render() {
     const { fields, errors } = this.props;
@@ -51,7 +55,7 @@ class Login extends Component {
           <FormError error={errors.password} />
           <div className="buttonContainer">
             {this.state.loading
-              ? <button className="formButton">Signing in..</button>
+              ? <button className="formButton">Signing in...</button>
               : <button className="formButton">Sign In!</button>}
           </div>
           <FormError error={this.state.error} />

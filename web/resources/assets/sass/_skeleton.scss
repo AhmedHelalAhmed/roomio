@@ -1,0 +1,88 @@
+@keyframes colorthrob {
+  0% {
+    background-color: $body-slight-grey; 
+  }
+  50% {
+    @include darker_background_color($body-slight-grey);
+  }
+  100% {
+    background-color: $body-slight-grey; 
+  }
+}
+
+@keyframes colorthrobNav {
+  0% {
+    background-color: $accent-offset;
+  }
+  50% {
+    background-color: darken($accent-offset, 5%);
+  }
+  100% {
+    background-color: $accent-offset;
+  }
+}
+
+
+.outerSkel-Nav {
+  overflow-y: hidden;
+  .skel {
+    @include lighter_background_color($body-accent);
+    animation: colorthrobNav 1s infinite;
+    -webkit-animation: colorthrobNav 1s infinite;
+    margin: 20px 30px 20px 20px;
+    padding: 10px;
+  }
+  .small {
+    width: 30%;
+  }
+  .medium {
+    width: 40%;
+  }
+  .large {
+    width: 50%;
+  }
+}
+
+
+.outerSkel-Room {
+  overflow-y: hidden;
+  .skel {
+    background: $base-white;
+    margin: 20px 50px 20px 20px;
+    .skelSub {
+      background: $body-slight-grey;
+      width: 100%;
+      animation: colorthrob 1s infinite;
+      -webkit-animation: colorthrob 1s infinite;
+      padding: 15px;
+      margin: 5px;
+    }
+    .skelTitle {
+      width: 80%;
+    }
+    .skelDesc {
+      width: 100%;
+    }
+
+    .skelComments {
+      width: 90%;
+    }
+  }
+  .full {
+    padding: 0;
+    background: $body-slight-grey;
+    height: 80px;
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+  }
+  .small {
+    width: 10%;
+  }
+  .medium {
+    width: 30%;
+  }
+  .large {
+    width: 40%;
+  }
+}
