@@ -13,6 +13,7 @@
     height: 80px;
     color: $base-white;
     @include lighter_background_color($body-accent);
+    // background-color: $body-slight-grey;
     &::before{
       content: "";
     }

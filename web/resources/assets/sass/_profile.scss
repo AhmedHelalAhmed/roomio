@@ -9,7 +9,8 @@
       // background: $base-white;
       // box-shadow: $shadow;
       min-width: 250px;
-      height: 130px;
+      height: 130px;    
+      margin-top: 5px;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -41,11 +42,12 @@
   }
   .sharedBody {
     .flexSplit {
-      padding: 10px 20px 10px 20px;
+      padding: 10px 60px 10px 60px;
       box-sizing: border-box;
       // flex: 1;
       // margin: 20px;
       // padding: 20px;
+      max-width: 500px;
       width: 50%;
       span {
         font-size: 1.6em;

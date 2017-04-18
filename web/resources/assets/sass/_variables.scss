@@ -1,12 +1,13 @@
 
 // Body
 $body-bg: white;
-$body-accent: indianred;
+$body-accent: #ce5454;
 $accent-offset: lighten($body-accent, 10%);
 // $body-accent: #ffa968;
 //$body-accent: rgb(0%, 34.7%, 49.5%);
-$body-other: #5c95cd;
-$body-slight-grey: #e6e6e6;
+$body-other: #3896ff;
+// $body-slight-grey: #e6e6e6;
+$body-slight-grey: #DBDDDE;
 $body-hover: #f2f2f2;
 //$body-accent: rgb(83.1%, 83.1%, 83.1%);
 
@@ -22,7 +23,7 @@ $panel-inner-border: $laravel-border-color;
 
 // Brands
 // $brand-primary: #3097D1;
-$brand-primary: #5c95cd;
+$brand-primary: #3896ff;
 $brand-info: #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;

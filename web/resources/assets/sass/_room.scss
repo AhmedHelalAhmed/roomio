@@ -22,7 +22,8 @@
     }
   }
   .sharedTitleSep {
-    @include darker_background_color($base-white);
+    // @include darker_background_color($base-white);
+    background-color: $body-slight-grey;
     color: $base-black;
     h1 {
       display: flex;
