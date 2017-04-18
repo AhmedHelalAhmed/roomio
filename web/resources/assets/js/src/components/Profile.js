@@ -2,9 +2,17 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Profile = ({ username, profile }) => (
-  <div className="sharedContainer limit">
-    <div className="sharedTitleSep userLeft">
-      <h1 className="username">{username}</h1>
+  <div className="profileOuter">
+    <div className="bannerOuter">
+      <div className='bannerInner'>
+        <span className='profCirc'>
+          <h1 className="username">{username[0]}</h1>
+        </span>
+        <span className='titleDisplayProfile'>
+          <h1 className='usernameCard'>{username}</h1>
+          <h4 className="createdAt">Member since {profile.created_at.substring(0,4)}</h4>
+        </span>
+      </div>
     </div>
     <div className="sharedBody spaceAround fixedBody">
       <ul className="roomsList flexSplit">

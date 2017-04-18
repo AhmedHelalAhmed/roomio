@@ -1,7 +1,22 @@
-.sharedContainer {
-  .usernameOuter {
-    display: flex;
-    justify-content: center;
+.profileOuter {
+  .bannerOuter {
+    background-color: $body-slight-grey;
+      height: 80px;
+      margin-bottom: 100px;
+      display: flex;
+      justify-content: center;
+    .bannerInner{
+      // background: $base-white;
+      // box-shadow: $shadow;
+      min-width: 250px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      .usernameCard {
+        padding: 10px;
+        margin: 0;
+      }
       .profileDate {
         align-self: flex-end;
         position: absolute;
@@ -9,6 +24,7 @@
         right: 5px;
         flex: 1;
       }
+    }
   }
   .profileSeperator {
     border: 0;
@@ -31,6 +47,14 @@
       // margin: 20px;
       // padding: 20px;
       width: 50%;
+      span {
+        font-size: 1.6em;
+        text-align: center;
+        flex:1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
     .listNode {
       display: inline-block;
@@ -56,5 +80,39 @@
         word-break: none;
       }
     }
+  }
+}
+
+.profCirc {
+  box-sizing: border-box;
+  color: $base-white;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  margin: 5px !important;
+  padding: 0 !important;
+  border-radius: 60px;
+  transition: .3s ease-in-out;
+  background: $body-other;
+  &:hover {
+    transition: .3s ease-in-out;
+    box-shadow: $shadow;
+  }
+  h1{
+    font-size: 4em;
+  }
+}
+
+.titleDisplayProfile {
+  display: flex;
+  flex-direction: column;
+  .createdAt{
+    margin: 0;
+    padding-left: 10px;
   }
 }
