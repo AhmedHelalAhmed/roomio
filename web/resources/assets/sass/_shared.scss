@@ -107,3 +107,8 @@
   margin-left: 5px;
   @include lighter_color_extra($body-accent);
 }
+
+.fadeOutAnimation {
+  animation: fadeOut .3s;
+  animation-fill-mode: forwards;
+}

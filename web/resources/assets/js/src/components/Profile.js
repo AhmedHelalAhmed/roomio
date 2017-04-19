@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import moment from 'moment';
 
 const Profile = ({ username, profile }) => (
   <div className="profileOuter">
@@ -10,7 +11,7 @@ const Profile = ({ username, profile }) => (
         </span>
         <span className='titleDisplayProfile'>
           <h1 className='usernameCard'>{username}</h1>
-          <h4 className="createdAt">Member since {profile.created_at.substring(0,4)}</h4>
+          <h4 className="createdAt">Joined {moment(profile.created_at).format('MMMM Do, YYYY')}</h4>
         </span>
       </div>
     </div>

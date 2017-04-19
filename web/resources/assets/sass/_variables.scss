@@ -13,7 +13,7 @@ $body-hover: #f2f2f2;
 
 //modal
 $modal-button: $body-other;
-
+$modal-backdrop: rgba(80.8%, 32.9%, 32.9%, 0.163);
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border: $laravel-border-color;

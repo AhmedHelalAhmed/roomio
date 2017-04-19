@@ -101,10 +101,10 @@
   border-radius: 60px;
   transition: .3s ease-in-out;
   background: $body-other;
-  &:hover {
-    transition: .3s ease-in-out;
-    box-shadow: $shadow;
-  }
+  // &:hover {
+  //   transition: .3s ease-in-out;
+  //   box-shadow: $shadow;
+  // }
   h1{
     font-size: 4em;
   }

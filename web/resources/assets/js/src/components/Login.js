@@ -3,6 +3,7 @@ import { Link, browserHistory } from "react-router";
 import axios from "axios";
 import MakeForm from "./HOCs/MakeForm";
 import FormError from "./reusable/FormError";
+import FontAwesome from 'react-fontawesome'
 
 class Login extends Component {
   state = { error: null, loading: false };
@@ -55,7 +56,7 @@ class Login extends Component {
           <FormError error={errors.password} />
           <div className="buttonContainer">
             {this.state.loading
-              ? <button className="formButton">Signing in...</button>
+              ? <button className="formButton">Signing In <FontAwesome name='circle-o-notch' spin /></button>
               : <button className="formButton">Sign In!</button>}
           </div>
           <FormError error={this.state.error} />
