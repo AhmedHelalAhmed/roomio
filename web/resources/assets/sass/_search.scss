@@ -1,0 +1,37 @@
+.searchbarOuter {
+    max-width: 100%;
+    margin: 5px 20px 20px 20px;
+  .searchbar {
+    padding: 0px 5px 0px 5px;
+    color: $base-white;
+    background: transparent;
+    width: 80%;
+    font-size: 16px;
+    border: 0px;
+    border-bottom: solid $base-white 2px;
+    &:focus{
+      border: 0px !important;
+      border-bottom: solid $base-white !important;
+      outline: none !important;
+    }
+    &::-webkit-input-placeholder {
+      @include lighter_color_medium($accent-offset);
+    }
+  }
+  form {
+    display: flex;
+    flex-wrap: none;
+    align-content: center;
+  }
+  button {
+    outline:0;
+    color: $base-white;
+    font-size: 18px;
+    width: 30px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 0px $base-white;
+  }
+}
+

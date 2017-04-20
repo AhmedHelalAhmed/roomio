@@ -37,8 +37,6 @@ const Loading = ({ name }) => (
             <NavSkel size="large" />
             <NavSkel size="medium" />
             <NavSkel size="small" />
-            <NavSkel size="medium" />
-            <NavSkel size="small" />
             <NavSkel size="small" />
           </span>
           : <div>
