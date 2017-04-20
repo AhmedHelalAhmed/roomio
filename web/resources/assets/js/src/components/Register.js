@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Link } from "react-router";
-import axios from "axios";
-import MakeForm from "./HOCs/MakeForm";
-import FormError from "./reusable/FormError";
+import React, { Component } from 'react';
+import { Link } from 'react-router';
+import axios from 'axios';
+import MakeForm from './HOCs/MakeForm';
+import FormError from './reusable/FormError';
 
 class Register extends Component {
   componentWillMount() {
-    document.title = "Register";
+    document.title = 'Register';
   }
 
   onSubmit = e => {
@@ -14,13 +14,13 @@ class Register extends Component {
     axios
       .post(`/api/register`, this.props.getEscapedFields())
       .then(res => {
-        window.location = "/";
+        window.location = '/';
       })
       .catch(err => {
         if (err.response.data) {
           this.props.createErrorsFromResponse(err.response.data);
         }
-        this.setState({ error: "An error has occured" });
+        this.setState({ error: 'An error has occured' });
       });
   };
 
@@ -29,7 +29,7 @@ class Register extends Component {
     return (
       <div>
         <form onSubmit={this.onSubmit} className="form">
-          <h1>Register</h1>
+          <h1>Join <Link className="leaveForm" to="/">Roomio</Link></h1>
           <label htmlFor="username">Username: </label>
           <input
             className="formInput"
@@ -82,13 +82,13 @@ class Register extends Component {
   }
 }
 
-const fields = ["email", "username", "password", "password_confirmation"];
+const fields = ['email', 'username', 'password', 'password_confirmation'];
 
 const rules = {
-  email: "isEmail|required",
-  username: "required",
-  password: "isPassword|required",
-  password_confirmation: "isPassword|required|sameAs:password"
+  email: 'isEmail|required',
+  username: 'required',
+  password: 'isPassword|required',
+  password_confirmation: 'isPassword|required|sameAs:password',
 };
 
 export default MakeForm(fields, rules)(Register);
