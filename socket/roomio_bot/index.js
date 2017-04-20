@@ -1,37 +1,60 @@
-const axios = require('axios');
-const { laravelURI = 'http://127.0.0.1:8888' } = process.env;
-const responses = require('./responses');
+const axios = require("axios");
+const { laravelURI = "http://127.0.0.1:8888" } = process.env;
+const resolvers = require("./resolvers");
 
 const sendMessage = ({ io, socket, message }) => {
-    return new Promise((resolve, reject) => {
-        axios.post(`${laravelURI}/api/message/robot`, message)
-            .then((res) => {  
-                const { message: newMessage } = res.data;
-                const topic = `topic:${message.topic_ref}`;
-                io.sockets.to(topic).emit('topic:new_message', { message: newMessage });
-                resolve(res);
-            }).catch(console.log);
-    });
-}
+  return new Promise((resolve, reject) => {
+    axios
+      .post(`${laravelURI}/api/message/robot`, message)
+      .then(res => {
+        const { message: newMessage } = res.data;
+        const topic = `topic:${message.topic_ref}`;
+        io.sockets.to(topic).emit("topic:new_message", { message: newMessage });
+        resolve(res);
+      })
+      .catch(reject);
+  });
+};
 
-const test = (reg, content) => new RegExp(reg).test(content);
+const test = (trigger, content) => new RegExp(trigger, 'gi').test(content);
+
+const parseResult = (result) => {
+    if (Array.isArray(result)) {
+        const index = Math.floor((Math.random() * result.length));
+        return result[index];
+    }
+    return result;
+};
 
 const RoomioBot = async (io, socket, message) => {
-    const params = content => ({
-        io, socket,
-        message: {
-            topic_ref: message.topic_ref,
-            content
-        }
-    });
-
-    const matches = Object.keys(responses).filter(key => test(key, message.content));
-
-    if (matches.length) {
-        await sendMessage(
-            params(await responses[matches.pop()](message) || 'I broke somehow.')
-        );
+  const params = (content = "i broke somehow :(") => ({
+    io,
+    socket,
+    message: {
+      topic_ref: message.topic_ref,
+      content
     }
+  });
+
+  if(!test('rb', message.content)) return;
+
+  const matches = Object.keys(resolvers).filter(key => {
+    return key.split('|').filter(subKey => {
+        return test(subKey, message.content);
+    }).length;
+  });
+
+  if (matches.length) {
+      try {
+        await sendMessage(
+            params(
+                await parseResult(resolvers[matches.pop()](message))
+            )
+        );
+      } catch (e) {
+        console.log(e);
+      }
+  }
 };
 
 module.exports = RoomioBot;
