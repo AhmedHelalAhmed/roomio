@@ -45,6 +45,7 @@ Route::group(['prefix' => 'topic'], function () {
 Route::group(['prefix' => 'message'], function () {
     Route::get('/', 'MessageController@index');
     Route::get('/topic/{topicRef}', 'MessageController@getMessagesForTopic');
+    Route::post('/robot', 'MessageController@storeRobot');
 
     Route::group([ 'middleware' => 'auth:api' ], function () {
         Route::post('/', 'MessageController@store');
