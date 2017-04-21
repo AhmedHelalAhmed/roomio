@@ -37,7 +37,9 @@
         flex:1;
       }
       form {
-        width: 85vw;
+        //EDIT VW
+        // width: 85vw;
+        width: calc(100% - 300px);
         float: right;
         height: 50px;
         position: fixed;
@@ -162,7 +164,9 @@
   margin: 0;
   height: 75px;
   display: flex;
-  width: 85vw;
+  //EDIT VW
+  // width: 85vw;
+  width: calc(100% - 300px);
   flex: 1;
   .flexTopTopic {
     align-items: center;

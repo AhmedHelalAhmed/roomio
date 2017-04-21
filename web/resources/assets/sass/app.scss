@@ -21,18 +21,6 @@
 @import "draft-js";
 
 
-/////////////////////////infinite list///////////////////////////////
-.infinite-list {
-        overflow: auto;
-        position: relative;
-    }
-
-    .infinite-list-content {
-        margin: 0;
-        position: absolute;
-    }
-/////////////////////////////////////////////////////////////////////
-
 * {
   box-sizing: content-box !important;
 }
@@ -136,8 +124,11 @@ body {
 
 
 .main-view {
-   width: 85vw;  
-   padding-left: 15vw;
+  //  width: 85vw;  
+    width: calc(100% - 300px);
+   //EDIT VW
+  //  padding-left: 15vw;
+  padding-left: 300px;
    text-overflow: ellipsis;
    overflow-x: hidden;
 }

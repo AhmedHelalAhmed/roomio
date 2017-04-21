@@ -10,7 +10,7 @@ class Search extends Component {
           <input 
             className='searchbar'
             type="text"
-            placeholder = "search for a room"
+            placeholder = "search rooms"
             value={this.props.input}
             onChange={this.props.onChange}
             disabled={this.props.disab ? true : false}
