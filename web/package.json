@@ -41,6 +41,7 @@
     "minimist": "^1.2.0",
     "moment": "^2.18.1",
     "node-sass": "^4.5.0",
+    "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "push.js": "^0.0.12",
     "react": "^15.4.2",

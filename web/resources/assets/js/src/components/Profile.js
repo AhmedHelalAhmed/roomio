@@ -5,21 +5,23 @@ import moment from 'moment';
 const Profile = ({ username, profile }) => (
   <div className="profileOuter">
     <div className="bannerOuter">
-      <div className='bannerInner'>
-        <span className='profCirc'>
+      <div className="bannerInner">
+        <span className="profCirc">
           <h1 className="username">{username[0]}</h1>
         </span>
-        <span className='titleDisplayProfile'>
-          <h1 className='usernameCard'>{username}</h1>
-          <h4 className="createdAt">Joined {moment(profile.created_at).format('MMMM Do, YYYY')}</h4>
+        <span className="titleDisplayProfile">
+          <h1 className="usernameCard">{username}</h1>
+          <h4 className="createdAt">
+            Joined {moment(profile.created_at).format('MMMM Do, YYYY')}
+          </h4>
         </span>
       </div>
     </div>
     <div className="sharedBody spaceAround fixedBody">
       <ul className="roomsList flexSplit">
         {profile.rooms.length != 1
-            ? <span>Admin of {profile.rooms.length} Rooms</span>
-            : <span>Admin of {profile.rooms.length} Room</span>}
+          ? <span>Admin of {profile.rooms.length} Rooms</span>
+          : <span>Admin of {profile.rooms.length} Room</span>}
         <hr className="profileSeperator" />
         {profile.rooms.map((info, key) => (
           <li className="listNode flexSplit" key={key}>
@@ -27,7 +29,7 @@ const Profile = ({ username, profile }) => (
               {info.title}
             </Link>
           </li>
-          ))}
+        ))}
       </ul>
       <ul className="topicsList flexSplit">
         <span>Topics - {profile.topics.length}</span>
@@ -38,10 +40,10 @@ const Profile = ({ username, profile }) => (
               {topic.title}
             </Link>
           </li>
-          ))}
+        ))}
       </ul>
     </div>
   </div>
-  );
+);
 
 export default Profile;

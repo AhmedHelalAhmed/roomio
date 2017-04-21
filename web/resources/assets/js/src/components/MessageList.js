@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import showdown from 'showdown';
 import { Element } from 'react-scroll';
 import Infinite from 'react-infinite';
-
 import Message from './Message';
 import ChatBox from './Chatbox';
 

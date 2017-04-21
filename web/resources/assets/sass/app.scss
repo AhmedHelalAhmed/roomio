@@ -20,6 +20,19 @@
 @import "loading";
 @import "draft-js";
 
+
+/////////////////////////infinite list///////////////////////////////
+.infinite-list {
+        overflow: auto;
+        position: relative;
+    }
+
+    .infinite-list-content {
+        margin: 0;
+        position: absolute;
+    }
+/////////////////////////////////////////////////////////////////////
+
 * {
   box-sizing: content-box !important;
 }
