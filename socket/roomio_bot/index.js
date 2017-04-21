@@ -48,7 +48,7 @@ const RoomioBot = async (io, socket, message) => {
       try {
         await sendMessage(
             params(
-                await parseResult(resolvers[matches.pop()](message))
+                await parseResult(resolvers[matches.pop()](message, socket))
             )
         );
       } catch (e) {
