@@ -16,7 +16,7 @@ const sendMessage = ({ io, socket, message }) => {
   });
 };
 
-const test = (trigger, content) => new RegExp(trigger, 'gi').test(content);
+const test = (trigger, content) => new RegExp(`\\b${trigger}\\b`, 'i').test(content);
 
 const parseResult = (result) => {
     if (Array.isArray(result)) {
@@ -46,14 +46,19 @@ const RoomioBot = async (io, socket, message) => {
 
   if (matches.length) {
       try {
+          const command = matches.shift();
+          console.log(`command: ${command}`);
         await sendMessage(
             params(
-                await parseResult(resolvers[matches.pop()](message, socket))
+                await parseResult(resolvers[command](message, socket))
             )
         );
       } catch (e) {
         console.log(e);
+        await sendMessage(params('something went wrong :('));
       }
+  } else {
+      await sendMessage(params('command not recognized :('));
   }
 };
 
