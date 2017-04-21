@@ -2,6 +2,7 @@ const axios = require('axios');
 
 const weatherAppID = '70da43007f50c4366fbb4685ffe5ef67';
 
+
 module.exports = {
     'hello|hi': (message) => `
         hi ${message.user.username || ''}! type 'help' for a list of commands.
@@ -33,5 +34,10 @@ module.exports = {
         // const ip = socket.request.connection.remoteAddress;
         // const { data } = await axios.get(`http://ip-api.com/json/${ip}`);
         // return data.city;
-    }
+    },
+    'fun fact|funfact': async () => {
+        const { data } = await axios.get('http://numbersapi.com/random');
+        console.log('random ', data);
+        return data;
+    },
 };
