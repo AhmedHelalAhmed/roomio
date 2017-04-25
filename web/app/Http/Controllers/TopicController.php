@@ -34,9 +34,11 @@ class TopicController extends Controller {
         return Response::json([compact('topic')], 200);
     }
 
-    public function getTopicsFromRoomId($roomId) {
+    public function getTopicsFromRoomName($roomName) {
         $topics = Topic::with(['user'])
-                    ->where('room_name', '=', $roomId)
+                    ->where('room_name', $roomName)
+                    ->withCount('messages')
+                    ->orderBy('created_at', 'DESC')
                     ->paginate(20);
 
         return Response::json(compact('topics'), 200);            
@@ -50,7 +52,7 @@ class TopicController extends Controller {
         $messages = Message::with(['user'])
                     ->where('topic_ref', $topicRef)
                     ->orderBy('created_at', 'DESC')
-                    ->paginate(20);
+                    ->paginate(1000);
 
         if ($topic == null) {
             return Response::json([

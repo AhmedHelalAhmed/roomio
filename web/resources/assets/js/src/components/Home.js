@@ -1,18 +1,18 @@
 import React from 'react';
 import TopicList from './TopicList';
 
-const Home = ({ topics }) => (
+const Home = props => (
   <div>
-    <div className="sharedContainer">
+    <div className="sharedContainer limit">
       <div className="sharedTitleSep">
         <h1>
-          <span>
+          <span className='frontPage'>
             Front Page
           </span>
         </h1>
       </div>
-      <div className="sharedBody">
-        <TopicList topics={topics} />
+      <div className="sharedBody fixedBody">
+        <TopicList {...props} />
       </div>
     </div>
   </div>

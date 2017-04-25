@@ -1,7 +1,9 @@
 .side-nav {
-  width: 15vw;
+  //EDIT VW
+  // width: 15vw;
+  width: 300px;
   height: 100vh;
-  z-index: 999;
+  // z-index: 999;
   // display: flex;
   overflow-y: auto;
   // flex-direction: column;
@@ -12,7 +14,7 @@
   position: fixed;
   .bookmark {
     text-align: justify;
-    margin: 3px 3px 10px 1vw;
+    margin: 3px 3px 10px 10px;
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -30,17 +32,18 @@
     &::after{
       content: "Roomio"
     }
-    @media screen and (max-width: $breakpoint-tablet) {
-      &::after{
-        content: "R";
-     }
-    }
+    // @media screen and (max-width: $breakpoint-tablet) {
+    //   &::after{
+    //     content: "R";
+    //  }
+    // }
   }
   a {
     text-decoration: none;
     color: $base-white;
   }
   .logoBox {
+    height: 80px;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -71,11 +74,11 @@
       @include lighter_color_medium($body-accent);
   }
   }
-  @media screen and (max-width: $breakpoint-tablet) {
-    flex-direction: column;
-    .logout {
-      float: left;
-      padding-bottom: 10px;
-    }
-  }
+  // @media screen and (max-width: $breakpoint-tablet) {
+  //   flex-direction: column;
+  //   .logout {
+  //     float: left;
+  //     padding-bottom: 10px;
+  //   }
+  // }
 }

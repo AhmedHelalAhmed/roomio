@@ -1,88 +1,160 @@
 .room404 {
   margin: 0 auto;
-  width: 500px;
+  width: 300px;
+  height: 70vh;
+}
+
+.adminTag {
+  text-align: center;
 }
 
 
+
 .sharedContainer {
+  //height: 100vh;
+  .topic{
+      margin-top: 15px !important;
+    p {
+      margin: 5px;
+    }
+    @media screen and (max-width: $breakpoint-tablet) {
+      display: block;
+    }
+  }
   .sharedTitleSep {
-    @include darker_background_color($base-white);
+    // @include darker_background_color($base-white);
+    background-color: $body-slight-grey;
     color: $base-black;
     h1 {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      //justify-content: space-between;
+      align-items: center;
       flex:1;
+      .flexTopTopicRight {
+        padding-left: 20px;
+        color: $brand-primary;
+      }
       span {
+        padding-left: 5px !important;
         text-justify: justify;
       }
     }
   }
-  .roomInformation {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    .description {
-      margin: 10px 10px 10px 0px;
-      p {
-        display: inline-flex;
-        padding: 10px;
-        @include darker_background_color($base-white);
-        &::before{
-          content: "\""
-        }
-        &::after{
-          content: "\""
-        }
-      }
-      .informationHeader {
-        margin-bottom: 0;
-      }
-    }
-    .admin {
-      margin: 10px;
-      .adminTag {
-        display: inline-flex;
-        a {
-          padding: 10px;
-          @include darker_background_color($base-white);
-          text-decoration: none;
-          color: $base-black;
-        }
-      }
-      .informationHeader {
-        margin-bottom: 0;
-      }
-    }
-  }
+  // .roomInformation {
+  //   width: 100%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   @media screen and (max-width: $breakpoint-tablet) {
+  //     display: block;
+  //   }
+  //   .description {
+  //     margin: 10px 10px 10px 0px;
+  //     p {
+  //       display: inline-flex;
+  //       padding: 10px;
+  //       @include darker_background_color($base-white);
+  //       &::before{
+  //         content: "\""
+  //       }
+  //       &::after{
+  //         content: "\""
+  //       }
+  //     }
+  //     .informationHeader {
+  //       margin-bottom: 0;
+  //     }
+  //   }
+  //   .admin {
+  //     margin: 10px;
+  //     .adminTag {
+  //       display: inline-flex;
+  //       a {
+  //         padding: 10px;
+  //         @include darker_background_color($base-white);
+  //         text-decoration: none;
+  //         color: $base-black;
+  //       }
+  //     }
+  //     .informationHeader {
+  //       margin-bottom: 0;
+  //     }
+  //   }
+  // }
   .sidebyside {
     display: flex;
     flex-direction: row !important;
     @media screen and (max-width: $breakpoint-tablet) {
       flex-direction: column-reverse !important;
+      overflow-y: auto;
       .roomInformation {
         padding: 0 !important;
         .fixed {
-          padding: 20px 0 20px;
+          padding: 5px 0 5px 0;
           position: inherit !important;
+          display: flex;
+          align-self: flex-start;
+          align-items: baseline;
+          .topicSeperator {
+            display: none;
+          }
+          .informationHeader {
+            margin: 0;
+          }
+          .description {
+            margin: 0;
+            p{
+              max-height: 50px;
+              overflow-y: auto;
+            }
+            .break {
+              display: none;
+            }
+          }
+          .admin {
+            p {
+              a {
+                text-overflow: ellipsis;
+                overflow-x: hidden;
+                max-width: 100px;
+              }
+            }
+          }
         }
       }
     }
     .topicsFlex {
-      flex:6;
+      width: 85%;
+      margin-top: 20px;
+      .sharedContainer {
+        position: initial;
+        div {
+          position: relative !important;
+        }
+      }
     }
     .roomInformation {
       padding: 20px;  
       align-items: center;
       flex:1;
       .fixed {
-        position: fixed;
-        .newTopic {
+        padding-left: 20px;
+        padding-right: 20px;
+        //position: fixed;
+      }
+    }
+  }
+}
+
+.fin {
+  position: absolute;
+  bottom: 0;
+}
+
+.newTopic {
           font-size: 18px;
           margin-right: 20px;
           a {
             text-decoration: none;
-            @include darker_background_color($base-white);
             color: $base-black;
             cursor: pointer;
             padding: 10px;        
@@ -90,7 +162,144 @@
             margin-bottom: 10px;
           }
         }
-      }
+
+.description {
+  margin: 0;
+  p{
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+.admin {
+  p{
+    a {
+      text-overflow: ellipsis;
+      overflow-x: hidden;
+      max-width: 200px;
     }
   }
+}
+
+.subBy {
+  font-size: 13px;
+  color: $text-color;
+  margin-left: 15px;
+}
+
+.commentsAndUser {
+  display: flex;
+  align-items: center;
+}
+
+.emptytopic {
+  margin-left: 15%;
+}
+
+.none {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex:1;
+  line-height: 3em;
+  .noneinner{
+    font-size: 3em;
+    text-align: center;
+    color: $border-color;
+  }
+  .createNewTopic{
+    a {
+    color: $border-color;
+      
+    }
+    font-size: 1.5em;
+    line-height: 2.5em;
+    text-decoration: underline;
+  }
+}
+
+// .bottomStickBubble {
+//   position: fixed;
+//   bottom: 20px;
+//   right: 20px;
+//   color: $body-accent !important;
+//   font-size: 2.3em;
+//   span {
+//     position: relative;
+//   }
+//   .newTopicBtn{
+//   text-decoration: none;
+//     &:visited {
+//       color: $body-accent !important;
+//     }
+//     .new {
+//       position: absolute;
+//       left: 30%;
+//       color: $base-white;
+//       z-index: 1;
+//     }
+//   }
+// }
+
+.bottomStickBubble {
+  cursor: pointer;
+  box-sizing: border-box;
+  position: fixed;
+  background: $body-accent;
+  bottom: 20px;
+  right: 20px;
+  transition: ease-in-out .2s;
+  padding: 18px;
+  border-radius: 50%;
+  span {
+    position: relative;
+    display: inline-block;
+    .new {
+      font-size: 24px;
+      line-height: 1.02;
+      position: absolute;
+      left: 5px;
+      color: $body-accent;
+      z-index: 3;
+    }
+  }
+  
+}
+
+.usSep {
+  margin-left: 5px;
+}
+
+.moved {
+  // border-radius: 0px !important;
+  bottom: unquote("-moz-calc(50% - 285px)");
+  bottom: unquote("-webkit-calc(50% - 285px)");
+  // bottom: 50%;
+  // right: 50%;
+  right: unquote("-moz-calc(50% - 260px)");
+  right: unquote("-webkit-calc(50% - 260px)");
+  z-index: 2;
+  animation: .7s bounce ease-in-out;
+  animation-delay: .2s;
+  box-shadow: $shadow;
+  transition: ease-in-out .2s;
+}
+
+.fa-comment {
+  color: $base-white !important;
+  font-size: 1.5em;
+}
+
+.info {
+  cursor: pointer;
+}
+
+.topicEx {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $body-accent;
+  cursor: pointer;
+  margin: 5px;
 }

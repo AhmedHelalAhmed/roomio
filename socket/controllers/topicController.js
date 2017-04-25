@@ -1,4 +1,5 @@
 const { authPOST } = require('../utils/authAxios');
+const RoomioBot = require('../roomio_bot/');
 
 const topicController = {
 
@@ -26,7 +27,7 @@ const topicController = {
    * The User sends a message while in a Topic chat.
    */
   sendMessage: (io, socket, payload) => {
-    const { laravelURI } = process.env;
+    const { laravelURI = 'http://127.0.0.1:8888' } = process.env;
     const { token, content, topic_ref } = payload;
     const message = { content, topic_ref };
     authPOST(`${laravelURI}/api/message`, token, message)
@@ -34,6 +35,7 @@ const topicController = {
         const { message } = res.data;
         const topic = `topic:${message.topic_ref}`;
         io.sockets.to(topic).emit('topic:new_message', { message });
+        RoomioBot(io, socket, message);
       }).catch((error) => {
         const { status, data, message } = error.response;
         switch (status) {

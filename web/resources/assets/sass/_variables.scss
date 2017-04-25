@@ -1,11 +1,19 @@
 
 // Body
-$body-bg: #f5f8fa;
-$body-accent: indianred;
+$body-bg: white;
+$body-accent: #ce5454;
+$accent-offset: lighten($body-accent, 10%);
+// $body-accent: #ffa968;
 //$body-accent: rgb(0%, 34.7%, 49.5%);
-$body-other: #5c95cd;
+$body-other: #3896ff;
+// $body-slight-grey: #e6e6e6;
+$body-slight-grey: #DBDDDE;
+$body-hover: #f2f2f2;
 //$body-accent: rgb(83.1%, 83.1%, 83.1%);
 
+//modal
+$modal-button: $body-other;
+$modal-backdrop: rgba(80.8%, 32.9%, 32.9%, 0.163);
 // Borders
 $laravel-border-color: darken($body-bg, 10%);
 $list-group-border: $laravel-border-color;
@@ -14,7 +22,8 @@ $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
 
 // Brands
-$brand-primary: #3097D1;
+// $brand-primary: #3097D1;
+$brand-primary: #3896ff;
 $brand-info: #8eb4cb;
 $brand-success: #2ab27b;
 $brand-warning: #cbb956;
@@ -27,6 +36,7 @@ $font-family-sans-serif: "Raleway", sans-serif;
 $font-size-base: 14px;
 $line-height-base: 1.6;
 $text-color: #636b6f;
+$text-border-color: rgb(75.3%, 75.3%, 75.3%);
 
 // Navbar
 $navbar-default-bg: #fff;
@@ -63,5 +73,6 @@ $base-black: black;
 $base-border: #636b6f;
 
 //topics
-$unvisited: rgb(0%, 34.7%, 49.5%);
-$visited: rgb(32.2%, 26.9%, 39.4%)
+// $unvisited: rgb(0%, 34.7%, 49.5%);
+// $visited: rgb(32.2%, 26.9%, 39.4%)
+

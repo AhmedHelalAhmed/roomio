@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
 	      <link rel="shortcut icon" href="http://i.imgur.com/X9LSYcX.png">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css"></link>
         <title>Roomio</title>
         <script src="https://use.fontawesome.com/b4eac05af7.js"></script>
         <script type="text/javascript">

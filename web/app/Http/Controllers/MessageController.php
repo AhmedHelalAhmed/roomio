@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Message;
+use App\User;
 use Validator;
 use Response;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class MessageController extends Controller {
         );
 
         $messageFields = $request->all();
-        // $messageFields['content'] = HTML::entities($messageFields['content']);
+
         $messageFields['user_id'] = $request->user()->id;
 
         $validator = Validator::make($request->all(), $rules);
@@ -44,6 +45,36 @@ class MessageController extends Controller {
         $message['user'] = [
           'id' => $request->user()->id,
           'username' => $request->user()->username
+        ];
+
+        return Response::json(compact('message'), 200);
+    }
+
+    public function storeRobot(Request $request) {
+        $rules = array(
+            'content' => 'required|string',
+            'topic_ref' => 'required|alpha_num'
+        );
+
+        $messageFields = $request->all();
+
+        $user = User::where('username', 'roomio_bot')->first();
+
+        $messageFields['user_id'] = $user['id'];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            $messages = $validator->messages();
+            return Response::json(compact('messages'), 400);
+            return response(400)->json(compact('messages'));
+        }
+
+        $message = Message::create($messageFields);
+
+        $message['user'] = [
+          'id' => $user['id'],
+          'username' => 'roomio_bot'
         ];
 
         return Response::json(compact('message'), 200);

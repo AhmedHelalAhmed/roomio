@@ -1,8 +1,23 @@
-.sharedContainer {
-  .usernameOuter {
-    display: flex;
-    justify-content: center;
-    padding-left: 20px;
+.profileOuter {
+  .bannerOuter {
+    background-color: $body-slight-grey;
+      height: 80px;
+      margin-bottom: 100px;
+      display: flex;
+      justify-content: center;
+    .bannerInner{
+      // background: $base-white;
+      // box-shadow: $shadow;
+      min-width: 250px;
+      height: 130px;    
+      margin-top: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      .usernameCard {
+        padding: 10px;
+        margin: 0;
+      }
       .profileDate {
         align-self: flex-end;
         position: absolute;
@@ -10,6 +25,7 @@
         right: 5px;
         flex: 1;
       }
+    }
   }
   .profileSeperator {
     border: 0;
@@ -24,25 +40,81 @@
     flex: 1;
     justify-content: space-around;
   }
-  .profileBody {
-    padding-top: 5em;
+  .sharedBody {
     .flexSplit {
-      flex: 1;
-      margin: 20px;
-      width: calc(50% - 40px);
+      padding: 10px 60px 10px 60px;
+      box-sizing: border-box;
+      // flex: 1;
+      // margin: 20px;
+      // padding: 20px;
+      max-width: 300px;
+      width: 50%;
+      span {
+        font-size: 1.6em;
+        text-align: center;
+        flex:1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
     .listNode {
-      padding: 10px;
+      display: inline-block;
+      padding: 3px;
+      border-radius: 0 10px 10px 0;
       overflow-x: hidden;
+      border-left: solid 4px $base-white;
       padding-left: 7px;
-      border-left: solid 4px $body-other;
-      margin: 20px;
-      width: calc(100% - 47px);
-      flex: 1;
+      // &::after {
+      //   content: " , "
+      // }
+      &:hover{
+        border-left: solid 4px $body-other;
+        cursor: pointer;
+        // padding-left: 15px;
+        // @include darker_background_color($base-white);
+      }
+      margin: 5px;
       a {
         text-decoration: none;
         color: $base-black;
+        text-overflow: none;
+        word-break: none;
       }
     }
+  }
+}
+
+.profCirc {
+  box-sizing: border-box;
+  color: $base-white;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: default;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  margin: 5px !important;
+  padding: 0 !important;
+  border-radius: 60px;
+  transition: .3s ease-in-out;
+  background: $body-other;
+  // &:hover {
+  //   transition: .3s ease-in-out;
+  //   box-shadow: $shadow;
+  // }
+  h1{
+    font-size: 4em;
+  }
+}
+
+.titleDisplayProfile {
+  display: flex;
+  flex-direction: column;
+  .createdAt{
+    margin: 0;
+    padding-left: 10px;
   }
 }

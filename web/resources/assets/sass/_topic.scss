@@ -1,79 +1,206 @@
-.sharedContainer {
-  .topicInformation {
-    transition: .2s;
-    border-bottom: solid .1px $base-border;
-    padding: 20px;
-    margin: 0 20px 0 20px;
-    p {
-      margin: 0;
-      display: inline-flex;
-      padding: 10px;
-      @include darker_background_color($base-white);
-      &::before{
-        content: "\""
-      }
-      &::after{
-        content: "\""
+  .topicSep {
+    .return {
+      text-decoration: none;
+      color: $base-black;
+      cursor: pointer;
+      &:hover {
+        @include lighter_color_extra($base-black);
       }
     }
   }
 
-  .topicTitle {
-    font-size: 20px;
+
+  .fortopic {
+  position: relative;
   }
+
+  .anchor {
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+  }
+  
+
+.outerChat {
+  display: flex;
+  height: calc(100vh - 130px) !important;
+  min-height: calc(100vh - 130px) !important;
+  flex-direction: column;
+    .bottomChat {
+      bottom: 0;
+      .topicOuterMessenger {
+        justify-content: center;
+        display: flex;
+      }
+      .topicMessenger{
+        justify-content: center;
+        flex:1;
+      }
+      form {
+        //EDIT VW
+        // width: 85vw;
+        width: calc(100% - 300px);
+        float: right;
+        height: 50px;
+        position: fixed;
+        display: flex;
+        align-content: center;
+        textarea {
+          resize: none;
+          font-family: $font-family-sans-serif;
+          font-size: 1em;
+          border-top: .5px solid $text-border-color;
+          flex: 1;
+          width: 100%;
+          border-right: solid 1px $base-white;
+          &:focus {
+            outline: none;
+          }
+        }
+    }
+          button {
+          line-height: 1.5em;
+          padding-right: 10px;
+          font-size: 20px;
+          background-color: $base-white;
+          //background-color: $brand-success;
+          color: $brand-success;
+          border: none;
+          border-top: .5px solid $text-border-color;
+          //border: solid 1px $brand-success;
+          cursor: pointer;
+          &:focus {
+            outline:0;
+            }
+        }
+  }
+}
+
 .fortopic{
-    margin: 0em 20px 0 20px;
-    margin-bottom: 125px;
+    overflow-y: auto;
+    height: 100%;
+    padding: 10px 0 0 0;
     .chatBubble {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        padding-left: 1%;
         display: flex;
         flex-direction: column;
         //border-left: .3px grey solid;
         word-wrap: break-word;
-        padding-left: 10px;
-        max-width: 75%;
+        width: 74%;
+        padding-right: 25%;
+        &:hover {
+          background-color: $body-hover;
+        }
+        div {
+          margin: 10px 0 0 0;
+          .date-trigger {
+            cursor: default;
+            font-size: 14px;
+            &::before {
+              content: " - ";
+            }
+          }
+        }
     }
+    span {
+      margin-left: 20px;
+      display: inline-block;
+      p {
+        margin: 3px;
+        img {
+          @include image_size(400px);
+        }
+      }
+      ol {
+        margin: 0;
+        //@include darker_background_color($base-white);
+      }
+      ul {
+        margin: 0;
+        //@include darker_background_color($base-white);
+      }
+     }
     .user {
-      line-height: 2em;
+        margin: 10px 0 0 0;
+        width: 100%;
+        &:hover {
+          cursor: pointer;
+        }
+        // display: block;
       a{
         color: $brand-primary;
+        font-weight: bold;
         text-decoration: none;
       }
     }
-  }
+    .date-trigger {
+      @include lighter_color_extra($text-color);
+    }
 }
 
-.topicInformationCont {
-  padding-bottom: 20px;
+.fortopic span {
+    margin-left: 20px;
+    display:block;
 }
 
-.topicMessenger {
-    background: none;
-    position: fixed;
-    width: 85vw;
-    bottom: 0;
-    margin-right: 20px;
-    form {
-      display: flex;
-      align-content: center;
-      margin: 5px 12px 0px 12px;
-      textarea {
-        width: 100%;
-        font-size: 18px;
-        height: 70px;
-        resize: none;
-        margin: 10px 0 10px 0px;
-      }
-      button {
-        width: 15% !important;
-        padding: 3px 7px 3px 7px;
-        line-height: 1.5em;
-        font-size: 1.15em;
-        background-color: $brand-success;
-        color: $btn-opp-color;
-        border: solid 1px $brand-success;
-        margin: 10px 0px 10px 0;
-        cursor: pointer;
-        width: 100%;
+.closeModal{
+  float: right;
+  cursor: pointer;
+  margin: 5px;
+  color: $base-white;
+}
+
+.inTtopicDesc {
+  max-width: 90%;
+  overflow-x: hidden;
+  text-overflow: ellipses;
+  font-size: 25px;
+  padding: 0;
+}
+
+.farRightBtn{
+  margin: 0;
+  height: 75px;
+  display: flex;
+  //EDIT VW
+  // width: 85vw;
+  width: calc(100% - 300px);
+  flex: 1;
+  .flexTopTopic {
+    align-items: center;
+    display: flex;
+    overflow-x: hidden;
+    flex-grow: 1;
+    flex-basis: 90%;
+    flex:1;
+    .leftTopTopic {
+      display: block;
+      font-size: 2em;
+      margin-left: 10px;
+      font-weight: bold;
+      flex-basis: 0;
+    }
+    .rightTopTopic {
+      flex-grow: 1;
+      flex-basis: 0;
+      font-size: 1.2em;
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
+  .flexTopTopicRight {
+    text-align: center;
+    display: flex;
+    color: $modal-button;
+    cursor: pointer;
+  }
+}
+
+img {
+  @include image_size(400px);
+}

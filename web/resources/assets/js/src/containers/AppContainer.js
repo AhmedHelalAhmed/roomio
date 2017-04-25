@@ -22,10 +22,10 @@ class AppContainer extends Component {
       if (this.props.params) {
         const { params: { roomName, topicRef } } = this.props;
         if (roomName) {
-          socket.emit('join:room', { roomName })
+          socket.emit('join:room', { roomName });
         }
         if (topicRef) {
-          socket.emit('join:topic', { topicRef, roomName })
+          socket.emit('join:topic', { topicRef, roomName });
         }
       }
     });
@@ -34,13 +34,8 @@ class AppContainer extends Component {
   render() {
     return (
       <div className="app-container">
-        <Nav
-          location={this.props.location}
-        />
-        <Active
-          children={this.props.children}
-          socket={socket}
-        />
+        <Nav location={this.props.location} />
+        <Active children={this.props.children} socket={socket} />
       </div>
     );
   }
@@ -50,8 +45,7 @@ AppContainer.propTypes = {
   children: PropTypes.object.isRequired,
 };
 
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   isWindowActive: state.active.window,
 });
 
@@ -59,9 +53,8 @@ const mapDispatchToProps = dispatch => ({
   updateActiveWindow: windowState => dispatch(updateActiveWindow(windowState)),
 });
 
-const ConnectedAppContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AppContainer);
+const ConnectedAppContainer = connect(mapStateToProps, mapDispatchToProps)(
+  AppContainer,
+);
 
 export default ConnectedAppContainer;

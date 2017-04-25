@@ -41,12 +41,16 @@
             line-height: 1.5em;
             font-size: 1.025em;
             margin-bottom: 10px;
-            background-color: $brand-success;
+            background-color: $body-accent;
             color: $btn-opp-color;
-            border: solid 1px $brand-success;
+            border: solid 1px $body-accent;
             cursor: pointer;
             width: 100%;
             // box-shadow: $shadow;
+        }
+        .inactive {
+            opacity: .55;
+            cursor: default;
         }
     }
     .form-error {
@@ -117,5 +121,13 @@ input {
         transition: .25s;
         outline: none !important;
         border-bottom: solid 1px $brand-success !important;
+    }
+}
+
+.leaveForm {
+    color: $base-black;
+    border-bottom: solid 2px $accent-offset;
+    &:hover {
+        color: $accent-offset;
     }
 }

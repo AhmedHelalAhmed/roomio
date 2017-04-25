@@ -21,3 +21,10 @@
 @mixin lighter_background_color($color) {
     background-color: lighten($color, 10%);
 }
+
+@mixin image_size($pix) {
+    width: $pix;
+    height: auto;
+    max-height: $pix;
+    object-fit: contain;
+}

@@ -1,5 +1,6 @@
 {
   "version": "0.0.1",
+  "engines" : { "node" : "7.6.0" },
   "description": "Roomio Socket Server",
   "main": "index.js",
   "scripts": {

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Link, browserHistory } from 'react-router';
-import { authPOST } from '../shared/utils/authAxios';
-import MakeForm from './HOCs/MakeForm';
-import FormError from './reusable/FormError';
+import React, { Component } from "react";
+import { Link, browserHistory } from "react-router";
+import { authPOST } from "../shared/utils/authAxios";
+import MakeForm from "./HOCs/MakeForm";
+import FormError from "./reusable/FormError";
 
 class CreateRoom extends Component {
   state = { error: null, loading: null };
@@ -14,22 +14,22 @@ class CreateRoom extends Component {
     });
   }
 
-  onSubmit = (e) => {
+  onSubmit = e => {
     e.preventDefault();
     authPOST(`/api/room`, this.props.getEscapedFields())
-      .then((res) => {
+      .then(res => {
         const { room } = res.data;
         const path = `/room/${room.name}`;
         browserHistory.push(path);
       })
-      .catch((err) => {
-        console.log(err.response)
+      .catch(err => {
+        console.log(err.response);
         if (err.response.data) {
           this.props.createErrorsFromResponse(err.response.data.messages);
         }
-        this.setState({ error: 'An error has occured' });
+        this.setState({ error: "An error has occured" });
       });
-  }
+  };
 
   render() {
     const { fields, errors } = this.props;
@@ -68,21 +68,21 @@ class CreateRoom extends Component {
             />
             <FormError error={errors.description} />
             <div className="buttonContainer">
-                <button className="formButton" >Create!</button>
+              <button className="formButton">Create!</button>
             </div>
             <FormError error={this.state.error} />
           </form>
         </div>
       </div>
-    ); 
+    );
   }
 }
 
-const fields = ['title', 'description', 'name'];
+const fields = ["title", "description", "name"];
 const rules = {
-  name: 'isLower|required',
-  title: 'required',
-  description: 'required',
+  name: "isLower|required",
+  title: "required",
+  description: "required"
 };
 
 export default MakeForm(fields, rules)(CreateRoom);
